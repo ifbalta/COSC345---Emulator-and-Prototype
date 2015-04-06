@@ -1,3 +1,27 @@
 .swot li{
 	list-style-type: none;
 }
+
+header{
+    background: url(https://www.envvied.com/Content/images/header_background.jpg);
+    background-size: cover;
+    padding: 20px;
+    margin: 15px;
+}
+
+body{
+    display: block;
+    margin: 10px auto;
+    padding: 0 50px;
+}
+
+img{
+    display: block;
+    margin: 0 auto;
+}
+
+.part{
+    background: url(http://www.psdgraphics.com/file/crumpled-paper.jpg);
+    margin: 10px;
+    padding: 20px;
+  }
