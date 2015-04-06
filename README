@@ -1,1 +1,33 @@
 1 April 2014: Set up git repository for emulator and prototype.
+7 April 2014: Updated README to include repository set up instructions and added collaborator list.
+Setting up your copy
+
+Getting a copy of  the git repo:
+
+        1. Get a git account and download the GitHub IDE or Git bash
+        2. Tell me your username or add your username to the list so
+        that I can add you to the list of collaborators.
+        3. Type 'git clone https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git'
+        into the command line or use the GitHub IDE.
+        This command will create a folder called “COSC345--Emulator-and-Prototype”
+        in your local directory and create a local copy of the repository.
+        4. All done.
+
+Adding changes:
+      Note: If this is a new file, you must track the file first using : 'git add filename'
+
+      1. git commit -a
+         This command adds all modified tracked files to the git repo.
+         This command will ask for a comment of your changes using VIM. Just use :wq to save your comment.
+      2. git push
+         This command will push your changes to the repository
+
+Ensuring that you have the updated version:
+         1. git pull
+         Pulls the most recent additions to the master branch
+
+Collaborators:
+        - Isabel Baltazar - ifbalta@github.com
+        - Lennox Huang
+        - Raeciel Reyes
+        - Huijun Zhou
