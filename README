@@ -12,7 +12,7 @@ Setting up your copy
 
 Getting a copy of  the git repo:
 
-        1. Get a git account and download the GitHub IDE or Git bash
+        1. Get a git account and download the GitHub GUI or Git bash
         2. Tell me your username or add your username to the list so
         that I can add you to the list of collaborators.
         3. Type 'git clone
@@ -40,6 +40,6 @@ Ensuring that you have the updated version:
 
 Collaborators:
         - Isabel Baltazar - ifbalta@github.com
-        - Lennox Huang - raeciel@github.com
-        - Raeciel Reyes
+        - Lennox Huang
+        - Raeciel Reyes  - raeciel@github.com
         - Huijun Zhou
