@@ -1,197 +1,170 @@
 <!DOCTYPE html>
-
-
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="assignment1.css"/>
 	<title>COSC345 Assignment 1 - smart watch Emulator and Prototype Plan</title>
 </head>
-
 <body>
-<header>
-	<h1>Assignment 1 - Planning</h1>
+	<header>
+		<h1>Assignment 1 - Planning</h1>
 		Git repository available
 		<a href="https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git">
-			here</a> 
-	
+			here</a>
 		<h3>Group</h3>
 		Isabel Baltazar 8093074<br>
 		Lennox Huang 1663448<br>
 		Raeciel Reyes  8360953<br>
 		Huijun Zhou     6794896<br>
-	
-</header>
-
-    <div class="part">
-<h2>Strengths/Weaknesses</h2>
-<p>
-<h3>Isabel Baltazar</h3>
-	<div class="swot">
-	<ul>
-	
-	<li><h4>Strengths</h4>
-		I&#39;m good at debugging and researching. I&#39;m also good at reading APIS so I can the libraries and tutorials to build the emulator and the smart watch app. I am also good at navigating StackOverflow for advice and using IDE debuggers.  I know the basics of HTML, CSS and JavaScript. I know what the &lt;canvas&gt; element does and how to use JavaScript to make it work. 
-	</li>
-	<li>
-	<h4>Weaknesses</h4>
-		I am not good at explaining details and English is not my first language.  I also have no experience in any kind of web development. I know the basics of HTML and JavaScript but I still need a lot of time to get comfortable with the work environment. I have never heard of SVG and I have no interest in vector graphics or art.  I have no experience in project management or development.
-	</li>
-	</ul>
-</div>
-
-<h3>Huijun Zhou</h3>
-<div class="swot">
-<ul>
-	<li><h4>Strengths</h4>
-		I am good at giving explanations and I have some experience with web development thanks to my summer job. I know about Git and, some PHP, Apache , MySQL and HTML. I like communicating with others, and exchanging ideas.I'm also good at improving code and debugging.
-	</li>
-	<li>
-	<h4>Weaknesses</h4>
-		 I am not good at writing reports since English is not my first language. I make a lot of typos and I am weak at researching in an academic setting. I also have no experience in project management.  I&#39;m also not good at the planning stages of coding , such as code management and planning techniques. I know nothing about CSS, JavaScript or SVG.
-	</li>
-</ul>
-</div>
-
-<h3>Lennox Huang</h3>
-<div class="swot">
-<ul>
-<li><h4>Strengths</h4>
-I have acceptable skills in organizing structural information. I have basic skills in coding and debugging. I am a fast learner and am able to learn new software in a limited time. Besides that, I have the patience for code reviews to make sure every the code is readable and understandable.  
-</li>
-<li>
-<h4>Weaknesses</h4> 
-      I am have no experience working in a group project. I am not good at writing reports in academic style. I have some skill in HTML5 but I have not experience in &lt;canvas&gt; element, SVG, JavaScript and Git.
-</li>
-</ul>
-</div>
-
-<h3>Raeciel Reyes</h3>
-<div class="swot">
-<ul>
-<li>
-	<h4>Strengths</h4>
-		I accept criticisms on my work and I use it to improve my skills. I can type fast and accurately therefore it decreases my typing errors when coding. I enjoy debugging codes. I communicate with my groupmates if I have questions and ideas about the project. I only know the CSS and HTML5 in an intermediate level. However, I understand how it works and still continue to learn more about it.
-</li>
-<li>
-	<h4>Weaknesses</h4>
-		I&#39;m not good at researching for answers on the internet. I&#39;m also not good at explaining things because of my limited vocabulary as English is not my first language. I have no experience in project development/management. I don’t know anything about the &lt;canvas&gt; element, SVG, JavaScript and Git.
-	</li>
-</ul>
-</div>
-        </div>
-    
-    <div class="part">
-
-<h2>Smart Watch Prototype Application</h2>
-
-<p>
-Our smart watch application will be the classic ball-in-a-maze game.
-</p>
-
-<p>
-<img src="WikipediaSource.png" alt=" 'Round maze' by Annielogue - Own work. Licensed under CC BY-SA 3.0 via Wikimedia Commons - http//commons.wikimedia.org/wiki/FileRound_maze.jpg#mediaviewer/FileRound_maze.jpg" width="500" height="500">
-<br>
-<small>"Round maze" by Annielogue - Own work. Licensed under CC BY-SA 3.0 via Wikimedia Commons - http//commons.wikimedia.org/wiki/FileRound_maze.jpg#mediaviewer/FileRound_maze.jpg
-</small>
-    </p>
-
-<p>
-The aim of the game is to get the ball to the center of the maze. The ball will be controlled by tilting the smart watch in whichever direction the user wants to go. The game will have multiple levels of increasing difficulty. The game will have no scoring system. For our implementation, the maze will be a square.
-</p>
-
-<p>
-There are many maze apps available for iOS, Android and Windows Phone. However, the smart watch app marketplace is still very small, so there aren&#39;t many game apps yet. We feel that since maze games are very common, it will be easy for us to research the best way to implement our game, especially since none of us have any experience with game development or JavaScript.
-</p>
-
-<p>
-The smart watch application will be built with JavaScript and tested in the browser using our own smart watch emulator. The emulator will be also be built with JavaScript. None of us are proficient in JavaScript and all of us will need to take a crash course. All of us are familiar and comfortable with Java.
-</p>
-    </div>
-    <div class="part">
-
-<h2>Tools</h2>
-<p>
-We will use GitHub for version control. GitHub is widely used and comes with its own shell and GUI.  The GUI is important for us because half the group has never used version control before and the GUI will let us get ahead of the learning curve. If we need extra functionality, then the Git shell is also available. We will need GitHub to commit our changes to the smart watch emulator and our maze app.
-</p>
-
-<p>
-Eclipse is one of the more widely used Java IDEs and has plug-in support for SQL databases, version control, Android or any other available library. Eclipse is also very good for large projects because it can search through multiple files very quickly, makes it easy to refactor code, and has plug-in support for Git. Git support is important to us because half the team is not familiar with Git and we would like to make the learning process easier.
-</p>
-
-<p>
-The smart watch emulator will be built with JavaScript and Dart. We like Dart because it looks very similar to Java-style code. The whole team is comfortable with the Java environment and we feel that we can work and learn JavaScript faster if we work in an environment that looks similar to Java. However, most of the work will be done in JavaScript because we know Dart has some underlying tech like the Dart VM and a special JavaScript interop library to wrap around other JavaScript libraries that might overcomplicate our project. We will also use HTML5 and CSS to build the web page that our emulator will run on.
-</p>
-
-<p>
-We will use Chrome DevTools because it is convenient. We only need to right click and inspect element, the Sources panel lets you see all the scripts that are part of the inspected page. Unlike the page source panel , it gives you a “pretty print ”view. As long as you have Chrome, you have Chrome DevTools. There is no need to install anything. Debugging is always painful, but by using Chrome DevTools, it will clearly point out the problem and if we want to view any specific part on the page(like a button, text), we do not need to looking for this specific part in our long paragraph code. As long as we right click at the specific part of the page, Chrome DevTools will lead you to the corresponding code. There are also Developer Tools available on Internet Explorer, Safari and Firefox when it&#39;s time to ensure that our emulator is compatible to most other major browsers.
-</p>
-    </div>
-    <div class="part">
-
-<h2>Schedule</h2>
-<img src="GANTTChart.PNG" alt="GANTT chart produced by Gantter">
-<small>GANTT chart produced by Gantter</small>
-
-
-
-<h2>Ball in a Hole Game</h2>
-Team 	Huijun Zhou		Raeciel Reyes<br>
-
-Development Tools<br>
-
-Planning<br>
-
-Estimated Time and Length<br>
-
-<p>
-Gameplay<br>
-	To win each level, you must drop the ball in a hole in the middle of the screen.
-You can achieve this by tilting the screen of your smart watch until it gets to the hole. 
-There will be obstacles such as a maze and a time limit(when the level is higher).
-</p>
-
-<p>
-Concept Example<br>
-	The actual game will have more than three levels. Here is the example of game.
-</p>
-<img src="Concepts.PNG" alt="Concept art">
-    </div>
-    <div class="part">
-
-<h2>Smart Watch Emulator</h2>
-Team 	Isabel Baltazar 	Lennox Huang<br>
-
-<p>
-The smart watch emulator will be written in JavaScript and other JavaScript libraries that may help us, such as EaselJS and BonsaiJS, and Bootstrap. We will use the Eclipse IDE thanks to its JavaScript development tools and GitHub because of its GUI and Git Shell. We estimate that it will take as us 6 weeks to learn the basics and best practices of JavaScript and 1 week to plan and design the beta version of the emulator. We expect that the team will continue researching and experimenting with JavaScript libraries while designing, implementing and testing the emulator. 
-</p>
-
-<p>
-We have found a JavaScript iPad emulator built three years ago which had roughly 2700 lines of JavaScript, not including extended jQuery libraries and around 1600 lines of CSS. They did not use HTML.
-</p>
-
-<p>
-We estimate that our team will build an emulator with around 1500-2000 lines of JavaScript code, and around 1000-1500 lines of CSS and HTML, depending on whether or not they choose to emulate the gyroscope or use detailed graphics. Unlike the iPad emulator, our team does not intend to use only JavaScript to build the emulator as HTML5 has better graphics support than it did three years ago, and we expect to use frameworks like Bootstrap to lighten the HTML and CSS load.
-</p>
-
-<p>
-Our team has only two years of programming experience and very little JavaScript expertise. We expect that the team will start slowly as they learn the best practices of JavaScript and its libraries and frameworks. We have allocated 7 weeks for the implementation of the smart watch emulator and we expect that at least 2 of those weeks will be spent learning and setting up the various JavaScript graphics libraries.
-</p>
-
-
-	We expect the completed smart watch to have the following features
-	<ul>
-		<li>Basic touch gestures such as swiping and tapping</li>
-		<li>A basic clock app</li>
-		<li>Be able to run JavaScript smart watch applications by other developers</li>
-		<li>A hardware button that can be utilized by other applications</li>
-	</ul>
-
-	Optional features
-	<ul>
-		<li>A gyroscope</li>
-		<li>A speaker</li>
-		<li>Be able to emulate the appearance of a Microsoft Band, Apple Watch, Pebble Watch and Samsung Gear.</li>
-	</ul>
-    </div>
-        </body>
+	</header>
+	<div class="part">
+		<h2>Strengths/Weaknesses</h2>
+		<p>
+		<h3>Isabel Baltazar</h3>
+		<div class="swot">
+			<ul>
+				<li><h4>Strengths</h4>
+					I&#39;m good at debugging and researching. I&#39;m also good at reading APIS so I can the libraries and tutorials to build the emulator and the smart watch app. I am also good at navigating StackOverflow for advice and using IDE debuggers.  I know the basics of HTML, CSS and JavaScript. I know what the &lt;canvas&gt; element does and how to use JavaScript to make it work.
+				</li>
+				<li>
+					<h4>Weaknesses</h4>
+					I am not good at explaining details and English is not my first language.  I also have no experience in any kind of web development. I know the basics of HTML and JavaScript but I still need a lot of time to get comfortable with the work environment. I have never heard of SVG and I have no interest in vector graphics or art.  I have no experience in project management or development.
+				</li>
+			</ul>
+		</div>
+		<h3>Huijun Zhou</h3>
+		<div class="swot">
+			<ul>
+				<li><h4>Strengths</h4>
+					I am good at giving explanations and I have some experience with web development thanks to my summer job. I know about Git and, some PHP, Apache , MySQL and HTML. I like communicating with others, and exchanging ideas.I'm also good at improving code and debugging.
+				</li>
+				<li>
+					<h4>Weaknesses</h4>
+					I am not good at writing reports since English is not my first language. I make a lot of typos and I am weak at researching in an academic setting. I also have no experience in project management.  I&#39;m also not good at the planning stages of coding , such as code management and planning techniques. I know nothing about CSS, JavaScript or SVG.
+				</li>
+			</ul>
+		</div>
+		<h3>Lennox Huang</h3>
+		<div class="swot">
+			<ul>
+				<li><h4>Strengths</h4>
+					I have acceptable skills in organizing structural information. I have basic skills in coding and debugging. I am a fast learner and am able to learn new software in a limited time. Besides that, I have the patience for code reviews to make sure every the code is readable and understandable.
+				</li>
+				<li>
+					<h4>Weaknesses</h4>
+					I am have no experience working in a group project. I am not good at writing reports in academic style. I have some skill in HTML5 but I have not experience in &lt;canvas&gt; element, SVG, JavaScript and Git.
+				</li>
+			</ul>
+		</div>
+		<h3>Raeciel Reyes</h3>
+		<div class="swot">
+			<ul>
+				<li>
+					<h4>Strengths</h4>
+					I accept criticisms on my work and I use it to improve my skills. I can type fast and accurately therefore it decreases my typing errors when coding. I enjoy debugging codes. I communicate with my groupmates if I have questions and ideas about the project. I only know the CSS and HTML5 in an intermediate level. However, I understand how it works and still continue to learn more about it.
+				</li>
+				<li>
+					<h4>Weaknesses</h4>
+					I&#39;m not good at researching for answers on the internet. I&#39;m also not good at explaining things because of my limited vocabulary as English is not my first language. I have no experience in project development/management. I don’t know anything about the &lt;canvas&gt; element, SVG, JavaScript and Git.
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="part">
+		<h2>Smart Watch Prototype Application</h2>
+		<p>
+			Our smart watch application will be the classic ball-in-a-maze game.
+		</p>
+		<p>
+			<img src="WikipediaSource.png" alt=" 'Round maze' by Annielogue - Own work. Licensed under CC BY-SA 3.0 via Wikimedia Commons - http//commons.wikimedia.org/wiki/FileRound_maze.jpg#mediaviewer/FileRound_maze.jpg" width="500" height="500">
+			<br>
+			<small>"Round maze" by Annielogue - Own work. Licensed under CC BY-SA 3.0 via Wikimedia Commons - http//commons.wikimedia.org/wiki/FileRound_maze.jpg#mediaviewer/FileRound_maze.jpg
+			</small>
+		</p>
+		<p>
+			The aim of the game is to get the ball to the center of the maze. The ball will be controlled by tilting the smart watch in whichever direction the user wants to go. The game will have multiple levels of increasing difficulty. The game will have no scoring system. For our implementation, the maze will be a square.
+		</p>
+		<p>
+			There are many maze apps available for iOS, Android and Windows Phone. However, the smart watch app marketplace is still very small, so there aren&#39;t many game apps yet. We feel that since maze games are very common, it will be easy for us to research the best way to implement our game, especially since none of us have any experience with game development or JavaScript.
+		</p>
+		<p>
+			The smart watch application will be built with JavaScript and tested in the browser using our own smart watch emulator. The emulator will be also be built with JavaScript. None of us are proficient in JavaScript and all of us will need to take a crash course. All of us are familiar and comfortable with Java.
+		</p>
+	</div>
+	<div class="part">
+		<h2>Tools</h2>
+		<p>
+			We will use GitHub for version control. GitHub is widely used and comes with its own shell and GUI.  The GUI is important for us because half the group has never used version control before and the GUI will let us get ahead of the learning curve. If we need extra functionality, then the Git shell is also available. We will need GitHub to commit our changes to the smart watch emulator and our maze app.
+		</p>
+		<p>
+			Eclipse is one of the more widely used Java IDEs and has plug-in support for SQL databases, version control, Android or any other available library. Eclipse is also very good for large projects because it can search through multiple files very quickly, makes it easy to refactor code, and has plug-in support for Git. Git support is important to us because half the team is not familiar with Git and we would like to make the learning process easier.
+		</p>
+		<p>
+			The smart watch emulator will be built with JavaScript and Dart. We like Dart because it looks very similar to Java-style code. The whole team is comfortable with the Java environment and we feel that we can work and learn JavaScript faster if we work in an environment that looks similar to Java. However, most of the work will be done in JavaScript because we know Dart has some underlying tech like the Dart VM and a special JavaScript interop library to wrap around other JavaScript libraries that might overcomplicate our project. We will also use HTML5 and CSS to build the web page that our emulator will run on.
+		</p>
+		<p>
+			We will use Chrome DevTools because it is convenient. We only need to right click and inspect element, the Sources panel lets you see all the scripts that are part of the inspected page. Unlike the page source panel , it gives you a “pretty print ”view. As long as you have Chrome, you have Chrome DevTools. There is no need to install anything. Debugging is always painful, but by using Chrome DevTools, it will clearly point out the problem and if we want to view any specific part on the page(like a button, text), we do not need to looking for this specific part in our long paragraph code. As long as we right click at the specific part of the page, Chrome DevTools will lead you to the corresponding code. There are also Developer Tools available on Internet Explorer, Safari and Firefox when it&#39;s time to ensure that our emulator is compatible to most other major browsers.
+		</p>
+	</div>
+	<div class="part">
+		<h2>Schedule</h2>
+		<img src="GANTTChart.PNG" alt="GANTT chart produced by Gantter">
+		<h2>Ball in a Hole Game</h2>
+		Team 	Huijun Zhou		Raeciel Reyes<br>
+		<p>
+			The Ball in a Hole game will be written in JavaScript and other JavaScript libraries that may help us to develop the application. We will use GitHub IDE to work on the project together and keep everyone in the group informed and updated.
+		</p>
+		<p>
+			We researched other similar games from the application stores to use as inspirations for our application. We have found that most of them uses a tilt feature for them to play the game. However, since we are building and testing it through an emulator, we are going to use the arrow keys to move the ball instead.
+		</p>
+		<p>
+			Putting a time limit in higher levels will also be one of our application’s feature. We got this idea from the game ‘Labyrinth Balls’ from the iOS application store which has a time limit for every level.
+		</p>
+		<p>
+			We estimate to have 1000-2000 lines of codes in JavaScript for our application. We estimate to learn the basics and best practices of JavaScript in 6 weeks while also planning our application’s features.
+		</p>
+		<p>
+			Overall, our goal is to complete the implementation of our application in 4 months time.
+		</p>
+		<p>
+			Gameplay<br>
+			To win each level, you must drop the ball in a hole in the middle of the screen.
+			You can achieve this by using the arrow keys to move the ball until it gets to the hole.
+			There will be obstacles such as a maze and a time limit(when the level is higher).
+		</p>
+		<p>
+			Concept<br>
+			The actual game will have more than three levels. Here is how our application might look like:
+		</p>
+		<img src="Concepts.png" alt="Concept art">
+	</div>
+	<div class="part">
+		<h2>Smart Watch Emulator</h2>
+		Team 	Isabel Baltazar 	Lennox Huang<br>
+		<p>
+			The smart watch emulator will be written in JavaScript and other JavaScript libraries that may help us, such as EaselJS and BonsaiJS, and Bootstrap. We will use the Eclipse IDE thanks to its JavaScript development tools and GitHub because of its GUI and Git Shell. We estimate that it will take as us 6 weeks to learn the basics and best practices of JavaScript and 1 week to plan and design the beta version of the emulator. We expect that the team will continue researching and experimenting with JavaScript libraries while designing, implementing and testing the emulator.
+		</p>
+		<p>
+			We have found a JavaScript iPad emulator built three years ago which had roughly 2700 lines of JavaScript, not including extended jQuery libraries and around 1600 lines of CSS. They did not use HTML.
+		</p>
+		<p>
+			We estimate that our team will build an emulator with around 1500-2000 lines of JavaScript code, and around 1000-1500 lines of CSS and HTML, depending on whether or not they choose to emulate the gyroscope or use detailed graphics. Unlike the iPad emulator, our team does not intend to use only JavaScript to build the emulator as HTML5 has better graphics support than it did three years ago, and we expect to use frameworks like Bootstrap to lighten the HTML and CSS load.
+		</p>
+		<p>
+			Our team has only two years of programming experience and very little JavaScript expertise. We expect that the team will start slowly as they learn the best practices of JavaScript and its libraries and frameworks. We have allocated 7 weeks for the implementation of the smart watch emulator and we expect that at least 2 of those weeks will be spent learning and setting up the various JavaScript graphics libraries.
+		</p>
+		We expect the completed smart watch to have the following features
+		<ul>
+			<li>Basic touch gestures such as swiping and tapping</li>
+			<li>A basic clock app</li>
+			<li>Be able to run JavaScript smart watch applications by other developers</li>
+			<li>A hardware button that can be utilized by other applications</li>
+		</ul>
+		Optional features
+		<ul>
+			<li>A gyroscope</li>
+			<li>A speaker</li>
+			<li>Be able to emulate the appearance of a Microsoft Band, Apple Watch, Pebble Watch and Samsung Gear.</li>
+		</ul>
+	</div>
+</body>
 
