@@ -1,6 +1,13 @@
 1 April 2014: Set up git repository for emulator and prototype.
 7 April 2014: Updated README to include repository set up instructions and
               added collaborator list.
+
+Setting up Git on your computer:
+        1. Download Git and/or GitHub GUI
+        2. On the command line, type
+           git config --global user.name "Your Name"
+           git config -- global user.email "Your Email"
+
 Setting up your copy
 
 Getting a copy of  the git repo:
