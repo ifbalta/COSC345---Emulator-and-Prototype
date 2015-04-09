@@ -45,7 +45,7 @@ cpu = function(){
 		this.pc = p;
 	}
 	function setSP(p){
-		this.registers.r13 = p;
+		this.reg.r13 = p;
 	}
 	function setLinkReg(p){
 		this.link_reg = p;
