@@ -50,3 +50,8 @@ Creating a new branch:
          1. git checkout -b your_branch_name
          2. git push origin your_branch_name
          3. Tell everybody else about it.
+
+Checking out a branch:
+         1. Clone the master branch
+         2. git checkout -b branch-name origin/branch-name
+         3. Done!
