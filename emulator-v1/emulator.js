@@ -4,7 +4,7 @@
 	  - Version 1 only waits for interrupts
 */
 
-$(document).ready(function (){
+$(document).ready(function () {
     alert("Emulator started!");
 });
 
@@ -15,3 +15,6 @@ function handleInterrupts(evt){
 	// iterate through flag array.	
 }
 
+function myFunction(evt){
+	alert("HI!");
+}
