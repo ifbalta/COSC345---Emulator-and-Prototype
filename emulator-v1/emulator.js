@@ -5,7 +5,11 @@
 */
 
 $(document).ready(function () {
-    alert("Emulator started!");
+	alert("Emulator started!");
+	while(true){
+		handleInterrupts
+	}
+    
 });
 
 /**
