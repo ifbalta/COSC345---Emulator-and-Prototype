@@ -12,6 +12,6 @@
 	Windows: bootup.exe
 */
 int main(){
-	printf("Hello C!");
+	printf("Hello C!\n");
 	return EXIT_SUCCESS;
 }
