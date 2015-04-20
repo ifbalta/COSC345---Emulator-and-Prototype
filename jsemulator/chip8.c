@@ -59,8 +59,10 @@ chip8 chip8_new(){
 	chip8 c = emalloc(sizeof chip8);
 	return c;
 }
-
-chip8 chip8_initialize(chip8 cpu){
+/*
+	I can probably combine chip8_new and initialize()
+*/
+chip8 initialize(chip8 cpu){
 	/*
 		Clear memory and point SP to top of ROM.
 	*/
@@ -78,7 +80,7 @@ chip8 chip8_initialize(chip8 cpu){
 	return cpu;
 }
 
-void chip8_emulateCycle(chip8 cpu){
+void emulateCycle(chip8 cpu){
 	/*
 		- fetch
 		- decode
@@ -87,7 +89,7 @@ void chip8_emulateCycle(chip8 cpu){
 	*/
 }
 
-void chip8_loadProgram(chip8 cpu)
+void loadProgram(chip8 cpu)
 }
 
 
