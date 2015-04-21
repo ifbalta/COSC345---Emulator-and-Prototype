@@ -10,6 +10,6 @@ void intialize(chip8 cpu);
 
 void emulateCycle(chip8 cpu);
 
-void loadProgram(chip8 cpu);
+void loadProgram(chip8 cpu, FILE *fp);
 
 #endif

@@ -62,34 +62,59 @@ chip8 chip8_new(){
 /*
 	I can probably combine chip8_new and initialize()
 */
-chip8 initialize(chip8 cpu){
+void initialize(chip8 cpu){
 	/*
 		Clear memory and point SP to top of ROM.
 	*/
-	cpu.pc = 0x200;
-	cpu.opcode = 0;
-	cpu.I = 0;
-	cpu.sp = 0;
+	cpu->pc = 0x200;
+	cpu->opcode = 0;
+	cpu->I = 0;
+	cpu->sp = 0;
 	
 	int i;
 	/* load fontset into memory*/
 	for(i = 0; i < 80; i++){
-		cpu.memory[i] = cpu.chip8_fontset[i];
+		cpu->memory[i] = cpu->chip8_fontset[i];
 	}
 	/* reset timers*/
-	return cpu;
+	cpu->delay_timer = 0;
+	cpu->sound_timer = 0;
 }
 
 void emulateCycle(chip8 cpu){
+	/* fetch */
+	cpu->opcode = cpu->memory[cpu->pc] << 8 | cpu->memory[pc + 1];
+	/* decode */
+	switch(cpu->opcode & 0xF00){
+		/* opcode list */
+		case Ax000:
+			cpu->I = cpu->opcode & 0x0FFF;
+			cpu->pc += 2;
+		break;
+		default:
+			printf("Unknown opcode: 0x%X\n", cpu->opcode);
+			break;
+	}
+
+	/* update timers */
+	if(cpu->delay_timer > 0){
+		--cpu->delay_timer;		
+	}
+	if(cpu->sound_timer > 0){
+		if(cpu->sound_timer){
+			printf("BEEP!\n" );
+		}
+		--cpu->sound_timer;		
+	}
+}
+
+void loadProgram(chip8 cpu, char *filename){
 	/*
-		- fetch
-		- decode
-		- execute
-		- update timer
+		using fopen for reading, no writing!!
+		FILE *storedFile = fopen(filename, "r");
 	*/
 }
 
-void loadProgram(chip8 cpu)
-}
+
 
 

@@ -38,7 +38,7 @@ int main(){
 	/* allocated here */
 	myChip8 = chip8_new();
 
-	myChip8.initialize();
+	initialize(myChip8);
 
 	/* deallocate here*/
 	free(myChip8);
