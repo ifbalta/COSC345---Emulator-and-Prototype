@@ -12,6 +12,8 @@ var Chip8 = {
 	SP : 0,
 	opcode : 0,
 	drawFlag : 0,
+	delay_timer : 0,
+	sound_timer : 0,
 	fontset : [
 		 0xF0, 0x90, 0x90, 0x90, 0xF0, 
 		 0x20, 0x60, 0x20, 0x20, 0x70,
@@ -264,20 +266,81 @@ case 0x0000:
     	for (var j = 0; j < 8; j++) {
     		if (pixel & (0x80 >> b)
     	}
-    } 
+    }
+    case 0xF000:
+    	switch(opcode & 0x000F){
+    		case 0x0007: // LD Vx, DT
+    		Vx = Chip8.delay_timer;
+    		// load delay timer into Vx
+    			break;
+
+    		case 0x000A: // LD Vx, K
+    		/*
+				wait for key press, then store into Vx
+				Vx = keyPress event.
+    		*/
+    		break;
+
+    		case 0x0015: // LD DT, Vx
+    		Chip8.delay_timer = Vx;
+    		// Load Vx into delay timer
+    		break;
+
+    		case 0x0018: // LD ST, Vx
+    		Chip8.sound_timer = Vx;
+    		// load Vx into sound_timer
+    		break;
+
+    		case 0x001E: // Add I, Vx
+    		Chip8.I += Vx;
+    		// Add Vx to I
+    		break;
+
+    		case 0x029: // LD F, Vx
+    		Chip8.I = Vx;
+    		// sprite location == Vx
+    		break;
+
+    		case 0x033: // LD B, Vx
+    		// store BCD representations of Vx into memory.
+    		Chip8.memory[Chip8.I] = v[(opcode & 0x0F00) >> 8] / 100;
+    		Chip8.memory[Chip8.I + 1] = (v[(opcode & 0x0F00) >> 8] / 10) % 10;
+    		Chip8.memory[Chip8.I + 2] = (v[(opcode & 0x0F00) >> 8] / 100) % 10;
+    		Chip8.PC += 2;
+    		break;
+
+    		case 0x055: // LD I, Vx
+    		// copies address V0 - Vx in into memory.
+    		for(var a = 0; a  <= ((opcode & 0xF00) >> 8); a++){
+    			Chip8.memory[Chip8.I + a] = Chip8.v[a];
+    		}
+    		Chip8.I += ((opcode & 0x0F00) >> 8) + 1;
+    		Chip8.PC += 2;
+    		break;
+
+    		case 0x065: // LD Vx, I
+    		// read registers V0 to Vx from memory starting at I
+    			for(var a = 0; a  <= ((opcode & 0xF00) >> 8); a++){
+    			Chip8.v[a] = Chip8.memory[Chip8.I + a];
+    		}
+    		Chip8.I += ((opcode & 0x0F00) >> 8) + 1;
+    		Chip8.PC += 2;
+    		break;
+    	}
+    	break; 
   }	
 }
 
 // load program
- $('#start').on('click', function(){
- 	var selected = $('#selection :selected');
-	var s = selected.text();
-	var filename = selected.attr('fname');
-	var message = "Loading " + s + " from " + filename + " file."
-	$('#display').val(message);
-	console.log(message);	
-	bootup(filename);
- });
+ // $('#start').on('click', function(){
+ // 	var selected = $('#selection :selected');
+	// var s = selected.text();
+	// var filename = selected.attr('fname');
+	// var message = "Loading " + s + " from " + filename + " file."
+	// $('#display').val(message);
+	// console.log(message);	
+	// bootup(filename);
+ // });
 
 
 
