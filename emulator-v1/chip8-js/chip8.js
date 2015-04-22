@@ -81,12 +81,13 @@ function initialize(){
 
 function emulate_cycle(){
 	Chip8.PC = 0x200;
-	print(Chip8.PC);
+	// print(Chip8.PC);
 	Chip8.opcode = (Chip8.memory[Chip8.PC]) << 8 | (Chip8.memory[Chip8.PC + 1]);
-	print(Chip8.opcode);
+	// print(Chip8.opcode);
 	decode(Chip8.opcode);
 }
 
+<<<<<<< HEAD
 function decode(opcode) {
 
 Vx = Chip8.v[opcode & 0x0F00 >> 8];
@@ -263,6 +264,15 @@ case 0x0000:
   }	
 }
 
+// load program
+ $('#start').on('click', function(){
+ 	var selected = $('#selection :selected');
+	var s = selected.text();
+	var filename = selected.attr('fname');
+	var message = "Loading " + s + " from " + filename + " file."
+	$('#display').val(message);
+	console.log(filename);
+ });
 
 
 initialize();
