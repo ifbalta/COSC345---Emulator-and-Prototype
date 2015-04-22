@@ -1,3 +1,5 @@
 # ignore OS generated files
 .DS_STORE
 Thumbs.db
+._*
+Desktop.ini
