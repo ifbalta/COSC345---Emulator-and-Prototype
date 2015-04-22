@@ -11,6 +11,26 @@ var Chip8 = {
 	drawFlag : 0
 }
 
+/*
+var opcode = {
+		"00E0":CLS, 
+		"8xy1":OR, 
+		"8xy2":AND
+	}
+
+	function CLS(c) {
+		opcode.00E0 = c;
+	}
+	function OR(c) {
+		opcode.8xy1 = c;
+	}
+	function AND(c) {
+		opcode.8xy2 = c;
+	}	
+*/
+
+
+
 // initialize Chip8
 function initialize(){
 	// clear memory
