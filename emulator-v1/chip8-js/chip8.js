@@ -89,6 +89,11 @@ function emulate_cycle(){
 	decode(Chip8.opcode);
 }
 
+function bootup(filename){
+	initialize();
+	emulate_cycle();
+}
+
 // load program
  $('#start').on('click', function(){
  	var selected = $('#selection :selected');
@@ -96,9 +101,9 @@ function emulate_cycle(){
 	var filename = selected.attr('fname');
 	var message = "Loading " + s + " from " + filename + " file."
 	$('#display').val(message);
-	console.log(filename);
+	console.log(message);	
+	bootup(filename);
  });
 
 
-initialize();
-emulate_cycle();
+
