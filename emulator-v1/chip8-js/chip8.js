@@ -50,8 +50,6 @@ var opcode = {
 	}	
 */
 
-
-
 // initialize Chip8
 function initialize(){
 	// clear memory
@@ -89,9 +87,185 @@ function emulate_cycle(){
 	decode(Chip8.opcode);
 }
 
+
 function bootup(filename){
 	initialize();
 	emulate_cycle();
+
+function decode(opcode) {
+
+Vx = Chip8.v[opcode & 0x0F00 >> 8];
+Vy = Chip8.v[(opcode & 0x00F0) >> 4];
+
+switch (opcode & 0xF000) {
+
+case 0x0000:
+
+ switch (opcode & 0x000F) {
+
+	case 0x000: // clear the screen
+	for (var a = 0; a < (32 * 64); a++) {
+		Chip8.display_screen = 0;
+		drawFlag = 1;
+     }
+    break;	
+
+    case 0x000E: // return from sub-routine
+    Chip8.SP--;
+    Chip8.PC = Chip8.stack[Chip8.SP];
+    Chip8.PC += 2;
+    break;
+
+    case 0x1000: // 1nnn - Jump to location nnn.
+    Chip8.PC = opcode & 0x0FFF;
+    break;
+	
+	case 0x2000: // 2nnn - Call sub-rountine at nnn
+	Chip8.stack[Chip8.SP] = Chip8.PC;
+	Chip8.SP++;
+	Chip8.PC = opcode & 0x0FFF;
+	break;
+
+	case 0x3000: // 3xkk - Skip next instruction if v[x] = kk
+	if (Vx == (opcode & 0x00FF)) {
+		Chip8.PC += 4; 
+	} else {	
+		Chip8.PC += 2;
+	}
+	break;
+
+    case 0x4000: // 4xkk - Skip next instruction if v[x] != kk
+    if (Vx != (opcode & 0x00FF)) {
+    	Chip8.PC += 4;
+    } else {
+    	Chip8.PC += 2;
+    }
+    break;
+
+    case 0x5000: // 5xy0 - Skip next instruction if v[x] = v[y]
+    if (Vx == Vy) {
+    	Chip8.PC += 4;
+    } else {
+    	Chip8.PC += 2;
+    }
+    break;
+
+    case 0x6000: // 6xkk - Set v[x] = kk 
+    Vx = opcode & 0x00FF;
+	Chip8.PC += 2;
+	break;
+	}
+
+	case 0x7000: // 7xkk - Set v[x] = v[x] + kk
+	Vx += 0x00FF;
+	Chip8.PC += 2;
+	break;
+
+
+	case 0x8000:
+    switch(opcode & 0x000F) {
+
+     case 0x0000: // 8xy0 - Set v[x] = v[y]
+     Vx = Vy;
+     Chip8.PC += 2;
+     break;
+
+     case 0x0001: // 8xy1 - Set v[x] = v[x] or v[y]
+     Vx != Vy;
+     Chip8.PC += 2;
+     break;
+
+     case 0x0002: // 8xy2 - Set v[x] = v[x] and v[y]
+     Vx &= Vy;
+     Chip8.PC += 2;
+     break;
+
+     case 0x0003: // 8xy3 - Set v[x] = v[x] XOR x[y]
+     Vx ^= Vy;
+     Chip8.PC += 2;
+     break;
+
+     case 0x0004: // 8xy4 - Set v[x] = v[x] + v[y] and VF = carry
+     Vx += Vy;
+
+     if (Vy > Vx) {
+     	Chip8.v[0xF] = 1;
+     } else {
+     	Chip8.v[0xF] = 0;
+     }
+     Chip8.PC += 2;
+     break;
+
+    case 0x0005: // 8xy5 - Set v[x] = v[x] - v[y] and VF = NOT borrow
+    Vx -= Vy;
+
+     if (Vy > (0xFF - Vx)) {
+     	Chip8.v[0xF] = 0;
+     } else {
+     	Chip8.v[0xF] = 1;
+     }
+     Chip8.PC += 2;
+     break;
+
+    case 0x0006: // 8xy6 - Set v[x] = v[x] SHR 1
+    Chip8.v[0xF] = Vx & 0x1;
+    Vx >> 1;
+    Chip8.PC += 2;
+    break; 
+
+    case 0x0007: // 8xy7 Set v[x] = v[y] - v[x] and VF = NOT borrow
+    Vx = Vy - Vx;
+
+    if (Vy < Vx) {
+    	Chip8.v[0xF] = 0;
+    } else {
+    	Chip8.v[0xF] = 1;
+     }
+    Chip8.PC += 2;
+    break;
+
+    case 0x000E: // Set Vx = Vx SHL 1
+    Chip8.v[0xF] = Vx >> 7;
+    Vx <<= 1;
+    Chip8.PC += 2;
+    break;
+    } // End Of 0x8000 
+
+    case 0x9000: // Skip next instruction if Vx != Vy
+    if (Vx != Vy) {
+    	Chip8.PC += 4;
+    } else {
+    	Chip8.PC += 2;
+    }
+    break;
+
+    case 0xA000: // Annn - Set I = nnn
+    Chip8.I = opcode & 0x0FFF;
+    Chip8.PC += 2;
+    break;
+
+    case 0xB000: // Bnnn - Jump to location nnn + V0
+    Chip8.PC = (opcode & 0x0FFF) + Chip8.v[0];
+    break;
+
+    case 0xC000: // Cxkk - Set Vx = random byte AND kk
+    Vx = (random() % 0xFF) & (opcode & 0x00FF);
+    Chip8.PC += 2;
+    break;
+
+    case 0xD000: // Dxyn - Display n-byte sprite starting at memory location I at (Vx, Vy), set VF = collision
+    x = Vx;
+    y = Vy;
+    height = opcode & 0x000F;
+
+    v[0xF] = 0;
+    for (var i = 0; i < height; i++) {
+    	pixel = Chip8.memory[Chip8.I + i];
+    	for (var j = 0; j < 8; j++) {
+    		if (pixel & (0x80 >> b)
+    	}
+    } 
+  }	
 }
 
 // load program
