@@ -89,10 +89,10 @@ function emulate_cycle(){
 	decode(Chip8.opcode);
 }
 
-
 function bootup(filename){
 	initialize();
 	emulate_cycle();
+}
 
 function decode(opcode) {
 
@@ -259,14 +259,43 @@ case 0x0000:
     x = Vx;
     y = Vy;
     height = opcode & 0x000F;
-
     v[0xF] = 0;
+
     for (var i = 0; i < height; i++) {
     	pixel = Chip8.memory[Chip8.I + i];
     	for (var j = 0; j < 8; j++) {
-    		if (pixel & (0x80 >> b)
-    	}
-    }
+			if ((pixel & (0x80 >> b)) != 0) {
+    			if (Chip8.display_screen[x + b + ((y + a) * 64)] == 1) {
+	                 v[0xF] = 1;         
+              }
+              Chip8.display_screen[x + b + ((y + a) * 64)] ^= 1;
+          }
+        }
+      }
+	     Chip8.drawFlag = 1;
+	     Chip8.PC += 2;
+	     break;
+
+	    case 0xE000:
+	     switch(opcode & 0x0FF) {
+
+	      case 0x009E:
+	       if (Chip8.keys[Vx] != 0) {
+	       	Chip8.PC += 4;
+	       } else {
+	       	Chip8.PC += 2;
+	        }
+	     break;
+
+	      case 0x00A1:
+	       if (Chip8.keys[Vx] == 0) {
+	        Chip8.PC += 4;
+	        } else {
+	   	      Chip8.PC += 2;
+	        }
+	     break;
+	 }
+	 break;
     case 0xF000:
     	switch(opcode & 0x000F){
     		case 0x0007: // LD Vx, DT
