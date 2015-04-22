@@ -14,6 +14,7 @@ var Chip8 = {
 	drawFlag : 0,
 	delay_timer : 0,
 	sound_timer : 0,
+    keyPress: 0,
 	fontset : [
 		 0xF0, 0x90, 0x90, 0x90, 0xF0, 
 		 0x20, 0x60, 0x20, 0x20, 0x70,
@@ -308,6 +309,13 @@ case 0x0000:
 				wait for key press, then store into Vx
 				Vx = keyPress event.
     		*/
+            Chip8.keyPress = 0;
+            for(var a = 0; a < 16; a++){
+                if(Chip8.keys[a] != 0){
+                    Chip8.v[(opcode & 0x0F00) >> 8] = a;
+                    chip8.keyPress = 1;
+                }
+            }
     		break;
 
     		case 0x0015: // LD DT, Vx
@@ -361,15 +369,15 @@ case 0x0000:
 }
 
 // load program
- // $('#start').on('click', function(){
- // 	var selected = $('#selection :selected');
-	// var s = selected.text();
-	// var filename = selected.attr('fname');
-	// var message = "Loading " + s + " from " + filename + " file."
-	// $('#display').val(message);
-	// console.log(message);	
-	// bootup(filename);
- // });
+ $('#start').on('click', function(){
+ 	var selected = $('#selection :selected');
+	var s = selected.text();
+	var filename = selected.attr('fname');
+	var message = "Loading " + s + " from " + filename + " file."
+	$('#display').val(message);
+	console.log(message);	
+	bootup(filename);
+ });
 
 
 
