@@ -1,4 +1,3 @@
-// JavaScript source code
 $(document).ready(function () {
     //Inititialize canvas
     var canvas = $("#canvas")[0];
@@ -107,9 +106,6 @@ $(document).ready(function () {
 
         snake_arr.unshift(tail);
 
-        //original condition
-        //(check_collision(nx,ny, snake_arr)) {
-
         //reinitialize game and restart only when you hit yourself
         if (nx == -1 || ny == -1 || nx == w / cw || ny == h / cw || check_collision(nx, ny, snake_arr)) {
             //  var respond = confirm("GAME OVER!\n Final Score: " + score);
@@ -118,28 +114,6 @@ $(document).ready(function () {
             return;
         }
 
-        //wrap around if you hit edges
-        /*
-        if (nx == -1 || ny == -1) {
-            console.log("over the edge");
-            if(nx < 0){
-                nx = (w / cw) -1;
-                console.log(nx);
-            }else{
-                ny = (h / cw) - 1; 
-            }
-        }
-
-        if (nx >= (w / cw) || ny >= (h / cw)) {
-            console.log("over the edge");
-            if (nx == w / cw) {
-                nx = 1;
-                console.log(nx);
-            }else{
-                ny = 1;
-            }
-        }
-        */
 
 
         /** PAINTING!  **/
