@@ -1,3 +1,10 @@
- .screen{
+body{
+	text-align: center;
+}
+.screen{
+	background: url("http://www.designjuices.co.uk/wp-content/uploads/2011/03/09_burnished-metal.jpg");
+	background-size: 500;
+}
+canvas{
         border: solid;
-    }
+   }
