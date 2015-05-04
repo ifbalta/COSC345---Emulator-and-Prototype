@@ -10,19 +10,23 @@
 
 	<h1> Beta Emulator - Chip8 </h1>
 
-	<div class="screen" id="scr">        
+	<div class="screen" id="scr"> 
+<!-- 		<object typr="image/svg+xml" data="watchface.svg">Your browser does not support SVG
+		</object>     -->   
 		<canvas id="canvas" width="320" height="320">
 			Your browser does not support HTML5</canvas>
 		</div>
+		<div class="appTray">
 		Select app:
 		<select id="selection">
 			<option fname="mazegame.js">Maze Game</option> 
 			<option fname="placeholder.js">Placeholder</option>
+			<option fname="snakelogic.js">Snake Game</option>
 		</select>
 		<button type="button" id="start"> start</button>
 		<br>
 		<textarea id="display" rows="3" cols="30"></textarea>
-
+	</div>
 		<script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="emulator.js"></script>
