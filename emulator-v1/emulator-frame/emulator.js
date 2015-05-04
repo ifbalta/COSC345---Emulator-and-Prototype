@@ -1,4 +1,9 @@
 // load program
+
+var links = {
+	"placeholder.js":"https://www.dropbox.com/s/ljarw44tg0zte1u/placeholder.js?dl=0"
+};
+
  $('#start').on('click', function(){
  	var selected = $('#selection :selected');
 	var s = selected.text();
@@ -10,7 +15,7 @@
  });
 
 function bootup(filename){
-	$.getScript(filename, function(){
+	$.getScript(links[filename], function(){
 		console.log("starting " + filename);
 	});
 }
