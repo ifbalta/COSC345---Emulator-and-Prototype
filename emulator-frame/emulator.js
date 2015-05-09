@@ -34,7 +34,7 @@ function clear(){
 
 function bootup(filename){
 	var prev;
-
+	console.log("booting " + filename);
 	if(prev != null) {
 			console.log("Stopping " + runningScript);
 			prev.stopScript();
@@ -42,14 +42,16 @@ function bootup(filename){
 			prev = null;
 			runningScript = null;
 		}
+		console.log("getting script");
 	runningScript = $.getScript(filename, function(){
 		console.log("starting " + filename);
-		if (protoRegex.test(filename)) {
+//		if (protoRegex.test(filename)) {
 			console.log("creating appObject");
 			prev = new appObject();
 			prev.startApp;
-		}
-	});	
+	//	}
+	});
+	console.log("fetched program");	
 }
 
 
