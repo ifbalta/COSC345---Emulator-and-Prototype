@@ -1,27 +1,59 @@
 // load program
-var links = {
-	"placeholder.js":"https://www.dropbox.com/s/ljarw44tg0zte1u/placeholder.js?dl=0"
-};
-
 var runningScript;
+var protoRegex = new RegExp("prototype");
 
+
+function clear(){
+	var canvas = $("#canvas")[0]; 
+	var ctxt = canvas.getContext("2d");
+	var width = canvas.width;
+	var height = canvas.height;
+	console.log("clearing screen");
+	ctxt.clearRect(0,0,width, height);
+}
+
+function clear(){
+	var canvas = $("#canvas")[0]; 
+	var ctxt = canvas.getContext("2d");
+	var width = $("#canvas").width();
+	var height = $("#canvas").height();
+	console.log("clearing screen");
+	ctxt.clearRect(0,0,width, height);
+}
 
  $('#start').on('click', function(){
+ 	clear();
  	var selected = $('#selection :selected');
 	var s = selected.text();
 	var filename = selected.attr('fname');
 	var message = "Loading " + s + " from " + filename + " file."
 	$('#display').val(message);
 	console.log(message);
-	runningScript = filename;	
+	
+	clear();
 	bootup(filename);
  });
 
 function bootup(filename){
-	$.getScript(filename, function(){
+	var prev;
+
+	if(prev != null) {
+			console.log("Stopping " + runningScript);
+			prev.stopScript();
+			clear();
+			prev = null;
+			runningScript = null;
+		}
+	runningScript = $.getScript(filename, function(){
 		console.log("starting " + filename);
-	});
+		if (protoRegex.test(filename)) {
+			console.log("creating appObject");
+			prev = new appObject();
+			prev.startApp;
+		}
+	});	
 }
+
 
 /*
 	if script is running.
