@@ -6,7 +6,17 @@ var links = {
 var runningScript;
 
 
+function clear(){
+	var canvas = $("#canvas")[0]; 
+	var ctxt = canvas.getContext("2d");
+	var width = $("#canvas").width();
+	var height = $("#canvas").height();
+	console.log("clearing screen");
+	ctxt.clearRect(0,0,width, height);
+}
+
  $('#start').on('click', function(){
+ 	clear();
  	var selected = $('#selection :selected');
 	var s = selected.text();
 	var filename = selected.attr('fname');
