@@ -10,41 +10,23 @@ $(document).ready(function () {
         mazeImg.src = "Level1.gif";
 
 
-        function init(){
-            return setInterval(draw(currRectX,currRectY),10);
-        }
 
+        function drawMazeAndRectangle(rectX, rectY) {
 
-        function draw(rectX,rectY){
+                context.drawImage(mazeImg, 0, 0);
+                drawRectangle(rectX, rectY, "#0000FF");
+                context.beginPath();
+
+                context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
+                context.closePath();
+                context.fillStyle = '#00FF00';
+                context.fill();
+
             
-            //bg
-            context.drawImage(mazeImg, 0, 0);
-            
-
-            //middle/goal
-            //context.arc(100, 150, 5, 0, 2 * Math.PI, false);
-            context.beginPath();
-            context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
-            context.closePath();
-            context.fillStyle = '#00FF00';
-            context.fill();
-
-            drawRectangle(rectX,rectY,"purple");
-            
-
-
         }
 
         function drawRectangle(x, y, style) {
-            //makeWhite(currRectX, currRectY, 15, 15);
-            context.drawImage(mazeImg, 0, 0);
-            
-            //middle/goal
-            context.beginPath();
-            context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
-            context.closePath();
-            context.fillStyle = '#00FF00';
-            context.fill();
+
 
             currRectX = x;
             currRectY = y;
@@ -55,22 +37,20 @@ $(document).ready(function () {
             context.fill();
         }
 
-
         function move(e) {
             var newX;
             var newY;
             var movingAllowed;
             e = e || window.event;
             //bg
-            // context.drawImage(mazeImg, 0, 0);
-            
+            context.drawImage(mazeImg, 0, 0);
+            context.beginPath();
 
-            // //middle/goal
-            // context.beginPath();
-            // context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
-            // context.closePath();
-            // context.fillStyle = '#00FF00';
-            // context.fill();
+            //middle/goal
+            context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
+            context.closePath();
+            context.fillStyle = '#00FF00';
+            context.fill();
 
 
             switch (e.keyCode) {
@@ -98,22 +78,21 @@ $(document).ready(function () {
 
             can_Move = canMoveTo(newX, newY);
             if (can_Move === 1) {  // 1 means collision with black, therefore can't move
-                drawRectangle(newX, newY, "purple");
+                drawRectangle(newX, newY, "#0000FF");
                 currRectX = newX;
                 currRectY = newY;
             }
             else if (can_Move === 2) { // rectangle has met the goal.
                 clearInterval(intervalVar);
                 make_Screen_White(0, 0, canvas.width, canvas.height);
-                context.font = "20px Arial";
+                context.font = "40px Arial";
                 context.fillStyle = "blue";
                 context.textAlign = "center";
                 context.textBaseline = "middle";
-                context.fillText("Goal!", canvas.width / 2, canvas.height / 2);
+                context.fillText("Congratulations!", canvas.width / 2, canvas.height / 2);
                 window.removeEventListener("keydown", move, true);
             }
         }
-
         function canMoveTo(destX, destY) {
             var imgData = context.getImageData(destX, destY, 15, 15);
             var data = imgData.data;
@@ -135,7 +114,6 @@ $(document).ready(function () {
             }
             return canMove;
         }
-
         function make_Screen_White(x, y, w, h) {
             context.beginPath();
             context.rect(x, y, w, h);
@@ -143,8 +121,8 @@ $(document).ready(function () {
             context.fillStyle = "white";
             context.fill();
         }
-        //drawMazeAndRectangle(200, 3);
-        init();
+        drawMazeAndRectangle(200, 3);
+        //init();
         window.addEventListener("keydown", move, true);
         //createTimer(300); // 2 minutes
 
