@@ -1,5 +1,7 @@
 // load program
 var runningScript;
+var protoRegex = new RegExp("prototype");
+
 
 function clear(){
 	var canvas = $("#canvas")[0]; 
@@ -45,7 +47,8 @@ function bootup(filename){
 	runningScript = $.getScript(filename, function(){
 	$.getScript(filename, function(){
 		console.log("starting " + filename);
-		if (regex.test(filename, "prototype")) {
+		if (protoRegex.test(filename)) {
+			console.log("creating appObject");
 			prev = new appObject();
 			prev.startApp();
 		}
