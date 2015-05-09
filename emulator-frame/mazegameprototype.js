@@ -1,4 +1,4 @@
-function appObject (){
+function appObject () {
         var canvas = $("#canvas")[0];;
         var context = canvas.getContext("2d");;
         var currRectX = 8;
@@ -9,39 +9,56 @@ function appObject (){
         var mazeImg = new Image();
         mazeImg.src = "Level1.gif";
 
-        this.startApp = function () {
-            drawMazeAndRectangle(200, 3);
-            window.addEventListener("keydown", move, true);
-        }
+        this.startApp = init();
 
         this.stopScript = function () {
-            console.log("stopping maze game");
             startApp = null;
+            clear();
         }
 
-        this.clearScreen = clear();
-
-        function clear(){
+        this.clearScreen = function clear(){
           console.log("clearing snake screen");
           ctxt.clearRect(0,0,w, h);
         }
 
-        function drawMazeAndRectangle(rectX, rectY) {
 
-                context.drawImage(mazeImg, 0, 0);
-                drawRectangle(rectX, rectY, "#0000FF");
-                context.beginPath();
 
-                context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
-                context.closePath();
-                context.fillStyle = '#00FF00';
-                context.fill();
 
+        function init(){
+            return setInterval(draw(currRectX,currRectY),10);
+        }
+
+
+        function draw(rectX,rectY){
             
+            //bg
+            context.drawImage(mazeImg, 0, 0);
+            
+
+            //middle/goal
+            //context.arc(100, 150, 5, 0, 2 * Math.PI, false);
+            context.beginPath();
+            context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
+            context.closePath();
+            context.fillStyle = '#00FF00';
+            context.fill();
+
+            drawRectangle(rectX,rectY,"purple");
+            
+
+
         }
 
         function drawRectangle(x, y, style) {
-
+            //makeWhite(currRectX, currRectY, 15, 15);
+            context.drawImage(mazeImg, 0, 0);
+            
+            //middle/goal
+            context.beginPath();
+            context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
+            context.closePath();
+            context.fillStyle = '#00FF00';
+            context.fill();
 
             currRectX = x;
             currRectY = y;
@@ -52,20 +69,22 @@ function appObject (){
             context.fill();
         }
 
+
         function move(e) {
             var newX;
             var newY;
             var movingAllowed;
             e = e || window.event;
             //bg
-            context.drawImage(mazeImg, 0, 0);
-            context.beginPath();
+            // context.drawImage(mazeImg, 0, 0);
+            
 
-            //middle/goal
-            context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
-            context.closePath();
-            context.fillStyle = '#00FF00';
-            context.fill();
+            // //middle/goal
+            // context.beginPath();
+            // context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
+            // context.closePath();
+            // context.fillStyle = '#00FF00';
+            // context.fill();
 
 
             switch (e.keyCode) {
@@ -93,21 +112,22 @@ function appObject (){
 
             can_Move = canMoveTo(newX, newY);
             if (can_Move === 1) {  // 1 means collision with black, therefore can't move
-                drawRectangle(newX, newY, "#0000FF");
+                drawRectangle(newX, newY, "purple");
                 currRectX = newX;
                 currRectY = newY;
             }
             else if (can_Move === 2) { // rectangle has met the goal.
                 clearInterval(intervalVar);
                 make_Screen_White(0, 0, canvas.width, canvas.height);
-                context.font = "40px Arial";
+                context.font = "20px Arial";
                 context.fillStyle = "blue";
                 context.textAlign = "center";
                 context.textBaseline = "middle";
-                context.fillText("Congratulations!", canvas.width / 2, canvas.height / 2);
+                context.fillText("Goal!", canvas.width / 2, canvas.height / 2);
                 window.removeEventListener("keydown", move, true);
             }
         }
+
         function canMoveTo(destX, destY) {
             var imgData = context.getImageData(destX, destY, 15, 15);
             var data = imgData.data;
@@ -129,6 +149,7 @@ function appObject (){
             }
             return canMove;
         }
+
         function make_Screen_White(x, y, w, h) {
             context.beginPath();
             context.rect(x, y, w, h);
@@ -136,8 +157,8 @@ function appObject (){
             context.fillStyle = "white";
             context.fill();
         }
-        
-        //init();
+        //drawMazeAndRectangle(200, 3);
+        init();
         window.addEventListener("keydown", move, true);
         //createTimer(300); // 2 minutes
 
