@@ -1,7 +1,8 @@
 1 April 2015: Set up git repository for emulator and prototype.
 7 April 2015: Updated README to include repository set up instructions and
               added collaborator list.
-15 April 2015: Added git branch instructions           
+15 April 2015: Added git branch instructions
+19 April 2015: Added EGit setup instructions.           
 
 
 Collaborators:
@@ -27,13 +28,13 @@ Getting a copy of  the git repo:
         https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git'
         into the command line or use the GitHub IDE.
         This command will create a folder called
-        “COSC345--Emulator-and-Prototype” in your local directory
+        â€œCOSC345--Emulator-and-Prototypeâ€� in your local directory
         and create a local copy of the repository.
         4. All done.
 
 Adding changes:
       Note: If this is a new file, you must track the file first using :
-               'git add filename'
+               'git add filename'  or 'git add --all'
 
       1. git commit -a
          This command adds all modified tracked files to the git repo.
@@ -45,6 +46,10 @@ Adding changes:
 Ensuring that you have the updated version:
          1. git pull
          Pulls the most recent additions to the master branch
+         git pull [remote] [branch]
+         Pull the specified branch from the remote. eg: git pull origin version-1
+         2. git merge A
+         Merge the current branch with branch A
 
 Creating a new branch:
          1. git checkout -b your_branch_name
@@ -55,3 +60,32 @@ Checking out a branch:
          1. Clone the master branch
          2. git checkout -b branch-name origin/branch-name
          3. Done!
+
+ Git and Eclipse:
+ 	If you're having trouble with using git using the command line,
+ 	you can use Eclipse and EGit to manage commits for you.
+ 	
+ Setting up EGit:
+ 	
+ 	1. Install Eclipse
+ 		The latest one is Luna.
+ 	2. Click Help->Install new software
+ 	3. In the "work with:" input field, enter "http://download.eclipse.org/egit/updates"
+ 	4. Select all available, and click finish to complete installation.
+ 
+ Setting up your repository:
+ 	At this point, you've probably already cloned the repository locally.
+ 	So all you have to do is tell Eclipse where to find it.
+ 	
+ 	1. Click Window->Show View->Other->Git->Git Repositories
+ 	2. On the lower left corner, there should be a bunch of icons that look like
+ 		folders labeled 'GIT'. Click on the one with a green cross, meaning
+ 		'Add an existing Local Repository to this View'
+ 	3. You'll get a pop up asking where to find your repository.
+ 		Click browse and find the folder where you've stored your repository.
+ 	4. All done.
+ 	
+ Commit:
+ 	1. Right-click on your repository and then select commit.
+ 	2. All done.
+ 

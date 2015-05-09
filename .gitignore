@@ -1,0 +1,5 @@
+#Ignore OS generated files
+.DS_STORE
+Thumbs.db
+Desktop.ini
+._*
