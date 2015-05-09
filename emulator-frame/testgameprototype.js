@@ -22,8 +22,3 @@ function appObject(){
 appObject.prototype.printSomething = function() {
   console.log("print hi!");
 };
-
-function printer(){
-  console.log("hello world");
-};
-

@@ -29,8 +29,6 @@ function clear(){
 	var message = "Loading " + s + " from " + filename + " file."
 	$('#display').val(message);
 	console.log(message);
-	
-	clear();
 	bootup(filename);
  });
 
