@@ -28,19 +28,19 @@ function appObject (){
         if (typeof game_loop != "undefined") clearInterval(game_loop);
         game_loop = setInterval(paint, 60);
     }
-    //if we click on the document, then the game should start
-    // $(document).onClick(function(){
-    //init();
-    //  })
-    function stopScript() {
+
+    this.startApp = startApp();
+
+    this.stopScript = function stopScript() {
       console.log("stopping game");
       clear();
       clearInterval(game_loop);
       game_loop = "undefined";
       clear();
+      this.startApp = null;
     }
 
-    function clear(){
+    this.clearScreen = function clear(){
       console.log("clearing snake screen");
       ctxt.clearRect(0,0,w, h);
     }

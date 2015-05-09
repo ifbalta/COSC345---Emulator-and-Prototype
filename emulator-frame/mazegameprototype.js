@@ -1,4 +1,4 @@
-$(document).ready(function () {
+function appObject (){
         var canvas = $("#canvas")[0];;
         var context = canvas.getContext("2d");;
         var currRectX = 8;
@@ -9,7 +9,22 @@ $(document).ready(function () {
         var mazeImg = new Image();
         mazeImg.src = "Level1.gif";
 
+        this.startApp = function () {
+            drawMazeAndRectangle(200, 3);
+            window.addEventListener("keydown", move, true);
+        }
 
+        this.stopScript = function () {
+            console.log("stopping maze game");
+            startApp = null;
+        }
+
+        this.clearScreen = clear();
+
+        function clear(){
+          console.log("clearing snake screen");
+          ctxt.clearRect(0,0,w, h);
+        }
 
         function drawMazeAndRectangle(rectX, rectY) {
 
@@ -121,7 +136,7 @@ $(document).ready(function () {
             context.fillStyle = "white";
             context.fill();
         }
-        drawMazeAndRectangle(200, 3);
+        
         //init();
         window.addEventListener("keydown", move, true);
         //createTimer(300); // 2 minutes

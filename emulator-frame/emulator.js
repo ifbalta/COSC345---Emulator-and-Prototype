@@ -10,7 +10,17 @@ function clear(){
 	ctxt.clearRect(0,0,width, height);
 }
 
+function clear(){
+	var canvas = $("#canvas")[0]; 
+	var ctxt = canvas.getContext("2d");
+	var width = $("#canvas").width();
+	var height = $("#canvas").height();
+	console.log("clearing screen");
+	ctxt.clearRect(0,0,width, height);
+}
+
  $('#start').on('click', function(){
+ 	clear();
  	var selected = $('#selection :selected');
 	var s = selected.text();
 	var filename = selected.attr('fname');
@@ -33,9 +43,12 @@ function bootup(filename){
 			runningScript = null;
 		}
 	runningScript = $.getScript(filename, function(){
+	$.getScript(filename, function(){
 		console.log("starting " + filename);
-		prev = new appObject();
-		prev.startApp();
+		if (regex.test(filename, "prototype")) {
+			prev = new appObject();
+			prev.startApp();
+		}
 	});
 	
 }
