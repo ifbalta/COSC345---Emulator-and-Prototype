@@ -49,7 +49,7 @@ function bootup(filename){
 		if (protoRegex.test(filename)) {
 			console.log("creating appObject");
 			prev = new appObject();
-			prev.startApp();
+			prev.startApp;
 		}
 	});	
 }
