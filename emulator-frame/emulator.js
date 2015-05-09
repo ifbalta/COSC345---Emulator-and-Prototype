@@ -45,16 +45,15 @@ function bootup(filename){
 			runningScript = null;
 		}
 	runningScript = $.getScript(filename, function(){
-	$.getScript(filename, function(){
 		console.log("starting " + filename);
 		if (protoRegex.test(filename)) {
 			console.log("creating appObject");
 			prev = new appObject();
 			prev.startApp();
 		}
-	});
-	
+	});	
 }
+
 
 /*
 	if script is running.
