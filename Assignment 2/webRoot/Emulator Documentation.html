@@ -36,7 +36,14 @@
     Requires git VCS be pre-installed.<br>
     git can be downloaded from <a href="http://git-scm.com/downloads"> git-scm.com/downloads.</a>
     <p>
-      For Google Chrome compatibility, node.js and Express.js must be installed.</br>
+      For Google Chrome compatibility, node.js and Express.js or python must be installed.<br><br>
+      If using a python server:
+      <ul>
+        <li>
+          Navigate to the webRoot directory and run <code>python -m SimpleHTTPServer 8080</code> on the command line.
+        </li>
+      </ul>
+      If using a node server:
       <ol>
         <li>Install <a href="https://nodejs.org/download/">node.js</a> from their website</li>
         <li>Install Express.js by running <code>npm install express --save</code> on the command line</li>
@@ -56,9 +63,15 @@
         <li>Git clients such as SourceTree or the GitHub GUI</li>
         <li>Using Safari, open <code>emulator.html</code> in the broswer</li>
         <li>
-          Using Google Chrome, start the node server through <code>node bootup</code> and navigate to
-          <code>http://localhost:3000</code> in the browser
-        </li>
+          Using Google Chrome, 
+          <ul>
+            <li>
+              Using node,start server through <code>node bootup</code> and navigate to
+            <code>http://localhost:3000</code> in the browser
+            </li>
+            <li>Using python, start server through <code>python -m SimpleHTTPServer 8080</code> and navigate
+              to <code>http://localhost:8080</code></li>
+        </ul>
       </ol>
     <p>
 
