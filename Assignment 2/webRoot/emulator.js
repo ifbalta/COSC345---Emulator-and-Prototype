@@ -16,8 +16,14 @@ function clear(){
  	var selected = $('#selection :selected');
 	var s = selected.text();
 	var filename = selected.attr('fname');
+	// prototype means it's stored in appDir
+	if (protoRegex.test(filename)) {
+		filename = "/appDir/" + filename.replace("prototype.js", "/") + filename
+		console.log(filename);
+	}
 	var message = "Loading " + s + " from " + filename + " file."
 	$('#display').val(message);
+	
 	console.log(message);
 	bootup(filename);
  });
