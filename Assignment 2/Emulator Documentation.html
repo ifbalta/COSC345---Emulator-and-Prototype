@@ -23,7 +23,7 @@
     The emulator acts like a generic smart watch and is not meant to mimic any currently available smart watch such as the Apple Watch or Moto 360.
     The emulator is written in JavaScript and jQuery and is run on the browser.
     The jQuery is version 1.11 and hosted on Google's Ajax library.
-   The emulator is compatible with Safari only.
+    The emulator is compatible with Safari and Google Chrome if node.js and Express.js are pre-installed.
   </p>
   <h2>
     Features
@@ -35,6 +35,15 @@
    <h2>Installation</h2>
     Requires git VCS be pre-installed.<br>
     git can be downloaded from <a href="http://git-scm.com/downloads"> git-scm.com/downloads.</a>
+    <p>
+      For Google Chrome compatibility, node.js and Express.js must be installed.</br>
+      <ol>
+        <li>Install <a href="https://nodejs.org/download/">node.js</a> from their website</li>
+        <li>Install Express.js by running <code>npm install express --save</code> on the command line</li>
+        <li>Start the server using the command <code>node bootup</code></li>
+      </ol>
+    </p>
+    
     </p>
       The emulator is open-source and publically available on GitHub.
       Get the code <a href="https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git">
@@ -45,14 +54,22 @@
          <code>git clone https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git</code> or
         </li>
         <li>Git clients such as SourceTree or the GitHub GUI</li>
-        <li>Start up <code>emulator.html</code> in Safari</li>
+        <li>Using Safari, open <code>emulator.html</code> in the broswer</li>
+        <li>
+          Using Google Chrome, start the node server through <code>node bootup</code> and navigate to
+          <code>http://localhost:3000</code> in the browser
+        </li>
       </ol>
     <p>
 
   <h2>For Users:</h2>
   <p>
     Starting up the emulator is as simple as opening <code>emulator.html</code> in Safari, and selecting an app
-    from the menu.
+    from the menu.<br>
+    <h3>Not using Safari?</h3>
+      <p>
+        The emulator is compatible with Google Chrome if you have node.js and Express.js pre-installed.
+      </p>
   </p>
   <h2>For Developers</h2>
   <p>
