@@ -1,0 +1,41 @@
+body {
+	text-align: center;
+    background: ##6d9fb8;
+    background-image: url("index.png"), url("index2.png");
+	background-repeat: repeat-x, repeat;
+}
+
+h1 {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	color: #FFF0AA;	
+}
+
+#pic {  
+ margin-left: auto;
+ margin-right: auto;
+}
+
+#scr {
+	/*background: url("http://www.designjuices.co.uk/wp-content/uploads/2011/03/09_burnished-metal.jpg"); */
+	background-size: 500;
+}
+
+#canvas {
+    border: solid;
+	border-width: 4px;	
+	color: #B4D8E7;
+	background-image: url("m.jpg");
+	position: relative; 
+	top: -513px;
+	left: -5px;
+}
+
+#interface {
+	position: relative;
+}
+
+#selectTitle{
+	position: relative;
+	top: -313px;
+}
+
