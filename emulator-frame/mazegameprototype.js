@@ -1,6 +1,6 @@
 function appObject () {
-        var canvas = $("#canvas")[0];;
-        var context = canvas.getContext("2d");;
+        var canvas = $("#canvas")[0];
+        var context = canvas.getContext("2d");
         var currRectX = 8;
         var currRectY = 3;
         var mazeWidth = 310;
@@ -14,17 +14,21 @@ function appObject () {
             return setInterval(draw(currRectX,currRectY),10);
         }
 
-        this.startApp = startApp();
+        function clearScren(){
+            console.log("clearing maze screen");
+            ctxt.clearRect(0,0,w, h);
+        }
 
-        this.stopScript = function () {
+        function stopScript() {
             startApp = null;
             clear();
         }
 
-        this.clearScreen = function clear(){
-          console.log("clearing maze screen");
-          ctxt.clearRect(0,0,w, h);
-        }
+        this.startApp = startApp();
+
+        //this.stopScript = stopScript();
+        //
+        //this.clearScreen = clearScreen();
 
 
         function draw(rectX,rectY){
@@ -160,4 +164,4 @@ function appObject () {
         window.addEventListener("keydown", move, true);
         //createTimer(300); // 2 minutes
 
-});
+}

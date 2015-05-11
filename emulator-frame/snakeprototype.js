@@ -29,21 +29,25 @@ function appObject (){
         game_loop = setInterval(paint, 60);
     }
 
+    function stopScript() {
+        console.log("stopping game");
+        clear();
+        clearInterval(game_loop);
+        game_loop = "undefined";
+        clear();
+        this.startApp = null;
+    }
+
+    function clear(){
+        console.log("clearing snake screen");
+        ctxt.clearRect(0,0,w, h);
+    }
+
     this.startApp = startApp();
 
-    this.stopScript = function stopScript() {
-      console.log("stopping game");
-      clear();
-      clearInterval(game_loop);
-      game_loop = "undefined";
-      clear();
-      this.startApp = null;
-    }
-
-    this.clearScreen = function clear(){
-      console.log("clearing snake screen");
-      ctxt.clearRect(0,0,w, h);
-    }
+    //this.stopScript = stopScript();
+    //
+    //this.clearScreen = clear();
 
     //Makes snake info
     function create_snake(y) {

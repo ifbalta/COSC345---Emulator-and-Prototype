@@ -3,7 +3,9 @@ $(document).ready(function(){
     var ctx = canvas.getContext("2d");
     var width = $("#canvas").width();
     var height = $("#canvas").height();
+    var x = 20;
+    var y = 20;
     ctx.fillStyle = "red";
-    ctx.rect(20,20,150,100);
-	ctx.fill();
-});
+    ctx.rect(x,y,10,50);
+    ctx.fill();
+ });

@@ -27,8 +27,8 @@ function bootup(filename){
 	console.log("booting " + filename);
 	if(prev != null) {
 			console.log("Stopping " + runningScript);
-			prev.stopScript();
-			clear();
+			prev.stopScript;
+			prev.clearScreen;
 			prev = null;
 			runningScript = null;
 		}
