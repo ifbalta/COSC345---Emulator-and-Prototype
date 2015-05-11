@@ -26,12 +26,13 @@ function bootup(filename){
 	var prev;
 	console.log("booting " + filename);
 	if(prev != null) {
-			console.log("Stopping " + runningScript);
-			prev.stopScript;
-			prev.clearScreen;
-			prev = null;
-			runningScript = null;
-		}
+		console.log("Stopping " + runningScript);
+		prev.prototype.stopScript = stopScript();
+		prev.prototype.clearScreen = clear();
+		prev.stopScript();
+		prev.clearScreen();
+		prev = null;
+	}
 		console.log("getting script");
 		runningScript = $.getScript(filename, function(){
 		console.log("starting " + filename);

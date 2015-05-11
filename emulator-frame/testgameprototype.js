@@ -13,6 +13,7 @@ function appObject(){
   this.startApp = startApp();
 
   function stopScript() {
+    clearScreen();
     console.log("stopping game");
   }
 

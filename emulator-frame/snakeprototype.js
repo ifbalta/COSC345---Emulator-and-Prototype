@@ -13,7 +13,7 @@ function appObject (){
     var image = new Image();
     var bg = new Image();
     var pat;
-    var game_loop;
+    this.game_loop;
     bg.src = "snakebg.png";
     image.src = "snakebox.png";
     pat = ctxt.createPattern(bg, "no-repeat");
@@ -33,7 +33,7 @@ function appObject (){
         console.log("stopping game");
         clear();
         clearInterval(game_loop);
-        game_loop = "undefined";
+        this.game_loop = "undefined";
         clear();
         this.startApp = null;
     }
@@ -45,7 +45,9 @@ function appObject (){
 
     this.startApp = startApp();
 
-    //this.stopScript = stopScript();
+    this.stopScript = function() {
+        stopScript();
+    }
     //
     //this.clearScreen = clear();
 
