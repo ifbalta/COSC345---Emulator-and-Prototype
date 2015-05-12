@@ -1,5 +1,9 @@
 /*
 	node server to avoid Chrome cross origin errors
 */
-var open = require('open');
-open('emulator.html');
+var express = require('express');
+var app = express();
+
+
+app.use(express.static(__dirname + '/'));
+app.listen(process.env.PORT || 3000);

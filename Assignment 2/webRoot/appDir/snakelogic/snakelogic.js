@@ -14,8 +14,8 @@ $(document).ready(function () {
     var image = new Image();
     var bg = new Image();
     var pat;
-    bg.src = "snakebg.png";
-    image.src = "snakebox.png";
+    bg.src = resourcePath + "snakebg.png";
+    image.src = resourcePath + "snakebox.png";
     pat = ctxt.createPattern(bg, "no-repeat");
 
 

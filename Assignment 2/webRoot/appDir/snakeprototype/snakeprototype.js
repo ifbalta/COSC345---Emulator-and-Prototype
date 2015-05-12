@@ -14,8 +14,8 @@ function appObject (){
     var bg = new Image();
     var pat;
     this.game_loop;
-    bg.src = "snakebg.png";
-    image.src = "snakebox.png";
+    bg.src = resourcePath + "snakebg.png";
+    image.src = resourcePath + "snakebox.png";
     pat = ctxt.createPattern(bg, "no-repeat");
 
 
