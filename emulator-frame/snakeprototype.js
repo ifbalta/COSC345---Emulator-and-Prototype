@@ -19,15 +19,6 @@ function appObject (){
     pat = ctxt.createPattern(bg, "no-repeat");
 
 
-    function startApp() {
-        dir = "right";
-        l = 5;
-        create_snake(0);
-        create_food();
-        score = 0;
-        if (typeof game_loop != "undefined") clearInterval(game_loop);
-        game_loop = setInterval(paint, 60);
-    }
 
     function stopScript() {
         console.log("stopping game");
@@ -38,12 +29,30 @@ function appObject (){
         this.startApp = null;
     }
 
-    function clear(){
+    function clearScreen(){
         console.log("clearing snake screen");
         ctxt.clearRect(0,0,w, h);
     }
 
-    this.startApp = startApp();
+    this.startApp = function startApp() {
+            dir = "right";
+            l = 5;
+            create_snake(0);
+            create_food();
+            score = 0;
+            if (typeof game_loop != "undefined") clearInterval(game_loop);
+            game_loop = setInterval(paint, 60);
+        }
+
+    var continuePlaying = function(){
+        dir = "right";
+        l = 5;
+        create_snake(0);
+        create_food();
+        score = 0;
+        if (typeof game_loop != "undefined") clearInterval(game_loop);
+        game_loop = setInterval(paint, 60);
+    }
 
     this.stopScript = function() {
         stopScript();
@@ -128,7 +137,7 @@ function appObject (){
         if (nx == -1 || ny == -1 || nx == w / cw || ny == h / cw || check_collision(nx, ny, snake_arr)) {
             //  var respond = confirm("GAME OVER!\n Final Score: " + score);
             // if (respond == true) init();
-            startApp();
+            continuePlaying();
             return;
         }
 

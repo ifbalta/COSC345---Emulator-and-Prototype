@@ -1,6 +1,6 @@
 function appObject () {
-        var canvas = $("#canvas")[0];;
-        var context = canvas.getContext("2d");;
+        var canvas = $("#canvas")[0];
+        var context = canvas.getContext("2d");
         var currRectX = 8;
         var currRectY = 3;
         var mazeWidth = 310;
@@ -9,22 +9,26 @@ function appObject () {
         var mazeImg = new Image();
         mazeImg.src = "Level1.gif";     
 
-        function startApp(){
+        this.startApp = function startApp(){
             console.log("starting maze game prototype");
             return setInterval(draw(currRectX,currRectY),10);
         }
 
-        this.startApp = startApp();
+        this.clearScreen = function clearScren(){
+            console.log("clearing maze screen");
+            ctxt.clearRect(0,0,w, h);
+        }
 
-        this.stopScript = function () {
+        this.stopScript = function stopScript() {
             startApp = null;
             clear();
         }
 
-        this.clearScreen = function clear(){
-          console.log("clearing maze screen");
-          ctxt.clearRect(0,0,w, h);
-        }
+        //this.startApp = startApp();
+
+        //this.stopScript = stopScript();
+        //
+        //this.clearScreen = clearScreen();
 
 
         function draw(rectX,rectY){
@@ -160,4 +164,4 @@ function appObject () {
         window.addEventListener("keydown", move, true);
         //createTimer(300); // 2 minutes
 
-});
+}

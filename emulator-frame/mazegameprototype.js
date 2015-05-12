@@ -9,22 +9,22 @@ function appObject () {
         var mazeImg = new Image();
         mazeImg.src = "Level1.gif";     
 
-        function startApp(){
+        this.startApp = function startApp(){
             console.log("starting maze game prototype");
             return setInterval(draw(currRectX,currRectY),10);
         }
 
-        function clearScren(){
+        this.clearScreen = function clearScren(){
             console.log("clearing maze screen");
             ctxt.clearRect(0,0,w, h);
         }
 
-        function stopScript() {
+        this.stopScript = function stopScript() {
             startApp = null;
             clear();
         }
 
-        this.startApp = startApp();
+        //this.startApp = startApp();
 
         //this.stopScript = stopScript();
         //

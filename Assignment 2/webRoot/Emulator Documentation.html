@@ -3,10 +3,9 @@
   <meta charset="UTF-8">
   <title>Emulator Documentation</title>
   <style type="text/css">
-    body{
-      display: block;
-      margin: 10px auto;
-      padding: 0 50px;
+    body {
+      margin:50px 50px;
+      padding:10px;
     }
     ul{
       list-style: none;
@@ -20,16 +19,16 @@
       <li>Lennox Huang</li>
     </ul>
   <p>
-    The emulator acts like a generic smart watch and is not meant to mimic any currently available smart watch such as the Apple Watch or Moto 360.
-    The emulator is written in JavaScript and jQuery and is run on the browser.
-    The jQuery is version 1.11 and hosted on Google's Ajax library.
+    The emulator acts like a generic smart watch and is not meant to mimic any currently available smart watch such as the Apple Watch or Moto 360. <br>
+    The emulator is written in JavaScript and jQuery and is run on the browser. <br>
+    The jQuery is version 1.11 and hosted on Google's Ajax library.<br>
     The emulator is compatible with Safari and Google Chrome if node.js and Express.js are pre-installed.
   </p>
   <h2>
     Features
   </h2>
   <ul>
-    <li>A screen</li>
+    <li>A 320 x 320 screen</li>
     <li>An app tray</li>
   </ul>
    <h2>Installation</h2>
@@ -38,17 +37,17 @@
     <p>
       For Google Chrome compatibility, node.js and Express.js or python must be installed.<br><br>
       If using a python server:
-      <ul>
+      <ol>
         <li>
           Navigate to the webRoot directory and run <code>python -m SimpleHTTPServer 8080</code> on the command line.
         </li>
-      </ul>
+      </ol>
       If using a node server:
-      <ol>
+      <ul>
         <li>Install <a href="https://nodejs.org/download/">node.js</a> from their website</li>
         <li>Install Express.js by running <code>npm install express --save</code> on the command line</li>
         <li>Start the server using the command <code>node bootup</code></li>
-      </ol>
+      </ul>
     </p>
     
     </p>
@@ -59,14 +58,13 @@
       <ol>
         <li>Clone the repository using
          <code>git clone https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git</code> or
-        </li>
-        <li>Git clients such as SourceTree or the GitHub GUI</li>
+          Git clients such as SourceTree or the GitHub GUI</li>
         <li>Using Safari, open <code>emulator.html</code> in the broswer</li>
         <li>
           Using Google Chrome, 
           <ul>
             <li>
-              Using node,start server through <code>node bootup</code> and navigate to
+              Using node, start server through <code>node bootup</code> and navigate to
             <code>http://localhost:3000</code> in the browser
             </li>
             <li>Using python, start server through <code>python -m SimpleHTTPServer 8080</code> and navigate
@@ -75,7 +73,7 @@
       </ol>
     <p>
 
-  <h2>For Users:</h2>
+  <h2>For Users</h2>
   <p>
     Starting up the emulator is as simple as opening <code>emulator.html</code> in Safari, and selecting an app
     from the menu.<br>
@@ -87,6 +85,20 @@
   <h2>For Developers</h2>
   <p>
     The emulator uses jQuery's getScript() function to retrieve appObjects from other JavaScript files.<br>
+    <h3>Installing your own application</h3>
+    <ol>
+      <li>Applications must be written in JavaScript and follow the appObject structure</li>
+      <li>Store your application in the <code>appDir/</code> directory.
+          <br> Your folder must have the same name as your main JavaScript file.
+          If your file is named <code>example.js</code> it must be stored in the <code>example</code> directory.
+        <br> Your application's file path should follow the <code>appDir/example/example.js</code> format.
+      </li>
+      <li> Add your application to the app tray on <code>emulator.html</code>.
+        The app tray is select menu with an <code>fname</code> property. The <code>fname</code> must have the
+        same name as your main JavaScript file.
+        <br>If your file is named <code>example.js</code>, then its <code>fname</code> must also be <code>example.js</code>
+      </li>
+    </ol>
     
     The emulator expects an appObject with three properties:
 

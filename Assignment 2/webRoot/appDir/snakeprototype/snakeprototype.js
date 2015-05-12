@@ -13,13 +13,38 @@ function appObject (){
     var image = new Image();
     var bg = new Image();
     var pat;
-    var game_loop;
+    this.game_loop;
     bg.src = "snakebg.png";
     image.src = "snakebox.png";
     pat = ctxt.createPattern(bg, "no-repeat");
 
 
-    function startApp() {
+
+    function stopScript() {
+        console.log("stopping game");
+        clear();
+        clearInterval(game_loop);
+        this.game_loop = "undefined";
+        clear();
+        this.startApp = null;
+    }
+
+    function clearScreen(){
+        console.log("clearing snake screen");
+        ctxt.clearRect(0,0,w, h);
+    }
+
+    this.startApp = function startApp() {
+            dir = "right";
+            l = 5;
+            create_snake(0);
+            create_food();
+            score = 0;
+            if (typeof game_loop != "undefined") clearInterval(game_loop);
+            game_loop = setInterval(paint, 60);
+        }
+
+    var continuePlaying = function(){
         dir = "right";
         l = 5;
         create_snake(0);
@@ -29,21 +54,11 @@ function appObject (){
         game_loop = setInterval(paint, 60);
     }
 
-    this.startApp = startApp();
-
-    this.stopScript = function stopScript() {
-      console.log("stopping game");
-      clear();
-      clearInterval(game_loop);
-      game_loop = "undefined";
-      clear();
-      this.startApp = null;
+    this.stopScript = function() {
+        stopScript();
     }
-
-    this.clearScreen = function clear(){
-      console.log("clearing snake screen");
-      ctxt.clearRect(0,0,w, h);
-    }
+    //
+    //this.clearScreen = clear();
 
     //Makes snake info
     function create_snake(y) {
@@ -122,7 +137,7 @@ function appObject (){
         if (nx == -1 || ny == -1 || nx == w / cw || ny == h / cw || check_collision(nx, ny, snake_arr)) {
             //  var respond = confirm("GAME OVER!\n Final Score: " + score);
             // if (respond == true) init();
-            startApp();
+            continuePlaying();
             return;
         }
 
