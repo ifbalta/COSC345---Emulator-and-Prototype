@@ -54,7 +54,7 @@ function bootup(filename){
 		console.log("getting script");
 		runningScript = $.getScript(filename, function(){
 		console.log("starting " + filename);
-			
+
 		if (protoRegex.test(filename)) {
 			console.log("creating appObject");
 			prev = new appObject();
