@@ -28,10 +28,8 @@ $(document).ready(function () {
         if (typeof game_loop != "undefined") clearInterval(game_loop);
         game_loop = setInterval(paint, 60);
     }
-    //if we click on the document, then the game should start
-    // $(document).onClick(function(){
+
     init();
-    //  })
 
     //Makes snake info
     function create_snake(y) {
@@ -60,9 +58,6 @@ $(document).ready(function () {
         }
         return false;
     }
-
-
-
 
     //Snake painting
     function paint() {
