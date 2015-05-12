@@ -2,6 +2,8 @@
 var runningScript;
 /** Regex pattern for all filenames containing 'prototype' */
 var protoRegex = new RegExp("prototype");
+/** File path hack so that resource files can find each other */
+var resourcePath;
 
 /**
  * Clears the screen.

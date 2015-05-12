@@ -7,7 +7,7 @@ $(document).ready(function () {
         var mazeHeight = 314;
         var intervalVar;
         var mazeImg = new Image();
-        mazeImg.src = "Level1.gif";
+        mazeImg.src = resourcePath + "Level1.gif";
 
 
         function init(){

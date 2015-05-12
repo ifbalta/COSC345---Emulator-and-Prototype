@@ -2,6 +2,8 @@
 var runningScript;
 /** Regex pattern for all filenames containing 'prototype' */
 var protoRegex = new RegExp("prototype");
+/** File path that resource files can find each other */
+var resourcePath;
 
 /**
  * Clears the screen.
@@ -24,15 +26,16 @@ $('#clear').on('click', function(){
  * Selects a file from the app tray and sends it to bootup()
  * */
  $('#start').on('click', function(){
-	clear();
-	var selected = $('#selection :selected');
-	var s = selected.text();
-	var filename = selected.attr('fname');
-	filename = "/appDir/" + filename.replace(".js", "/") + filename
-	var message = "Loading " + s + " from " + filename + " file."
-	$('#display').val(message);
-	console.log(message);
-	bootup(filename);
+    clear();
+    var selected = $('#selection :selected');
+    var s = selected.text();
+    var filename = selected.attr('fname');
+     resourcePath = "/appDir/" + filename.replace(".js", "/")
+    filename = resourcePath + filename
+    var message = "Loading " + s + " from " + filename + " file."
+    $('#display').val(message);
+    console.log(message);
+    bootup(filename);
  });
 
 /**

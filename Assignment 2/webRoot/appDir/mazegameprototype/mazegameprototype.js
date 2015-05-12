@@ -7,7 +7,7 @@ function appObject () {
         var mazeHeight = 314;
         var intervalVar;
         var mazeImg = new Image();
-        mazeImg.src = "Level1.gif";     
+        mazeImg.src = resourcePath + "Level1.gif";
 
         this.startApp = function startApp(){
             console.log("starting maze game prototype");
