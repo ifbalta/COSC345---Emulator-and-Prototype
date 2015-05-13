@@ -48,9 +48,9 @@ function bootup(filename){
 	if(prev != null) {
 		console.log("Stopping " + runningScript);
 		$.getScript(runningScript, function () {
-			prev = new appObject();
-			prev.stopScript();
-			prev.clearScreen();
+			this.stopScript();
+			this.clearScreen();
+			this.continueFlag = false;
 		});
 		prev = null;
 	}

@@ -16,8 +16,6 @@ $(document).ready(function () {
     var pat;
     bg.src = resourcePath + "snakebg.png";
     image.src = resourcePath + "snakebox.png";
-    pat = ctxt.createPattern(bg, "no-repeat");
-
 
     function init() {
         dir = "right";

@@ -18,7 +18,7 @@ function appObject (){
     image.src = resourcePath + "snakebox.png";
     pat = ctxt.createPattern(bg, "no-repeat");
 
-
+    this.continueFlag = false;
 
     function stopScript() {
         console.log("stopping game");
@@ -35,6 +35,7 @@ function appObject (){
     }
 
     this.startApp = function startApp() {
+            this.continueFlag = true;
             dir = "right";
             l = 5;
             create_snake(0);
@@ -55,6 +56,7 @@ function appObject (){
     }
 
     this.stopScript = function() {
+        this.continueFlag = false;
         stopScript();
     }
     //
@@ -137,7 +139,7 @@ function appObject (){
         if (nx == -1 || ny == -1 || nx == w / cw || ny == h / cw || check_collision(nx, ny, snake_arr)) {
             //  var respond = confirm("GAME OVER!\n Final Score: " + score);
             // if (respond == true) init();
-            continuePlaying();
+            if(this.continueFlag)continuePlaying();
             return;
         }
 
