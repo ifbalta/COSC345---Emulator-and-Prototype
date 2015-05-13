@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    /*
+        global variables
+        level: store the image of the maze level.
+        roundCounter: count the current level.
+    */
         var canvas = $("#canvas")[0];;
         var context = canvas.getContext("2d");;
         var currRectX = 8;
@@ -7,14 +12,19 @@ $(document).ready(function () {
         var mazeHeight = 314;
         var intervalVar;
         var mazeImg = new Image();
-        mazeImg.src = "Level1.gif";
+        var roundCounter =0;
+        var level = new Array("Level1.gif", "Level2.gif", "Level3.gif");
+      
 
-
+        /*
+            Start the 
+        */
         function init(){
-            return setInterval(draw(currRectX,currRectY),10);
+            mazeImg.src = level[roundCounter];
+            return setInterval(draw(8,3),10);
         }
 
-
+      
         function draw(rectX,rectY){
             
             //bg
@@ -103,14 +113,19 @@ $(document).ready(function () {
                 currRectY = newY;
             }
             else if (can_Move === 2) { // rectangle has met the goal.
-                clearInterval(intervalVar);
-                make_Screen_White(0, 0, canvas.width, canvas.height);
-                context.font = "20px Arial";
-                context.fillStyle = "blue";
-                context.textAlign = "center";
-                context.textBaseline = "middle";
-                context.fillText("Goal!", canvas.width / 2, canvas.height / 2);
-                window.removeEventListener("keydown", move, true);
+                 if(roundCounter > level.length){
+                    clearInterval(intervalVar);
+                    make_Screen_White(0, 0, canvas.width, canvas.height);
+                    context.font = "20px Arial";
+                    context.fillStyle = "blue";
+                    context.textAlign = "center";
+                    context.textBaseline = "middle";
+                    context.fillText("Goal!", canvas.width / 2, canvas.height / 2);
+                    window.removeEventListener("keydown", move, true);
+                }else{
+                    roundCounter++;
+                    init();
+                }
             }
         }
 
