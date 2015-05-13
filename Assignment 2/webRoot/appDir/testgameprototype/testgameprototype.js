@@ -1,4 +1,4 @@
-function appObject(){
+function AppObject(){
 
   function startApp(){
     console.log("Starting test game");

@@ -83,10 +83,10 @@
 
   <h2>For Developers</h2>
   <p>
-    The emulator uses jQuery's getScript() function to retrieve appObjects from other JavaScript files.<br>
+    The emulator uses jQuery's getScript() function to retrieve AppObjects from other JavaScript files.<br>
     <h3>Installing your own application</h3>
     <ol>
-      <li>Applications must be written in JavaScript and follow the appObject structure</li>
+      <li>Applications must be written in JavaScript and follow the AppObject structure</li>
       <li>Store your application in the <code>appDir/</code> directory.
           <br> Your folder must have the same name as your main JavaScript file.
           If your file is named <code>example.js</code> it must be stored in the <code>example</code> directory.
@@ -99,7 +99,7 @@
       </li>
     </ol>
     
-    The emulator expects an appObject with three properties:
+    The emulator expects an AppObject with three properties:
 
     <ul>
       <li>
@@ -128,9 +128,9 @@
         <h3><code>bootup()</code></h3>
         <p>
           <code>@param</code> filename<br>
-          the file from which the appObject can be retrieved
+          the file from which the AppObject can be retrieved
           <p>
-            <code>bootup()</code> is tasked with clearing and stopping any previously running applications before initializing a new appObject.
+            <code>bootup()</code> is tasked with clearing and stopping any previously running applications before initializing a new AppObject.
           </p>
 
       </li>
@@ -138,7 +138,7 @@
         <h3><code>clear()</code></h3>
         <p>
           <code>clear()</code> clears the emulator screen.
-          It does not deallocate resources. Deallocation should be the <code>appObject's clear</code> property's responsibility.
+          It does not deallocate resources. Deallocation should be the <code>AppObject's clear</code> property's responsibility.
         </p>
       </li>
       <li>

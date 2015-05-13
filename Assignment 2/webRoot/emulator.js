@@ -59,8 +59,8 @@ function bootup(filename){
 		console.log("starting " + filename);
 
 		if (protoRegex.test(filename)) {
-			console.log("creating appObject");
-			prev = new appObject();
+			console.log("creating AppObject");
+			prev = new AppObject();
 			prev.startApp();
 		}
 	});

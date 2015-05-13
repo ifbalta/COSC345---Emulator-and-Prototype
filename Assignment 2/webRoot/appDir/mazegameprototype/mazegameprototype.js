@@ -1,4 +1,4 @@
-function appObject () {
+function AppObject () {
         var canvas = $("#canvas")[0];
         var context = canvas.getContext("2d");
         var currRectX = 8;

@@ -1,4 +1,4 @@
-function appObject (){
+function AppObject (){
     var canvas = $("#canvas")[0];
     var ctxt = canvas.getContext("2d");
     var w = $("#canvas").width();
