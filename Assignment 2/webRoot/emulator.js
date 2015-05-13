@@ -29,7 +29,7 @@ $('#clear').on('click', function(){
     clear();
     var selected = $('#selection :selected');
     var s = selected.text();
-    var filename = selected.attr('fname');
+    var filename = selected.attr('label');
      resourcePath = "/appDir/" + filename.replace(".js", "/")
     filename = resourcePath + filename
     var message = "Loading " + s + " from " + filename + " file."

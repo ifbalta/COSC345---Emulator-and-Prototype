@@ -1,6 +1,6 @@
 body {
 	text-align: center;
-    background: ##6d9fb8;
+    background: #6d9fb8;
     background-image: url("index.png"), url("index2.png");
 	background-repeat: repeat-x, repeat;
 }
@@ -13,11 +13,12 @@ h1 {
 #pic {  
  margin-left: auto;
  margin-right: auto;
+ text-align: center;
 }
 
 #scr {
 	/*background: url("http://www.designjuices.co.uk/wp-content/uploads/2011/03/09_burnished-metal.jpg"); */
-	background-size: 500;
+	background-size: 500px;
 }
 
 #canvas {
