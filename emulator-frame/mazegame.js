@@ -15,7 +15,7 @@ $(document).ready(function () {
         var roundCounter =0;
         var level = new Array("Level1.gif", "Level2.gif", "Level3.gif");
       
-        mazeImg.src = level[roundCounter];
+        // mazeImg.src = level[roundCounter];
 
         /*
             Start the new round of game
@@ -108,7 +108,8 @@ $(document).ready(function () {
                 currRectY = newY;
             }
             else if (can_Move === 2) { // rectangle has met the goal.
-                 if(roundCounter > level.length){
+                roundCounter++;
+                 if(roundCounter >= level.length){
                     clearInterval(intervalVar);
                     make_Screen_White(0, 0, canvas.width, canvas.height);
                     context.font = "20px Arial";
@@ -118,8 +119,8 @@ $(document).ready(function () {
                     context.fillText("Goal!", canvas.width / 2, canvas.height / 2);
                     window.removeEventListener("keydown", move, true);
                 }else{
-                    clearInterval(intervalVar);
-                    roundCounter++;
+                    // clearInterval(intervalVar);
+                    
                     init();
                 }
             }
