@@ -155,7 +155,7 @@ $(document).ready(function () {
         }
 
         /*
-            The finsih screen when passed all levels
+            The finished screen when passed all levels
         */
         function make_Screen_White(x, y, w, h) {
             context.beginPath();

@@ -32,6 +32,7 @@ $('#clear').on('click', function(){
     var filename = selected.attr('label');
      resourcePath = "/appDir/" + filename.replace(".js", "/")
     filename = resourcePath + filename
+	 console.log("Filename: " + filename);
     var message = "Loading " + s + " from " + filename + " file."
     $('#display').val(message);
     console.log(message);

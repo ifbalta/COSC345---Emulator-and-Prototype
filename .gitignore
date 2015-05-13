@@ -1,7 +1,7 @@
 # Ignore OS generated files
 *.DS_STORE
 Desktop.ini
-
+DS_STORE
 
 # Ignore thumbnails
 ._*
