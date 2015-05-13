@@ -16,24 +16,25 @@ $(document).ready(function () {
         var level = new Array("Level1.gif", "Level2.gif", "Level3.gif");
       
         mazeImg.src = level[roundCounter];
+
         /*
-            Start the 
+            Start the new round of game
         */
         function init(){
-            // mazeImg = new Image();
             mazeImg.src = level[roundCounter];
             urrRectX = 8;
             currRectY = 3;
             return setInterval(draw(8,3),10);
         }
 
-      
+        /*
+            draw the level picture and moving square
+        */
         function draw(rectX,rectY){
             
             //bg
             context.drawImage(mazeImg, 0, 0);
             
-
             //middle/goal
             //context.arc(100, 150, 5, 0, 2 * Math.PI, false);
             context.beginPath();
@@ -43,10 +44,9 @@ $(document).ready(function () {
             context.fill();
 
             drawRectangle(rectX,rectY,"purple");
-            
-
-
         }
+
+
 
         function drawRectangle(x, y, style) {
             //makeWhite(currRectX, currRectY, 15, 15);
@@ -69,23 +69,15 @@ $(document).ready(function () {
         }
 
 
+        /*
+            moving the rectangle, bye "up down left right " key
+        */
         function move(e) {
             var newX;
             var newY;
             var movingAllowed;
             e = e || window.event;
-            //bg
-            // context.drawImage(mazeImg, 0, 0);
-            
-
-            // //middle/goal
-            // context.beginPath();
-            // context.arc(mazeWidth/2, mazeHeight/2, 5, 0, 2 * Math.PI, false);
-            // context.closePath();
-            // context.fillStyle = '#00FF00';
-            // context.fill();
-
-
+ 
             switch (e.keyCode) {
                 case 38:   // arrow up key
                 case 87: // W key
@@ -132,7 +124,12 @@ $(document).ready(function () {
                 }
             }
         }
-
+        /*
+            decide the quare can move or not
+            canMove = 0 , the rectangle can not move
+            canMove = 1 , the rectangle can move
+            can Move = 2, the rectangle reached the end
+        */
         function canMoveTo(destX, destY) {
             var imgData = context.getImageData(destX, destY, 15, 15);
             var data = imgData.data;
@@ -156,6 +153,9 @@ $(document).ready(function () {
             return canMove;
         }
 
+        /*
+            The finsih screen when passed all levels
+        */
         function make_Screen_White(x, y, w, h) {
             context.beginPath();
             context.rect(x, y, w, h);
