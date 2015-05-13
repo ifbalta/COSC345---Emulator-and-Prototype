@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    /*
+        global variables
+        level: store the image of the maze level.
+        roundCounter: count the current level.
+    */
         var canvas = $("#canvas")[0];;
         var context = canvas.getContext("2d");;
         var currRectX = 8;
@@ -10,17 +15,16 @@ $(document).ready(function () {
         var roundCounter =0;
         var level = new Array("Level1.gif", "Level2.gif", "Level3.gif");
       
-// mazeImg.src = "Level1.gif";
 
+        /*
+            Start the 
+        */
         function init(){
             mazeImg.src = level[roundCounter];
             return setInterval(draw(8,3),10);
         }
 
-        // function nextLevel(var round){
-
-        // }
-
+      
         function draw(rectX,rectY){
             
             //bg
