@@ -6,23 +6,28 @@ function appObject () {
         var mazeWidth = 310;
         var mazeHeight = 314;
         var intervalVar;
+        var roundCounter = 0;
         var mazeImg = new Image();
-        mazeImg.src = "Level1.gif";     
+        var level = new Array("Level1.gif", "Level2.gif", "Level3.gif");
 
-        this.startApp = function startApp(){
-            console.log("starting maze game prototype");
-            return setInterval(draw(currRectX,currRectY),10);
-        }
+        // mazeImg.src = "Level1.gif";     
 
-        this.clearScreen = function clearScren(){
-            console.log("clearing maze screen");
-            ctxt.clearRect(0,0,w, h);
-        }
+        // this.startApp = function startApp(){
+        //     console.log("starting maze game prototype");
+        //     return setInterval(draw(currRectX,currRectY),10);
+        // }
 
-        this.stopScript = function stopScript() {
-            startApp = null;
-            clear();
-        }
+        // this.clearScreen = function clearScren(){
+        //     console.log("clearing maze screen");
+        //     ctxt.clearRect(0,0,w, h);
+        // }
+
+        // this.stopScript = function stopScript() {
+        //     startApp = null;
+        //     clear();
+        // }
+
+        nextLevel(roundCounter);
 
         //this.startApp = startApp();
 
@@ -30,6 +35,24 @@ function appObject () {
         //
         //this.clearScreen = clearScreen();
 
+        function nextLevel(var round){
+            mazeImg.src = level[round];     
+
+            this.startApp = function startApp(){
+                console.log("starting maze game prototype");
+                return setInterval(draw(currRectX,currRectY),10);
+            }
+
+            this.clearScreen = function clearScren(){
+                console.log("clearing maze screen");
+                ctxt.clearRect(0,0,w, h);
+            }
+
+            this.stopScript = function stopScript() {
+                startApp = null;
+                clear();
+            }
+        }
 
         function draw(rectX,rectY){
             
@@ -119,14 +142,20 @@ function appObject () {
                 currRectY = newY;
             }
             else if (can_Move === 2) { // rectangle has met the goal.
-                clearInterval(intervalVar);
-                make_Screen_White(0, 0, canvas.width, canvas.height);
-                context.font = "20px Arial";
-                context.fillStyle = "blue";
-                context.textAlign = "center";
-                context.textBaseline = "middle";
-                context.fillText("Goal!", canvas.width / 2, canvas.height / 2);
-                window.removeEventListener("keydown", move, true);
+                if(roundCounter > level.length){
+                    roundCounter = 0;
+                    clearInterval(intervalVar);
+                    make_Screen_White(0, 0, canvas.width, canvas.height);
+                    context.font = "20px Arial";
+                    context.fillStyle = "blue";
+                    context.textAlign = "center";
+                    context.textBaseline = "middle";
+                    context.fillText("Goal!", canvas.width / 2, canvas.height / 2);
+                    window.removeEventListener("keydown", move, true);
+                }else{
+                    roundCounter++;
+                    nextLevel(roundCounter);
+                }
             }
         }
 
