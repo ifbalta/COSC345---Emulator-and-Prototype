@@ -8,19 +8,22 @@ $(document).ready(function () {
         var context = canvas.getContext("2d");;
         var currRectX = 8;
         var currRectY = 3;
-        var mazeWidth = 310;
-        var mazeHeight = 314;
+        var mazeWidth = 320;
+        var mazeHeight = 320;
         var intervalVar;
         var mazeImg = new Image();
         var roundCounter =0;
         var level = new Array("Level1.gif", "Level2.gif", "Level3.gif");
       
-
+        mazeImg.src = level[roundCounter];
         /*
             Start the 
         */
         function init(){
+            // mazeImg = new Image();
             mazeImg.src = level[roundCounter];
+            urrRectX = 8;
+            currRectY = 3;
             return setInterval(draw(8,3),10);
         }
 
@@ -107,7 +110,7 @@ $(document).ready(function () {
             }
 
             can_Move = canMoveTo(newX, newY);
-            if (can_Move === 1) {  // 1 means collision with black, therefore can't move
+            if (can_Move === 1) {  // 1 means no collision with black,  can move
                 drawRectangle(newX, newY, "purple");
                 currRectX = newX;
                 currRectY = newY;
@@ -123,6 +126,7 @@ $(document).ready(function () {
                     context.fillText("Goal!", canvas.width / 2, canvas.height / 2);
                     window.removeEventListener("keydown", move, true);
                 }else{
+                    clearInterval(intervalVar);
                     roundCounter++;
                     init();
                 }
@@ -133,13 +137,14 @@ $(document).ready(function () {
             var imgData = context.getImageData(destX, destY, 15, 15);
             var data = imgData.data;
             var canMove = 1; // 1 means: the rectangle can move
-            if (destX >= 0 && destX <= mazeWidth - 15 && destY >= 0 && destY <= mazeHeight - 15) {
+            if (destX >= 0 && destX <= mazeWidth-15 && destY >= 0 && destY <= mazeHeight-15) {
                 for (var i = 0; i < 4 * 15 * 15; i += 4) {
                     if (data[i] === 0 && data[i + 1] === 0 && data[i + 2] === 0) { // black
                         canMove = 0; // 0 means: the rectangle can't move
                         break;
                     }
                     else if (data[i] === 0 && data[i + 1] === 255 && data[i + 2] === 0) { // #00FF00
+                        // window.alert(data[i]);
                         canMove = 2; // 2 means: the end point is reached
                         break;
                     }
