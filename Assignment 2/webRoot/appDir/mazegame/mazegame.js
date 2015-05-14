@@ -30,17 +30,24 @@ $(document).ready(function () {
         var roundCounter =0;
         var level = new Array("Level1.gif", "Level2.gif", "Level3.gif");
 
-      
+
         // mazeImg.src = level[roundCounter];
 
         /**
          * Initializes the game.
          * */
         function init(){
-            mazeImg.src = resourcePath + level[roundCounter];
+            mazeImg.src = resourcePath + levelSelect(roundCounter);
             currRectX = 8;
             currRectY = 3;
             return setInterval(draw(8,3),10);
+        }
+
+        /**
+        *   Returns the filename of the new level.
+        */
+        function levelSelect(round){
+            return level[round];
         }
 
         /**
@@ -143,8 +150,6 @@ $(document).ready(function () {
                     context.fillText("Goal!", canvas.width / 2, canvas.height / 2);
                     window.removeEventListener("keydown", move, true);
                 }else{
-                    // clearInterval(intervalVar);
-                    
                     init();
                 }
             }

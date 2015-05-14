@@ -1,9 +1,9 @@
 /**
- *  mockemulator.js
+ *  mazegame.js
  *
- *  Tests emulator.js with QUnit.
+ *  Tests mazegame.js with QUnit.
  *
- *  Authors: Isabel Baltazar
+ *  Authors: Huijun Zhou
  *
  *
  *  Version: 1.0.0
@@ -24,10 +24,10 @@ var testResults = {
 /**
  * Tests levelSelect() results.
  * */
-function levelTest(filename, expected){
+function levelTest(round, expected){
     testResults.total++;
-     
-    var result = selectFile(filename);
+    var result = levelSelect(round);
+    
     if (result != expected) {
         testResults.bad++;
         console.log("Expected " + expected + " but received " + result);
@@ -37,6 +37,9 @@ function levelTest(filename, expected){
 /**
  * Test cases for level selection
  * */
+levelTest(0, "Level1.gif");
+levelTest(1, "Level2.gif");
+levelTest(2, "Level3.gif");
 
 
 console.log("Of " + testResults.total + " tests, " + testResults.bad + " failed, " + 

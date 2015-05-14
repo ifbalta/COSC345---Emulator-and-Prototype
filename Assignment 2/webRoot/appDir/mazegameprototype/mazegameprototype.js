@@ -42,11 +42,18 @@ function AppObject() {
     /**
      * Initializes the game.
      * */
-    function init(){
-        mazeImg.src = resourcePath + level[roundCounter];
+     function init(){
+        mazeImg.src = resourcePath + levelSelect(roundCounter);
         currRectX = 8;
         currRectY = 3;
         return setInterval(draw(8,3),10);
+    }
+
+    /*
+    *   Returns the filename of the new level.
+    */
+    function levelSelect(round){
+        return level[round];
     }
 
     /**
