@@ -10,6 +10,9 @@
     ul{
       list-style: none;
     }
+      #bug-list{
+          list-style: circle;
+      }
   </style>
 </head>
 <body>
@@ -21,8 +24,10 @@
   <p>
     The emulator acts like a generic smart watch and is not meant to mimic any currently available smart watch such as the Apple Watch or Moto 360. <br>
     The emulator is written in JavaScript and jQuery and is run on the browser. <br>
-    The jQuery is version 1.11 and hosted on Google's Ajax library.<br>
-    The emulator is compatible with Safari and Google Chrome if node.js and Express.js are pre-installed.
+    The jQuery is version 1.11 and sourced from
+      <a href="https://developers.google.com/speed/libraries/">Google's hosted library.</a><br>
+    The emulator is compatible with Safari.<br>
+    The emulator is compatible with Chrome, Firefox, Internet Explorer, and Opera if node.js and Express.js or python is pre-installed.
   </p>
   <h2>
     Features
@@ -149,7 +154,14 @@
           The function uses jQuery to select a file from the app tray.
         </p>
       </li>
-    </ul>     
+    </ul>
+
+    <h2>Bugs</h2>
+    <ul id="bug-list">
+        <li>The emulator cannot completely stop an application from running</li>
+        <li>The emulator does not always clear the screen</li>
+        <li>The emulator does not focus on the canvas when an application is running</li>
+    </ul>
 
  
 </body>

@@ -43,6 +43,9 @@ $('#clear').on('click', function(){
  * */
  $('#start').on('click', function(){
     clear();
+
+     var canvas = document.getElementById('canvas').focus();
+
     var selected = $('#selection :selected');
     var s = selected.text();
     var filename = selected.attr('label');
