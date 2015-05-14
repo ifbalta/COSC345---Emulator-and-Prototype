@@ -1,8 +1,24 @@
+/**
+ *  emulator.js
+ *
+ *  Compatibility layer between the browser and smart watch application.
+ *  The emulator is compatible with Safari and needs a server for compatibility with
+ *  Chrome, Firefox, Internet Explorer and Opera.
+ *
+ *  Authors: Isabel Baltazar
+ *           Lennox Huang
+ *
+ *  Version: 1.0.0
+ *  Language: JavaScript
+ *  Dependencies: jQuery version 1.11.1
+ *
+ * */
+
 /** Holds the filename of the currently running app */
 var runningScript;
 /** Regex pattern for all filenames containing 'prototype' */
 var protoRegex = new RegExp("prototype");
-/** File path that resource files can find each other */
+/** File path so that resource files can find each other */
 var resourcePath;
 
 /**
@@ -30,9 +46,9 @@ $('#clear').on('click', function(){
     var selected = $('#selection :selected');
     var s = selected.text();
     var filename = selected.attr('label');
-     resourcePath = "/appDir/" + filename.replace(".js", "/")
+    resourcePath = "appDir/" + filename.replace(".js", "/")
     filename = resourcePath + filename
-	 console.log("Filename: " + filename);
+    console.log("Filename: " + filename);
     var message = "Loading " + s + " from " + filename + " file."
     $('#display').val(message);
     console.log(message);
@@ -44,14 +60,13 @@ $('#clear').on('click', function(){
  * @param filename The chosen app
  * */
 function bootup(filename){
-	var prev;
+	var prev = null;
 	console.log("booting " + filename);
 	if(prev != null) {
 		console.log("Stopping " + runningScript);
 		$.getScript(runningScript, function () {
 			this.stopScript();
 			this.clearScreen();
-			this.continueFlag = false;
 		});
 		prev = null;
 	}

@@ -1,3 +1,19 @@
+/**
+ *  snakelogic.js
+ *
+ *  Snake game implemented in JavaScript from a tutorial at
+ *  http://thecodeplayer.com/walkthrough/html5-game-tutorial-make-a-snake-game-using-html5-canvas-jquery.
+ *  This is fpr testing scripts that use intervals to draw images, so that we can be sure
+ *  that we can start and stop them properly.
+ *
+ *  Authors: Isabel Baltazar
+ *           Lennox Huang
+ *
+ *  Version: 1.0.0.0
+ *  Language: JavaScript
+ *  Dependencies: jQuery version 1.11.1
+ *
+ * */
 $(document).ready(function () {
     //Inititialize canvas
     var canvas = $("#canvas")[0];
@@ -17,6 +33,9 @@ $(document).ready(function () {
     bg.src = resourcePath + "snakebg.png";
     image.src = resourcePath + "snakebox.png";
 
+    /**
+     * Initializes game settings and starts the game loop.
+     * */
     function init() {
         dir = "right";
         l = 5;
@@ -29,7 +48,9 @@ $(document).ready(function () {
 
     init();
 
-    //Makes snake info
+    /**
+     * Initializes the first snake.
+     * */
     function create_snake(y) {
         snake_arr = [];//empy array initialized
 
@@ -38,7 +59,9 @@ $(document).ready(function () {
         }
     }
 
-    //randomize food
+    /**
+     * Creates the snake at a random location.
+     * */
     function create_food() {
         food = {
             x: Math.round(Math.random() * (w - cw) / cw),
@@ -46,10 +69,22 @@ $(document).ready(function () {
         }
     }
 
+    /**
+     * Draws a square.
+     * This is used to draw both the snake, and the food.
+     * @param x x-coordinates of square
+     * @param y y-coordinates of square
+     * */
     function paint_cell(x, y, color) {
         ctxt.drawImage(image, x * cw, y * cw);
     }
 
+    /**
+     * Collision checking ensures that the snake has not collided with the wall
+     * or checks if the snake has eated its food.
+     * @param x x-coordinates of destination
+     * @param y y-coordinates of destination
+     * */
     function check_collision(x, y, a) {
         for (var i = 0; i < a.length; i++) {
             if (x == a[i].x && y == a.y) return true;
@@ -57,7 +92,10 @@ $(document).ready(function () {
         return false;
     }
 
-    //Snake painting
+    /**
+     * Game loop which displays snake and food information,
+     * and handles movement.
+     * */
     function paint() {
 
         //This clears everything to redraw the BG,
@@ -123,6 +161,7 @@ $(document).ready(function () {
         ctxt.fillText(score_text, 5, h - 5);
     }
 
+    // moves player depending of key press
     $(document).keydown(function (e) {
         var k = e.which;
         switch (k) {
