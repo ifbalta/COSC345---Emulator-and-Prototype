@@ -22,11 +22,13 @@ var testResults = {
 }
 
 /**
- * Tests selectFile() formatting.
+ * Tests level selection.
  * */
-function selectionTest(filename, expected){
+function levelTest(round, expected){
     testResults.total++;
-    var result = selectFile(filename);
+    
+
+    var result = levelSelect(round);
     if (result != expected) {
         testResults.bad++;
         console.log("Expected " + expected + " but received " + result);
@@ -34,15 +36,13 @@ function selectionTest(filename, expected){
 }
 
 /**
- * Test cases for file selection
+ * Test cases for level selection
  * */
+levelTest(0, "Level1.gif");
+levelTest(1, "Level2.gif");
+levelTest(2, "Level3.gif");
 
-selectionTest("mazegame.js", "appDir/mazegame/mazegame.js");
-selectionTest("mazegameprototype.js", "appDir/mazegameprototype/mazegameprototype.js");
-selectionTest("placeholder.js", "appDir/placeholder/placeholder.js");
-selectionTest("testgameprototype.js", "appDir/testgameprototype/testgameprototype.js");
-selectionTest("snakelogic.js", "appDir/snakelogic/snakelogic.js");
-selectionTest("snakeprototype.js", "appDir/snakeprototype/snakeprototype.js");
+
 
 console.log("Of " + testResults.total + " tests, " + testResults.bad + " failed, " + 
 (testResults.total - testResults.bad) + " passed.");
