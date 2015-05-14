@@ -112,50 +112,62 @@
       <li>
         <h3><code>startUp</code></h3>
         <p>
-          Should initialize the application
+          Should initialize the application.
         </p>
       </li>
       <li>
         <h3><code>stopScript</code></h3>
         <p>
-          Should stop the application
+          Should stop the application.
         </p>
       </li>
       <li>
          <h3><code>clear</code></h3>
         <p>
-          Should clear the screen and deallocate resources
+          Should clear the screen.
         </p>
       </li>
     </ul>     
     <br><a href="index.html"></a>
-    The emulator itself has only three functions:
+    The emulator itself has only four functions:
       <ul>
-      <li>
-        <h3><code>bootup()</code></h3>
-        <p>
-          <code>@param</code> filename<br>
-          the file from which the AppObject can be retrieved
-          <p>
-            <code>bootup()</code> is tasked with clearing and stopping any previously running applications before initializing a new AppObject.
-          </p>
+          <li>
+            <h3><code>bootup()</code></h3>
+            <p>
+              <code>@param</code> filename<br>
+              the file from which the AppObject can be retrieved
+              <p>
+                <code>bootup()</code> is tasked with clearing and stopping any previously running applications before initializing a new AppObject.
+              </p>
 
-      </li>
-      <li>
-        <h3><code>clear()</code></h3>
-        <p>
-          <code>clear()</code> clears the emulator screen.
-          It does not deallocate resources. Deallocation should be the <code>AppObject's clear</code> property's responsibility.
-        </p>
-      </li>
-      <li>
-         <h3>
-          A function linked to <code>emulator.html's start</code> button.
-        </h3>
-        <p>
-          The function uses jQuery to select a file from the app tray.
-        </p>
-      </li>
+          </li>
+          <li>
+            <h3><code>clear()</code></h3>
+            <p>
+              <code>clear()</code> clears the emulator screen.
+              It does not stop the application. Stopping the application should be the
+                <code>AppObject's stopScript</code> property's responsibility.
+            </p>
+          </li>
+          <li>
+             <h3>
+              A function linked to <code>emulator.html's start</code> button.
+            </h3>
+            <p>
+              The function uses jQuery to select a file from the app tray.
+            </p>
+          </li>
+          <li>
+              <h3><code>selectFile()</code></h3>
+              <p>
+                  <code>@param</code> filename<br>
+                  the selected application
+                  <p>
+                    Responsible for adding the file path to the file name.
+                  </p>
+
+              </p>
+          </li>
     </ul>
 
     <h2>Bugs</h2>

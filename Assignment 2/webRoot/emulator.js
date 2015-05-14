@@ -44,13 +44,10 @@ $('#clear').on('click', function(){
  $('#start').on('click', function(){
     clear();
 
-     var canvas = document.getElementById('canvas').focus();
-
+    var canvas = document.getElementById('canvas').focus();
     var selected = $('#selection :selected');
     var s = selected.text();
-    var filename = selected.attr('label');
-    resourcePath = "appDir/" + filename.replace(".js", "/")
-    filename = resourcePath + filename
+    var filename = selectFile(selected.attr('label'));
     console.log("Filename: " + filename);
     var message = "Loading " + s + " from " + filename + " file."
     $('#display').val(message);
@@ -59,29 +56,38 @@ $('#clear').on('click', function(){
  });
 
 /**
+ *  Takes a filename and adds the file path.
+ *  @param filename
+ * */
+function selectFile(filename){
+    resourcePath = "appDir/" + filename.replace(".js", "/");
+    var selectedFile =  resourcePath + filename;
+    return selectedFile;
+}
+
+/**
  * Stops previously running application, and runs the new application.
  * @param filename The chosen app
  * */
 function bootup(filename){
-	var prev = null;
-	console.log("booting " + filename);
-	if(prev != null) {
-		console.log("Stopping " + runningScript);
-		$.getScript(runningScript, function () {
-			this.stopScript();
-			this.clearScreen();
-		});
-		prev = null;
-	}
-		console.log("getting script");
-		runningScript = $.getScript(filename, function(){
-		console.log("starting " + filename);
-
-		if (protoRegex.test(filename)) {
-			console.log("creating AppObject");
-			prev = new AppObject();
-			prev.startApp();
-		}
-	});
+    var prev = null;
+    console.log("booting " + filename);
+    if(prev != null) {
+        console.log("Stopping " + runningScript);
+        $.getScript(runningScript, function () {
+            prev.stopScript();
+            prev.clearScreen();
+        });
+        prev = null;
+    }
+    console.log("getting script");
+    runningScript = $.getScript(filename, function(){
+        console.log("starting " + filename);
+        if (protoRegex.test(filename)) {
+            console.log("creating AppObject");
+            prev = new AppObject();
+            prev.startApp();
+        }
+    });
 	console.log("fetched program");	
 }
