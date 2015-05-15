@@ -37,6 +37,11 @@ h1 {
 	position:relative;
 	top:60px;
 }
+
+p.credits{
+	margin-top:60px;
+	font-size: 11px;
+}
 /*old css*/
 /*html{
 	background: #6d9fb8;
