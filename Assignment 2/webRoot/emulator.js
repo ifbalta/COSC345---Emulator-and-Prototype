@@ -47,7 +47,7 @@ $('#clear').on('click', function(){
     var canvas = document.getElementById('canvas').focus();
     var selected = $('#selection :selected');
     var s = selected.text();
-    var filename = selectFile(selected.attr('label'));
+    var filename = selectFile(selected.attr("value"));
     console.log("Filename: " + filename);
     var message = "Loading " + s + " from " + filename + " file."
     $('#display').val(message);

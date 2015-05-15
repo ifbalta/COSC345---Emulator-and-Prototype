@@ -27,18 +27,18 @@
             </p>
             <p>
                 Both teams planned and designed their projects from March 2015 and May 2015.
-                We believed this would be enough time to research other JavaScript emulator implementations, and
+                We believed this would be enough time to research other JavaScript emulator implementations,
                 maze generation and player movement algorithms. The planning period overlapped with our implementation and
                 documentation periods, because we believed the best way to research something was to try and test it ourselves.
             </p>
             <p>
                 In Assignment 1, our group decided Eclipse would fit our needs because of its JavaScript and Git support.
-                In practice, nobody in our group liked Eclipse because it was slow and frustrating to configure.
+                In practice, nobody liked Eclipse because it was slow and frustrating to configure.
                 Both teams decided to switch to Sublime Text Editor 2, Taco HTML Editor, IntelliJ IDEA and SourceTree to handle
                 our IDE and Git needs. Sublime and IntelliJ both have Git plugins, making it very easy for us to add and commit
                 to our repository. SourceTree was useful for helping us merge branches and keep our files updated.
                 The team chose IntelliJ over WebStorm because they also wanted a Java IDE for COSC326,
-                and they did not want to download two things that were very similar.
+                and they did not want to download similar IDEs.
             </p>
             <p>
                 Both teams relied on extensive console.log() calls and Google Chrome for testing and debugging both projects.
@@ -51,41 +51,40 @@
     <hr>
         <p>
             <p>
-                The maze game team relied on Sublime because they liked its speed and responsiveness.
+                We relied on Sublime because we liked its speed and responsiveness.
                 We discovered that Sublime had a package manager, allowing us to download a Git plugin.
-                However, the team found the Git plugin’s commit message feature confusing, so the team switched to SourceTree.
+                However, we found the Git plugin’s commit message feature confusing, so we switched to SourceTree.
             </p>
             <p>
-                The maze game team found a maze generation algorithm from codeproject.com, and found that they liked the phaser.io framework.
-                The team liked phaser.io’s extensive library that supported graphics, physics and collision detection.
+                We found a maze generation algorithm from codeproject.com, and we liked the phaser.io framework because
+                of its library that supports graphics, physics and collision detection.
             </p>
             <p>
-                The team had no experience with game development or JavaScript.
-                They preferred to develop the beta in pure JavaScript because they wanted to test basic parts of the game like movement
-                and collision detection before worrying about graphics and physics.
+                Our group had no experience with game development or JavaScript.
+                We preferred to develop the beta in pure JavaScript because we wanted to test basic parts of
+                the game like movement and collision detection before worrying about graphics and physics.
                 The final version of the game will be written using phaser.io.
             </p>
             <p>
                 The game currently has three levels, and is controlled using the arrow keys.
                 Collision detection is handled by checking the pixels surrounding the player.
                 If the pixel is black, then the player is not allowed to occupy that pixel.
-                Collision detection is unreliable and the game does not simulate gravity or friction,
-                factors that would make the game more challenging.
-                The team has decided that phaser.io will be better equipped to handle these features.
+                Collision detection is unreliable and the game does not simulate gravity or friction, or other
+                features that would make the game more challenging yet.
+                We have decided that phaser.io will be better equipped to handle these features better than JavaScript alone.
             </p>
         </p>
         <h3>Testing the Maze Game Prototype</h3>
             <p>
                 <p>
-                    The team realized that neither the mazegame.js nor mazegameprototype.js implementation was designed to cooperate with QUnit and
-                    relied on console.log() statements and Google Chrome to test movement, collision detection and resource loading.
+                    We realised that neither the mazegame.js nor mazegameprototype.js implementation was designed to cooperate with QUnit.
+                    Instead, we relied on console.log() statements and Google Chrome to test movement, collision detection and resource loading.
 
                 </p>
                 <p>
-                    QUnit could not access functions in mazegame.js because all functions were declared inside the <code>$(document).ready()</code> scope.
-                    QUnit could not access functions in mazegameprototype.js because the AppObject structure had only three properties: startApp,
-                    stopScript, and clearScreen. Only properties were visible to QUnit, and
-                    none of these properties returned values suited for QUnit testing.
+                    QUnit cannot access functions in mazegame.js because all functions were declared inside the <code>$(document).ready()</code> scope.
+                    QUnit also cannot access functions in mazegameprototype.js because the AppObject structure has only three properties: startApp,
+                    stopScript, and clearScreen. None of these properties returned values suited for QUnit testing.
                 </p>
                 <p>
                     We have told the emulator team that the AppObject structure should have a testFunction property,
@@ -93,7 +92,7 @@
                 </p>
                     <h3>Test Cases</h3>
                     <ul>
-                        <li>Test that that the player is drawn at position (8,3) at the beginning of each level</li>
+                        <li>Test that the player is drawn at position (8,3) at the beginning of each level</li>
                         <li>Test that the player cannot cross black pixels coming from the left, right, top or bottom</li>
                         <li>Test that levels are loaded in the correct order</li>
                         <li>Test that the level can detect that the player has reached the goal</li>
@@ -104,7 +103,7 @@
                         <li>More than three levels</li>
                         <li>Implement physics effects such as gravity and friction</li>
                         <li>Better than MS Paint graphics</li>
-                        <li>Developed with phaser.io</li>
+                        <li>Developed with phaser.io or other game frameworks</li>
                     </ul>
 
                 <h3>Maze Game Prototype Reality</h3>
@@ -131,31 +130,29 @@
         <hr>
         <p>
             <p>
-                The emulator team relied on IntelliJ and Taco to build the emulator.
-                IntelliJ useful for checking how directories and files related with each other,
+                We relied on IntelliJ and Taco to build the emulator.
+                IntelliJ was useful for checking how directories and files related with each other,
                 which functions were available to which scripts and its refactoring feature.
-                The team also used Taco because they liked its Live Preview feature, letting them quickly test and validate HTML and CSS.
-                The emulator team used both IntelliJ and SourceTree to handle version control.
+                We also used Taco because we liked its Live Preview feature, letting them quickly test and validate HTML and CSS.
+                We used both IntelliJ and SourceTree to handle version control.
             </p>
             <p>
-                The emulator team researched a Chip 8 emulator implementation in C and tried to port it to JavaScript.
-                They planned to extend Chip 8 to match the ARM architecture of most smart watches later on.
-                They received feedback from our professor and found that the emulator was not meant emulate hardware,
+                We researched a Chip 8 emulator implementation in C and tried to port it to JavaScript.
+                We planned to extend Chip 8 to match the ARM chip of most smart watches later on.
+                After we received your feedback, we realised that the emulator was not meant emulate hardware,
                 but act as a compatibility layer between the browser and smart watch application.
+            </p>
+            <p>
+                We decided on an emulator that had only three responsibilities : starting the app, stopping the app and clearing the screen.
+                The clear function should be able to clear the screen and stop the currently running application.
+                The emulator also features a screen, a start button, a clear button and an app tray.
                 The emulator is written in JavaScript and jQuery.
             </p>
-            <p>
-                They decided on an emulator that had only three responsibilities : starting the app, stopping the app and clearing the screen.
-                The clear function should be able to clear the screen and stop the currently running application.
-            </p>
-            <p>
-                The emulator features a screen, a start button, a clear button and an app tray. The buttons  start apps and clear the screen.
-                However, the emulator is unable to stop the script using the clear function.
-            </p>
+
             <p>
                 The emulator expects all applications to follow the AppObject structure.
                 The AppObject is a JavaScript prototype that must contain three properties: startApp, stopScript and clearScreen.
-                All AppObjects must contain all three properties so that the emulator knows which methods it is able to call.
+                The three properties are described in detail in the emulator documentation.
             </p>
             <p>
                 The emulator is compatible with Safari, and compatible with Chrome, Firefox, Internet Explorer, and Opera when
@@ -163,10 +160,14 @@
             </p>
             <p>
                 Safari was the easiest browser to develop for because it didn’t complain about loading JavaScript files straight from a C:// drive.
-                Chrome, Firefox and Internet Explorer refused to side load JavaScript files if their file path included C://. We solved the problem by building a server using node.js and Express.js, which gave our JavaScript files localhost:8080 paths instead. For testing, we chose to use python’s SimpleHTTPServer instead because the Owheo lab machines won’t let us install node.js.
+                Chrome, Firefox and Internet Explorer refused to side load JavaScript files if their file path included C://.
+            </p>
+            <p>
+                We solved the problem by building a server using node.js and Express.js, which gave our JavaScript files localhost:3000 paths instead.
+                For testing at the University, we used python’s SimpleHTTPServer instead because the Owheo lab machines won’t let us install node.js.
             </p>
         </p>
-            <h3>Emulator Expectations:</h3>
+            <h3>Emulator Expectations</h3>
             <ul>
                 <li>Clock app</li>
                 <li>Touch gestures such as swiping and tapping</li>
@@ -176,38 +177,56 @@
             </ul>
 
 
-            <h3>Emulator Reality:</h3>
+            <h3>Emulator Reality</h3>
             <ul>
                 <li>No clock app. We have decided that unless everything else works perfectly, we will not make a clock app.</li>
                 <li>There are no touch gestures, and no hardware button. I/O is handled by the application,
-                but the application has no way of knowing if that I/O is allowed. For example, the application does not know if it has access to touch controls or keyboard controls.</li>
+                    but the application has no way of knowing if that I/O is allowed.
+                    For example, the application does not know if it has access to the touchscreen or keyboard controls.</li>
+                <li>We are able to run multiple applications, but we are not always able to stop them.</li>
                 <li>There are two hardware buttons : start and stop, but neither are available for the developer to map.</li>
                 <li>We have sourced all graphics from Google.</li>
             </ul>
-            <h3>Emulator Bugs:</h3>
+            <h3>Emulator Bugs</h3>
             <ul>
                 <li>The clear button should clear the screen and stop any previously running applications.
                     The clear() function works sometimes, and the emulator’s call to the stopScript property never works.</li>
-                <li>Starting the application does not guarantee that all application resources are loaded. Sometimes you have to press the start button twice.</li>
-                <li>The canvas does not recognise that when an application has started, the keyboard direction keys should be for the application, and not for scrolling.</li>
-            </ul>
+                <li>Starting the application does not guarantee that all application resources are loaded.
+                    Sometimes you have to press the start button twice.</li>
+                <li>Using the directional buttons while using an application causes the browser to scroll.</li>
+           </ul>
             <h3>Testing the Emulator</h3>
                 <p>
-                    We made two implementations of each file, one followed the AppObject structure and
-                    the other ran while the HTML document was ready. This was done to test if the application was working,
-                    and if the AppObject structure was practical.
+                    We made two implementations of each file. One implementation followed the AppObject structure and
+                    the other using the <code>$(document).ready()</code> function. This was done so that
+                    the maze game team could test their application without worrying about the AppObject structure.
                 </p>
                 <p>
                     The emulator has only one QUnit test, which tests the <code>selectFile()</code> function.
                     We were unable to write QUnit tests for the AppObject's functions.
                     We realize that AppObject should be redesigned to cooperate with QUnit by adding a testFunction property,
-                    and rework the <code>bootup()</code> and file selection functions.<br>
+                    and rework the <code>bootup()</code> function.
+                </p>
+                <p>
+                    <code>bootup()</code> is in charge of stopping and starting scripts. We can split those responsibilities into two functions
+                    that are testable with QUnit.
+                </p>
 
-                    <code>bootup()</code> is in charge of stopping and starting scripts. We can split those responsibilities into two functions.
-                    The file selection function was in
+                <p>
+                    We wrote <code>snakelogic.js</code> which continuously repainted the canvas to test our <code>stopScript</code> functions.<br>
+                    We wrote <code>placeholder.js</code> to test if we could load JavaScript files using the <code>$.getScript()</code> function.
                 </p>
             <h3>Test cases</h3>
             <ul>
+                <li>
+                    <p>QUnit Test</p>
+                    <ul>
+                        <li>
+                            <code>selectionTest()</code>
+                            ensures that the <code>selectFile()</code> function returns the correct path to a JavaScript file.
+                        </li>
+                    </ul>
+                </li>
                 <li>
                     <p>Static scripts</p>
                     <ul>
@@ -246,20 +265,26 @@
         <hr>
         <p>
             We believed that allocating the months of  March 2015 - May 2015 to coding and planning would be more than enough time to make a working prototype and emulator.
-            Unfortunately, we failed to account that every member of the group also studied COSC326 - Effective Programming during semester one.
+            Unfortunately, we forgot that every member of the group also took COSC326 - Effective Programming during semester one.
             For most of April, both emulator and maze projects were left untouched because of the heavy workload of COSC326.
         </p>
         <p>
-            We should have realized that our team is not devoted to one paper, and that there will times when our team will have different priorities.
+            We should have realised that our team is not devoted to one paper, and that there will times when each member will have different priorities.
             To our group’s credit, nobody missed a meeting even under the pressure of COSC326.
         </p>
         <p>
-            We should have tested Eclipse before deciding on our IDE. In the end, we chose different IDEs depending on which task we were focusing on.
+            We should have tested Eclipse before deciding on our IDE.
+            In the end, we chose different IDEs depending on which task we were focused on.
             Although each member was happy with their chosen work environment, constantly switching between IDEs doesn’t feel efficient.
         </p>
         <p>
             We expected both projects to have 1000-2000 sloc each. emulator.js is only 70 lines long, and mazegame.js is 172 lines long.
             Either we have not written enough code, or we have overestimated our work load.
+        </p>
+        <p>
+            We relied on <code>console.log()</code> for testing and debugging. We did not design our projects in such a way that was easily testable
+            through QUnit. The AppObject data structure is difficult to test through QUnit, so we will be adding a testFunction property later on
+            to help the maze game team write better test cases.
         </p>
         <p>
             We believed pure JavaScript would be enough for our emulator, but we now realize that TypeScript will be a better fit for our AppObject structure.

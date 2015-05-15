@@ -34,12 +34,13 @@ function AppObject (){
     image.src = resourcePath + "snakebox.png";
     pat = ctxt.createPattern(bg, "no-repeat");
 
-    continueFlag = true;
+    var continueFlag = true;
 
     /**
      *  Stops the game by resetting the gameloop and clearing the screen.
      * */
     function stopScript() {
+        continueFlag = false;
         console.log("stopping game");
         clear();
         clearInterval(game_loop);
