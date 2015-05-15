@@ -43,20 +43,13 @@ function AppObject() {
      * Initializes the game.
      * */
      function init(){
-        mazeImg.src = resourcePath + levelSelect(roundCounter);
+        mazeImg.src = resourcePath + level[roundCounter];
         currRectX = 8;
         currRectY = 3;
         return setInterval(draw(8,3),10);
     }
 
-    /*
-    *   Returns the filename of the new level.
-    */
-    function levelSelect(round){
-        return level[round];
-    }
-
-    /**
+     /**
      * stopScript property according to AppObject structure.
      * Stops the application.
      * */

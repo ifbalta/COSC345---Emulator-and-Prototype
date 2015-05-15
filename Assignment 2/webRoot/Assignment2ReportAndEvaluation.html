@@ -76,7 +76,21 @@
         </p>
         <h3>Testing the Maze Game Prototype</h3>
             <p>
-                The maze game team used console.log() statements and Google Chrome to test movement, collision detection and resource loading.<br>
+                <p>
+                    The team realized that neither the mazegame.js nor mazegameprototype.js implementation was designed to cooperate with QUnit and
+                    relied on console.log() statements and Google Chrome to test movement, collision detection and resource loading.
+
+                </p>
+                <p>
+                    QUnit could not access functions in mazegame.js because all functions were declared inside the <code>$(document).ready()</code> scope.
+                    QUnit could not access functions in mazegameprototype.js because the AppObject structure had only three properties: startApp,
+                    stopScript, and clearScreen. Only properties were visible to QUnit, and
+                    none of these properties returned values suited for QUnit testing.
+                </p>
+                <p>
+                    We have told the emulator team that the AppObject structure should have a testFunction property,
+                    which can expose other functions for QUnit testing.
+                </p>
                     <h3>Test Cases</h3>
                     <ul>
                         <li>Test that that the player is drawn at position (8,3) at the beginning of each level</li>
@@ -112,6 +126,7 @@
     </div>
 
 
+<<<<<<< HEAD
 
 
 
@@ -136,88 +151,122 @@
                     The emulator is written in JavaScript and jQuery.
                 </p>
                 <p>
+=======
+    <div class="section">
+        <h2>Emulator</h2>
+            <p>
+                    <p>
+                        The emulator team relied on IntelliJ and Taco to build the emulator.
+                        IntelliJ useful for checking how directories and files related with each other,
+                        which functions were available to which scripts and its refactoring feature.
+                        The team also used Taco because they liked its Live Preview feature, letting them quickly test and validate HTML and CSS.
+                        The emulator team used both IntelliJ and SourceTree to handle version control.
+                    </p>
+                    <p>
+                        The emulator team researched a Chip 8 emulator implementation in C and tried to port it to JavaScript.
+                        They planned to extend Chip 8 to match the ARM architecture of most smart watches later on.
+                        They received feedback from our professor and found that the emulator was not meant emulate hardware,
+                        but act as a compatibility layer between the browser and smart watch application.
+                        The emulator is written in JavaScript and jQuery.
+                    </p>
+                    <p>
+>>>>>>> a287a68af16d3a5e2764e055f0b02b552b605282
                         They decided on an emulator that had only three responsibilities : starting the app, stopping the app and clearing the screen.
-                    The clear function should be able to clear the screen and stop the currently running application.
+                        The clear function should be able to clear the screen and stop the currently running application.
+                    </p>
+                    <p>
+                        The emulator features a screen, a start button, a clear button and an app tray. The buttons  start apps and clear the screen.
+                        However, the emulator is unable to stop the script using the clear function.
+                    </p>
+                    <p>
+                        The emulator expects all applications to follow the AppObject structure.
+                        The AppObject is a JavaScript prototype that must contain three properties: startApp, stopScript and clearScreen.
+                        All AppObjects must contain all three properties so that the emulator knows which methods it is able to call.
+                    </p>
+                    <p>
+                        The emulator is compatible with Safari, and compatible with Chrome, Firefox, Internet Explorer, and Opera when
+                        using a python or node.js server.
+                    </p>
+                    <p>
+                        Safari was the easiest browser to develop for because it didn’t complain about loading JavaScript files straight from a C:// drive.
+                        Chrome, Firefox and Internet Explorer refused to side load JavaScript files if their file path included C://. We solved the problem by building a server using node.js and Express.js, which gave our JavaScript files localhost:8080 paths instead. For testing, we chose to use python’s SimpleHTTPServer instead because the Owheo lab machines won’t let us install node.js.
+                    </p>
+                </p>
+            <h3>Emulator Expectations:</h3>
+            <ul>
+                <li>Clock app</li>
+                <li>Touch gestures such as swiping and tapping</li>
+                <li>Be able to run different JavaScript applications</li>
+                <li>A hardware button that can be utilized by other applications</li>
+                <li>EaselJS and BonsaiJs for graphics.</li>
+            </ul>
+
+
+            <h3>Emulator Reality:</h3>
+            <ul>
+                <li>No clock app. We have decided that unless everything else works perfectly, we will not make a clock app.</li>
+                <li>There are no touch gestures, and no hardware button. I/O is handled by the application,
+                but the application has no way of knowing if that I/O is allowed. For example, the application does not know if it has access to touch controls or keyboard controls.</li>
+                <li>There are two hardware buttons : start and stop, but neither are available for the developer to map.</li>
+                <li>We have sourced all graphics from Google.</li>
+            </ul>
+            <h3>Emulator Bugs:</h3>
+            <ul>
+                <li>The clear button should clear the screen and stop any previously running applications.
+                    The clear() function works sometimes, and the emulator’s call to the stopScript property never works.</li>
+                <li>Starting the application does not guarantee that all application resources are loaded. Sometimes you have to press the start button twice.</li>
+                <li>The canvas does not recognise that when an application has started, the keyboard direction keys should be for the application, and not for scrolling.</li>
+            </ul>
+            <h3>Testing the Emulator</h3>
+                <p>
+                    We made two implementations of each file, one followed the AppObject structure and
+                    the other ran while the HTML document was ready. This was done to test if the application was working,
+                    and if the AppObject structure was practical.
                 </p>
                 <p>
-                    The emulator features a screen, a start button, a clear button and an app tray. The buttons  start apps and clear the screen.
-                    However, the emulator is unable to stop the script using the clear function.
+                    The emulator has only one QUnit test, which tests the <code>selectFile()</code> function.
+                    We were unable to write QUnit tests for the AppObject's functions.
+                    We realize that AppObject should be redesigned to cooperate with QUnit by adding a testFunction property,
+                    and rework the <code>bootup()</code> and file selection functions.<br>
+
+                    <code>bootup()</code> is in charge of stopping and starting scripts. We can split those responsibilities into two functions.
+                    The file selection function was in
                 </p>
-                <p>
-                    The emulator expects all applications to follow the AppObject structure.
-                    The AppObject is a JavaScript prototype that must contain three properties: startApp, stopScript and clearScreen.
-                    All AppObjects must contain all three properties so that the emulator knows which methods it is able to call.
-                </p>
-                <p>
-                    The emulator is compatible with Safari, and compatible with Chrome, Firefox, Internet Explorer, and Opera when
-                    using a python or node.js server.
-                </p>
-                <p>
-                    Safari was the easiest browser to develop for because it didn’t complain about loading JavaScript files straight from a C:// drive.
-                    Chrome, Firefox and Internet Explorer refused to side load JavaScript files if their file path included C://. We solved the problem by building a server using node.js and Express.js, which gave our JavaScript files localhost:8080 paths instead. For testing, we chose to use python’s SimpleHTTPServer instead because the Owheo lab machines won’t let us install node.js.
-                </p>
-            </p>
-        <h3>Emulator Expectations:</h3>
-        <ul>
-            <li>Clock app</li>
-            <li>Touch gestures such as swiping and tapping</li>
-            <li>Be able to run different JavaScript applications</li>
-            <li>A hardware button that can be utilized by other applications</li>
-            <li>EaselJS and BonsaiJs for graphics.</li>
-        </ul>
+            <h3>Test cases</h3>
+            <ul>
+                <li>
+                    <p>Static scripts</p>
+                    <ul>
+                        <li>placeholder.js draws a red rectangle in the upper left corner.</li>
+                        <li>placeholderprototype.js is an AppObject implementation of placeholder.js and draws a red rectangle in the upper left corner.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>Scripts that use <code>setInterval()</code> to redraw images</p>
+                    <ul>
+                        <li>snakelogic.js runs a snake game clone</li>
+                        <li>snakelogicprototype.js an AppObject implementation of snakelogic.js</li>
+                    </ul>
 
-
-        <h3>Emulator Reality:</h3>
-        <ul>
-            <li>No clock app. We have decided that unless everything else works perfectly, we will not make a clock app.</li>
-            <li>There are no touch gestures, and no hardware button. I/O is handled by the application,
-            but the application has no way of knowing if that I/O is allowed. For example, the application does not know if it has access to touch controls or keyboard controls.</li>
-            <li>There are two hardware buttons : start and stop, but neither are available for the developer to map.</li>
-            <li>We have sourced all graphics from Google.</li>
-        </ul>
-        <h3>Emulator Bugs:</h3>
-        <ul>
-            <li>The clear button should clear the screen and stop any previously running applications.
-                The clear() function works sometimes, and the emulator’s call to the stopScript property never works.</li>
-            <li>Starting the application does not guarantee that all application resources are loaded. Sometimes you have to press the start button twice.</li>
-            <li>The canvas does not recognise that when an application has started, the keyboard direction keys should be for the application, and not for scrolling.</li>
-        </ul>
-        <h3>Testing the Emulator</h3>
-        <p>
-        We made two implementations of each file, one followed the AppObject structure and the other ran while the HTML document was ready.
-            This was done to test if the application was working, and if the AppObject structure was practical.
-        </p>
-        <h3>Test cases</h3>
-        <ul>
-            <li>
-                <p>Static scripts</p>
-                <ul>
-                    <li>placeholder.js draws a red rectangle in the upper left corner.</li>
-                    <li>placeholderprototype.js is an AppObject implementation of placeholder.js and draws a red rectangle in the upper left corner.</li>
-                </ul>
-            </li>
-            <li>
-                <p>Scripts that use setInterval() to redraw images</p>
-                <ul>
-                    <li>snakelogic.js runs a snake game clone</li>
-                    <li>snakelogicprototype.js an AppObject implementation of snakelogic.js</li>
-                </ul>
-
-            </li>
-            <li>
-            <p>Maze game test</p>
-                <ul>
-                    <li>mazegame.js is a JavaScript implementation of the ball-in-the-maze puzzle. The maze game team worked on this file.</li>
-                    <li>mazegameprototype.js is an AppObject implementation of mazegame.js.
-                        The emulator team worked ensured that this file was consistent with the AppObject structure and the maze game team’s implementation.</li>
-                </ul>
-            </li>
-        </ul>
-</div>
+                </li>
+                <li>
+                <p>Maze game test</p>
+                    <ul>
+                        <li>mazegame.js is a JavaScript implementation of the ball-in-the-maze puzzle. The maze game team worked on this file.</li>
+                        <li>
+                            mazegameprototype.js is an AppObject implementation of mazegame.js.
+                            The emulator team ensured that this file was consistent with the AppObject structure and
+                            the maze game team’s implementation.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+    </div>
 
 
 
 
+<<<<<<< HEAD
 <br>
 <div class="section">
     <h2>Evaluation</h2>
@@ -253,5 +302,41 @@
         Raeciel Reyes and Huijun Zhou will remain on the maze game team, but we expect Isabel Baltazar and Lennox Huang to join them once they complete the TypeScript port.
     </p>
 </div>
+=======
+
+    <div class="section">
+        <h2>Evaluation</h2>
+        <p>
+            We believed that allocating the months of  March 2015 - May 2015 to coding and planning would be more than enough time to make a working prototype and emulator.
+            Unfortunately, we failed to account that every member of the group also studied COSC326 - Effective Programming during semester one.
+            For most of April, both emulator and maze projects were left untouched because of the heavy workload of COSC326.
+        </p>
+        <p>
+            We should have realized that our team is not devoted to one paper, and that there will times when our team will have different priorities.
+            To our group’s credit, nobody missed a meeting even under the pressure of COSC326.
+        </p>
+        <p>
+            We should have tested Eclipse before deciding on our IDE. In the end, we chose different IDEs depending on which task we were focusing on.
+            Although each member was happy with their chosen work environment, constantly switching between IDEs doesn’t feel efficient.
+        </p>
+        <p>
+            We expected both projects to have 1000-2000 sloc each. emulator.js is only 70 lines long, and mazegame.js is 172 lines long.
+            Either we have not written enough code, or we have overestimated our work load.
+        </p>
+        <p>
+            We believed pure JavaScript would be enough for our emulator, but we now realize that TypeScript will be a better fit for our AppObject structure.
+            We are happy with our emulator’s AppObject structure, but we believe it can be better implemented in TypeScript.
+            We believe that since most of the design is already complete, we can easily port the emulator from JavaScript to TypeScript.
+            Isabel Baltazar and Lennox Huang will remain on the emulator team. TypeScript is similar to Java with classes, types and inheritance.
+            Both Isabel and Lennox are more confident with that type of object-oriented design and we believe they will be able to quickly port the emulator,
+            and will be able to help the maze game team test and debug the game later on.
+        </p>
+        <p>
+            We are happy with the movement and level loading of the maze game, but we believe that phaser.io will help us implement physics and use better graphics.
+            Although the game design is complete, we don’t know how quickly we will be able to port the game from JavaScript to using the phaser.io framework.
+            Raeciel Reyes and Huijun Zhou will remain on the maze game team, but we expect Isabel Baltazar and Lennox Huang to join them once they complete the TypeScript port.
+        </p>
+    </div>
+>>>>>>> a287a68af16d3a5e2764e055f0b02b552b605282
 </body>
 </html>
