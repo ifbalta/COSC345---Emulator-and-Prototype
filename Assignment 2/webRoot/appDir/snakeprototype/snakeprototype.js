@@ -1,4 +1,20 @@
-function appObject (){
+/**
+ *  snakeprototype.js
+ *
+ *  Snake game implementation in JavaScript.
+ *
+ *  AppObject implementation of snakelogic.js
+ *
+ *  Authors: Isabel Baltazar
+ *           Lennox Huang
+ *
+ *  Version: 1.0.0.0
+ *  Language: JavaScript
+ *  Dependencies: jQuery version 1.11.1
+ *
+ * */
+function AppObject (){
+
     var canvas = $("#canvas")[0];
     var ctxt = canvas.getContext("2d");
     var w = $("#canvas").width();
@@ -18,9 +34,13 @@ function appObject (){
     image.src = resourcePath + "snakebox.png";
     pat = ctxt.createPattern(bg, "no-repeat");
 
+    var continueFlag = true;
 
-
+    /**
+     *  Stops the game by resetting the gameloop and clearing the screen.
+     * */
     function stopScript() {
+        continueFlag = false;
         console.log("stopping game");
         clear();
         clearInterval(game_loop);
@@ -29,21 +49,17 @@ function appObject (){
         this.startApp = null;
     }
 
-    function clearScreen(){
-        console.log("clearing snake screen");
-        ctxt.clearRect(0,0,w, h);
+    /**
+     *  startApp property according to AppObject structure.
+     * */
+    this.startApp = function startApp() {
+            continueFlag = true;
+            continuePlaying();
     }
 
-    this.startApp = function startApp() {
-            dir = "right";
-            l = 5;
-            create_snake(0);
-            create_food();
-            score = 0;
-            if (typeof game_loop != "undefined") clearInterval(game_loop);
-            game_loop = setInterval(paint, 60);
-        }
-
+    /**
+     * Initializes game settings and starts the game loop.
+     * */
     var continuePlaying = function(){
         dir = "right";
         l = 5;
@@ -54,22 +70,28 @@ function appObject (){
         game_loop = setInterval(paint, 60);
     }
 
+    /**
+     * stopScript property according to AppObject structure.
+     * */
     this.stopScript = function() {
+        continueFlag = false;
         stopScript();
     }
-    //
-    //this.clearScreen = clear();
 
-    //Makes snake info
+    /**
+     * Initializes the first snake.
+     * */
     function create_snake(y) {
-        snake_arr = [];//empy array initialized
+        snake_arr = [];//empty array initialized
 
         for (var i = l; i >= 0; i--) {
             snake_arr.push({ x: i, y: 0 });
         }
     }
 
-    //randomize food
+    /**
+     * Creates the snake at a random location.
+     * */
     function create_food() {
         food = {
             x: Math.round(Math.random() * (w - cw) / cw),
@@ -77,10 +99,22 @@ function appObject (){
         }
     }
 
-    function paint_cell(x, y, color) {
+    /**
+     * Draws a square.
+     * This is used to draw both the snake, and the food.
+     * @param x x-coordinates of square
+     * @param y y-coordinates of square
+     * */
+    function paint_cell(x, y) {
         ctxt.drawImage(image, x * cw, y * cw);
     }
 
+    /**
+     * Collision checking ensures that the snake has not collided with the wall
+     * or checks if the snake has eated its food.
+     * @param x x-coordinates of destination
+     * @param y y-coordinates of destination
+     * */
     function check_collision(x, y, a) {
         for (var i = 0; i < a.length; i++) {
             if (x == a[i].x && y == a.y) return true;
@@ -89,9 +123,10 @@ function appObject (){
     }
 
 
-
-
-    //Snake painting
+    /**
+     * Game loop which displays snake and food information,
+     * and handles movement.
+     * */
     function paint() {
 
         //This clears everything to redraw the BG,
@@ -135,9 +170,8 @@ function appObject (){
 
         //reinitialize game and restart only when you hit yourself
         if (nx == -1 || ny == -1 || nx == w / cw || ny == h / cw || check_collision(nx, ny, snake_arr)) {
-            //  var respond = confirm("GAME OVER!\n Final Score: " + score);
-            // if (respond == true) init();
-            continuePlaying();
+            console.log("Continue playing? " + continueFlag);
+            if(continueFlag) continuePlaying();
             return;
         }
 
@@ -157,6 +191,7 @@ function appObject (){
         ctxt.fillText(score_text, 5, h - 5);
     }
 
+    // moves player depending of key press
     $(document).keydown(function (e) {
         var k = e.which;
         switch (k) {

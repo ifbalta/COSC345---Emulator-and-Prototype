@@ -46,7 +46,7 @@ function bootup(filename){
 	if(prev != null) {
 		console.log("Stopping " + runningScript);
 		$.getScript(runningScript, function () {
-			prev = new appObject();
+			prev = new AppObject();
 			prev.stopScript();
 			prev.clearScreen();
 		});
@@ -56,8 +56,8 @@ function bootup(filename){
 		runningScript = $.getScript(filename, function(){
 		console.log("starting " + filename);
 		if (protoRegex.test(filename)) {
-			console.log("creating appObject");
-			prev = new appObject();
+			console.log("creating AppObject");
+			prev = new AppObject();
 			prev.startApp();
 		}
 	});
