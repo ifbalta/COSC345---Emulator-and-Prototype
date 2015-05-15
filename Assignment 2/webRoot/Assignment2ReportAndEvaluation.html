@@ -125,73 +125,47 @@
             </p>
     </div>
 
-
-<<<<<<< HEAD
-
-
-
-
 <br>
-<div class="section">
-    <h2>Emulator</h2>
-    <hr>
-        <p>
-                <p>
-                    The emulator team relied on IntelliJ and Taco to build the emulator.
-                    IntelliJ useful for checking how directories and files related with each other,
-                    which functions were available to which scripts and its refactoring feature.
-                    The team also used Taco because they liked its Live Preview feature, letting them quickly test and validate HTML and CSS.
-                    The emulator team used both IntelliJ and SourceTree to handle version control.
-                </p>
-                <p>
-                    The emulator team researched a Chip 8 emulator implementation in C and tried to port it to JavaScript.
-                    They planned to extend Chip 8 to match the ARM architecture of most smart watches later on.
-                    They received feedback from our professor and found that the emulator was not meant emulate hardware,
-                    but act as a compatibility layer between the browser and smart watch application.
-                    The emulator is written in JavaScript and jQuery.
-                </p>
-                <p>
-=======
     <div class="section">
         <h2>Emulator</h2>
+        <hr>
+        <p>
             <p>
-                    <p>
-                        The emulator team relied on IntelliJ and Taco to build the emulator.
-                        IntelliJ useful for checking how directories and files related with each other,
-                        which functions were available to which scripts and its refactoring feature.
-                        The team also used Taco because they liked its Live Preview feature, letting them quickly test and validate HTML and CSS.
-                        The emulator team used both IntelliJ and SourceTree to handle version control.
-                    </p>
-                    <p>
-                        The emulator team researched a Chip 8 emulator implementation in C and tried to port it to JavaScript.
-                        They planned to extend Chip 8 to match the ARM architecture of most smart watches later on.
-                        They received feedback from our professor and found that the emulator was not meant emulate hardware,
-                        but act as a compatibility layer between the browser and smart watch application.
-                        The emulator is written in JavaScript and jQuery.
-                    </p>
-                    <p>
->>>>>>> a287a68af16d3a5e2764e055f0b02b552b605282
-                        They decided on an emulator that had only three responsibilities : starting the app, stopping the app and clearing the screen.
-                        The clear function should be able to clear the screen and stop the currently running application.
-                    </p>
-                    <p>
-                        The emulator features a screen, a start button, a clear button and an app tray. The buttons  start apps and clear the screen.
-                        However, the emulator is unable to stop the script using the clear function.
-                    </p>
-                    <p>
-                        The emulator expects all applications to follow the AppObject structure.
-                        The AppObject is a JavaScript prototype that must contain three properties: startApp, stopScript and clearScreen.
-                        All AppObjects must contain all three properties so that the emulator knows which methods it is able to call.
-                    </p>
-                    <p>
-                        The emulator is compatible with Safari, and compatible with Chrome, Firefox, Internet Explorer, and Opera when
-                        using a python or node.js server.
-                    </p>
-                    <p>
-                        Safari was the easiest browser to develop for because it didn’t complain about loading JavaScript files straight from a C:// drive.
-                        Chrome, Firefox and Internet Explorer refused to side load JavaScript files if their file path included C://. We solved the problem by building a server using node.js and Express.js, which gave our JavaScript files localhost:8080 paths instead. For testing, we chose to use python’s SimpleHTTPServer instead because the Owheo lab machines won’t let us install node.js.
-                    </p>
-                </p>
+                The emulator team relied on IntelliJ and Taco to build the emulator.
+                IntelliJ useful for checking how directories and files related with each other,
+                which functions were available to which scripts and its refactoring feature.
+                The team also used Taco because they liked its Live Preview feature, letting them quickly test and validate HTML and CSS.
+                The emulator team used both IntelliJ and SourceTree to handle version control.
+            </p>
+            <p>
+                The emulator team researched a Chip 8 emulator implementation in C and tried to port it to JavaScript.
+                They planned to extend Chip 8 to match the ARM architecture of most smart watches later on.
+                They received feedback from our professor and found that the emulator was not meant emulate hardware,
+                but act as a compatibility layer between the browser and smart watch application.
+                The emulator is written in JavaScript and jQuery.
+            </p>
+            <p>
+                They decided on an emulator that had only three responsibilities : starting the app, stopping the app and clearing the screen.
+                The clear function should be able to clear the screen and stop the currently running application.
+            </p>
+            <p>
+                The emulator features a screen, a start button, a clear button and an app tray. The buttons  start apps and clear the screen.
+                However, the emulator is unable to stop the script using the clear function.
+            </p>
+            <p>
+                The emulator expects all applications to follow the AppObject structure.
+                The AppObject is a JavaScript prototype that must contain three properties: startApp, stopScript and clearScreen.
+                All AppObjects must contain all three properties so that the emulator knows which methods it is able to call.
+            </p>
+            <p>
+                The emulator is compatible with Safari, and compatible with Chrome, Firefox, Internet Explorer, and Opera when
+                using a python or node.js server.
+            </p>
+            <p>
+                Safari was the easiest browser to develop for because it didn’t complain about loading JavaScript files straight from a C:// drive.
+                Chrome, Firefox and Internet Explorer refused to side load JavaScript files if their file path included C://. We solved the problem by building a server using node.js and Express.js, which gave our JavaScript files localhost:8080 paths instead. For testing, we chose to use python’s SimpleHTTPServer instead because the Owheo lab machines won’t let us install node.js.
+            </p>
+        </p>
             <h3>Emulator Expectations:</h3>
             <ul>
                 <li>Clock app</li>
@@ -266,46 +240,10 @@
 
 
 
-<<<<<<< HEAD
-<br>
-<div class="section">
-    <h2>Evaluation</h2>
-    <hr>
-    <p>
-        We believed that allocating the months of  March 2015 - May 2015 to coding and planning would be more than enough time to make a working prototype and emulator.
-        Unfortunately, we failed to account that every member of the group also studied COSC326 - Effective Programming during semester one.
-        For most of April, both emulator and maze projects were left untouched because of the heavy workload of COSC326.
-    </p>
-    <p>
-        We should have realized that our team is not devoted to one paper, and that there will times when our team will have different priorities.
-        To our group’s credit, nobody missed a meeting even under the pressure of COSC326.
-    </p>
-    <p>
-        We should have tested Eclipse before deciding on our IDE. In the end, we chose different IDEs depending on which task we were focusing on.
-        Although each member was happy with their chosen work environment, constantly switching between IDEs doesn’t feel efficient.
-    </p>
-    <p>
-        We expected both projects to have 1000-2000 sloc each. emulator.js is only 70 lines long, and mazegame.js is 172 lines long.
-        Either we have not written enough code, or we have overestimated our work load.
-    </p>
-    <p>
-        We believed pure JavaScript would be enough for our emulator, but we now realize that TypeScript will be a better fit for our AppObject structure.
-        We are happy with our emulator’s AppObject structure, but we believe it can be better implemented in TypeScript.
-        We believe that since most of the design is already complete, we can easily port the emulator from JavaScript to TypeScript.
-        Isabel Baltazar and Lennox Huang will remain on the emulator team. TypeScript is similar to Java with classes, types and inheritance.
-        Both Isabel and Lennox are more confident with that type of object-oriented design and we believe they will be able to quickly port the emulator,
-        and will be able to help the maze game team test and debug the game later on.
-    </p>
-    <p>
-        We are happy with the movement and level loading of the maze game, but we believe that phaser.io will help us implement physics and use better graphics.
-        Although the game design is complete, we don’t know how quickly we will be able to port the game from JavaScript to using the phaser.io framework.
-        Raeciel Reyes and Huijun Zhou will remain on the maze game team, but we expect Isabel Baltazar and Lennox Huang to join them once they complete the TypeScript port.
-    </p>
-</div>
-=======
-
+    <br>
     <div class="section">
         <h2>Evaluation</h2>
+        <hr>
         <p>
             We believed that allocating the months of  March 2015 - May 2015 to coding and planning would be more than enough time to make a working prototype and emulator.
             Unfortunately, we failed to account that every member of the group also studied COSC326 - Effective Programming during semester one.
@@ -337,6 +275,5 @@
             Raeciel Reyes and Huijun Zhou will remain on the maze game team, but we expect Isabel Baltazar and Lennox Huang to join them once they complete the TypeScript port.
         </p>
     </div>
->>>>>>> a287a68af16d3a5e2764e055f0b02b552b605282
-</body>
+    </body>
 </html>
