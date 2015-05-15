@@ -33,12 +33,12 @@ and create a local copy of the repository.
 The emulator is also compatible with Chrome, Internet Explorer, and Opera if you use a server.
 The emulator comes with a node.js server powered by Express.js.
 #### Running the server      
-   * install node.js from [nodejs.org](https://nodejs.org/download/)
-   * install Express.js using `npm install express --save on` the command line
-   * navigate to the webRoot directory and start the server using the command
+   * Install node.js from [nodejs.org](https://nodejs.org/download/)
+   * Install Express.js using `npm install express --save on` the command line
+   * Navigate to the webRoot directory and start the server using the command
      `node bootup`
 
 ##Playing the maze game
-   * start the emulator
-   * select *Maze Game* from the drop down menu
+   * Start the emulator
+   * Select *Maze Game* from the drop down menu
    * Enjoy!
