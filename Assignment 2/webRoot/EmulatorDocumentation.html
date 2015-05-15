@@ -3,21 +3,27 @@
   <meta charset="UTF-8">
   <title>Emulator Documentation</title>
   <link rel="stylesheet" type="text/css" href="report.css">
-</head>
+ </head>
 
 
 
 <body>
   <h1>Smart Watch Emulator Manual</h1>
-    <ul>
-      <li>Isabel Baltazar</li>
-      <li>Lennox Huang</li>
-    </ul>
   <p>
-    The emulator acts like a generic smart watch and is not meant to mimic any currently available smart watch such as the Apple Watch or Moto 360. <br>
-    The emulator is written in JavaScript and jQuery and is run on the browser. <br>
-    The jQuery is version 1.11 and sourced from
-      <a href="https://developers.google.com/speed/libraries/">Google's hosted library.</a><br>
+        <b>Authors:</b><br>
+          Isabel Baltazar<br>
+          Lennox Huang
+  </p>
+  <p>
+      <b>Language:</b> JavaScript<br>
+      <b>Dependencies:</b>
+          jQuery version 1.11. provided by  <a href="https://developers.google.com/speed/libraries/">Google's hosted library.</a><br>
+  </p>
+  <p>
+    The emulator acts like a generic smart watch and is not meant to mimic any currently available smart watch such as the Apple Watch or Moto 360.
+    The emulator is written in JavaScript and jQuery and is run on the browser.
+    It is a compatibility layer between the browser and smart watch application.<br>
+
     The emulator is compatible with Safari.<br>
     The emulator is compatible with Chrome, Firefox, Internet Explorer, and Opera if node.js and Express.js or python is pre-installed.
   </p>
@@ -100,22 +106,13 @@
 
     <ul>
       <li>
-        <h3><code>startUp</code></h3>
-        <p>
-          Should initialize the application.
-        </p>
+        <h3><code>startUp</code></h3> should initialize the application.
       </li>
       <li>
-        <h3><code>stopScript</code></h3>
-        <p>
-          Should stop the application.
-        </p>
+        <h3><code>stopScript</code></h3> should stop the application.
       </li>
       <li>
-         <h3><code>clear</code></h3>
-        <p>
-          Should clear the screen.
-        </p>
+         <h3><code>clear</code></h3> should clear the screen.
       </li>
     </ul>     
     <br><a href="index.html"></a>
@@ -150,8 +147,7 @@
           <li>
               <h3><code>selectFile()</code></h3>
               <p>
-                  <code>@param</code> filename<br>
-                  the selected application
+                  <code>@param</code> filename the selected application
                   <p>
                     Responsible for adding the file path to the file name.
                   </p>
