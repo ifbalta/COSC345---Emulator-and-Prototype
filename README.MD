@@ -1,8 +1,8 @@
--1 April 2015:  Set up git repository for emulator and prototype.
--7 April 2015:  Updated README to include repository set up instructions and added collaborator list.
--15 April 2015: Added git branch instructions
--19 April 2015: Added EGit setup instructions.
--15 May 2015:   Updated README to reflect emulator installation instructions.
+*1 April 2015:  Set up git repository for emulator and prototype.
+*7 April 2015:  Updated README to include repository set up instructions and added collaborator list.
+*15 April 2015: Added git branch instructions
+*19 April 2015: Added EGit setup instructions.
+*15 May 2015:   Updated README to reflect emulator installation instructions.
 
 # COSC345 Emulator and Smart Watch Application
 
