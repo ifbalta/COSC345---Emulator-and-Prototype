@@ -1,4 +1,4 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Emulator</title>
@@ -9,14 +9,12 @@
 <body>
 
 	<h1> Beta Emulator - Smart Watch</h1>
-	<div class="screen" id="scr"> 
-	<!--<object typr="image/svg+xml" data="watchface.svg">Your browser does not support SVG</object>-->   
-	<div id="interface">
-	<figure id="pic"> <img src="watch.png" alt="watch" width="419" height="605"> </figure>
-	<canvas id="canvas" width="320" height="320" tabindex="1"> Your browser does not support HTML5 </canvas>
-		<div class="appTray" id="selectTitle">
-		Please Select A Game:
-		<select id="selection" class="stylesheet">
+	<div class="screen"> 
+	<canvas id="canvas" width="320" height="320"> Your browser does not support HTML5 </canvas>
+
+		<div id="selectTitle">
+			Please Select A Game:
+		<select id="selection">
 			<option label="mazegameprototype.js" value="Maze Prototype">Maze Prototype</option> 
 			<option label="snakeprototype.js" value="Snake Prototye">Snake Prototype</option> 
 			<option label="testgameprototype.js" value="Testprototype">Test Prototype</option> 
@@ -30,8 +28,6 @@
 	</div>
 	</div>
 
-	</div>
-	
 		<script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="emulator.js"></script>
