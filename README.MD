@@ -24,7 +24,7 @@ Dependencies:
 * `QUnit` version 1.18.0
 
 ##Getting the code:
-Type 'git clone https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git' into the command line or a git client. This command will create a folder called 
+Type `git clone https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git` into the command line or a git client. This command will create a folder called
 COSC345--Emulator-and-Prototype in your local directory
 and create a local copy of the repository.
  
