@@ -18,6 +18,7 @@ The smart watch application is a JavaScript implementation of
 the classic ball-in-a-maze game.
 
 Language: `JavaScript`
+
 Dependencies:
 * `jQuery` version 1.11.1
 * `QUnit` version 1.18.0
