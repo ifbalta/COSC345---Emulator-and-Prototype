@@ -23,7 +23,7 @@ Dependencies:
 * `jQuery` version 1.11.1
 * `QUnit` version 1.18.0
 
-Documentation available [here](index.html)
+
 
 ##Getting the code:
 Type `git clone https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git` into the command line or a git client. This command will create a folder called
@@ -40,6 +40,7 @@ The emulator comes with a node.js server powered by Express.js.
    * Install Express.js using `npm install express --save` on the command line
    * Navigate to the webRoot directory and start the server using the command
      `node bootup`
+   * Documentation is available under `index.html`
 
 ##Playing the maze game
    * Start the emulator
