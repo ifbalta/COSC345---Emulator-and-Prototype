@@ -40,7 +40,7 @@ The emulator comes with a node.js server powered by Express.js.
    * Install Express.js using `npm install express --save` on the command line
    * Navigate to the webRoot directory and start the server using the command
      `node bootup`
-   * Documentation is available under `index.html`
+   * Documentation for both the emulator and maze game is available under `index.html`
 
 ##Playing the maze game
    * Start the emulator
