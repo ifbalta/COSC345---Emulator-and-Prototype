@@ -29,17 +29,18 @@ h1 {
 
 #canvas{
 	background-image: url("m.jpg");
-	margin-top:155px;
+	margin-top:132px;
 
 }
 
 #selectTitle{
 	position:relative;
-	top:60px;
+	top:50px;
 }
 
-p.credits{
-	margin-top:60px;
+#credits{
+	position:relative;
+	top:100px;
 	font-size: 11px;
 }
 /*old css*/
