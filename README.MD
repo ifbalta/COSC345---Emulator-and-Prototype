@@ -20,23 +20,19 @@ the classic ball-in-a-maze game.
 
 Language: `JavaScript`
 Dependencies:
-        * `jQuery` version 1.11.1
-        * `QUnit` version 1.18.0
+* `jQuery` version 1.11.1
+* `QUnit` version 1.18.0
+
 ##Getting the code:
-        Type `git clone
-        https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git`
-        into the command line or a git client.
-        This command will create a folder called
-        COSC345--Emulator-and-Prototype in your local directory
-        and create a local copy of the repository.
+Type 'git clone https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git' into the command line or a git client. This command will create a folder called 
+COSC345--Emulator-and-Prototype in your local directory
+and create a local copy of the repository.
  
 ##Installing the emulator
    The emulator is compatible with Safari.
 ### Not using Safari?
-    The emulator is also compatible withChrome, Internet Explorer, and Opera if
-    you use a server.
-
-    The emulator comes with a node.js server powered by Express.js.
+The emulator is also compatible with Chrome, Internet Explorer, and Opera if you use a server.
+The emulator comes with a node.js server powered by Express.js.
 #### Running the server      
    * install node.js from [nodejs.org](https://nodejs.org/download/)
    * install Express.js using `npm install express --save on` the command line
