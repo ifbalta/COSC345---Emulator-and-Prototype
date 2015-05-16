@@ -48,8 +48,8 @@ $('#clear').on('click', function(){
     var selected = $('#selection :selected');
     var s = selected.text();
     var filename = selectFile(selected.attr("value"));
+     var message = "Loading " + s + " from " + filename + " file."
     console.log("Filename: " + filename);
-    var message = "Loading " + s + " from " + filename + " file."
     $('#display').val(message);
     console.log(message);
     bootup(filename);
