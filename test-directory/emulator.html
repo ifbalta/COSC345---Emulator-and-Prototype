@@ -1,0 +1,36 @@
+<!DOCTYPE html >
+<html>
+<head>
+	<title>Emulator</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="emulator.css">
+</head>
+
+<body>
+
+	<h1> Beta Emulator - TypeScript Port</h1>
+	<div class="screen" id="scr"> 
+	<!--<object typr="image/svg+xml" data="watchface.svg">Your browser does not support SVG</object>-->   
+	<div id="interface">
+	<figure id="pic"> <img src="watch.png" alt="watch" width="419" height="605" text-align="center"> </figure>
+	<canvas id="canvas" width="320" height="320"> Your browser does not support HTML5 </canvas>
+		<div class="appTray" id="selectTitle">
+		Please Select A Game:
+		<select id="selection">
+			<option fname="typescript-port/placeholder.js">Placeholder</option>
+		</select>
+		<button type="button" id="start">start</button><button type="button" id="clear">clear</button>
+		<br>
+		<textarea id="display" rows="3" cols="30"></textarea>
+	</div>
+	</div>
+
+	</div>
+	
+		<script type="text/javascript"
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="typescript-port/emulator.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	</body>
+	
+</html>
