@@ -2,8 +2,8 @@
   I/O pipeline between browser and app.js.
 */
 
-$(document).ready(function(){
-    //Inititialize canvas
+
+  //Inititialize canvas
   var canvas = $("#canvas")[0];
   var ctxt = canvas.getContext("2d");
   var w = $("#canvas").width();
@@ -12,14 +12,17 @@ $(document).ready(function(){
   var bg = new Image();
   var images = []; // GameObject array
 
-  function addResource (x, y, imgFile) {
-    images.push(new GameObject(x, y, imgFile));    
+  function addResource (name, x, y, imgFile) {
+    images[name] = new GameObject(x, y, imgFile); // to allow access by name
+    images.push(images[name]); // to allow access through forEach
+    return images[name];   
   }
 
-  function setBG(bgFile){
-    bg.src = bgFile;    
+  function setup(bgFile){
+    bg.src = bgFile;
+    bg.height=h;
+    bg.width=w;        
   }
-
   
   // start gameloop
   function init () {
@@ -29,11 +32,11 @@ $(document).ready(function(){
   }
 
   function paint () {
-    ctxt.fillStyle = "red";
-    ctxt.rect(20,20,150,100);
-    ctxt.fill();
-    ctxt.drawImage(spriteImage, imagePos[1], imagePos[0]);
+    ctxt.drawImage(bg, 0, 0);
+    images.forEach(function (gObj) {
+      ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);  
+    })
+    
   }
 
-});
 

@@ -7,7 +7,12 @@ var GameObject = (function () {
     function GameObject(x, y, spriteFile) {
         this.x = x;
         this.y = y;
-        this.sprite = new Image(spriteFile);
+        this.sprite = new Image();
+        this.sprite.src = spriteFile;
+        this.spriteFile = spriteFile;
     }
+    GameObject.prototype.toString = function () {
+        return "(" + this.x + "," + this.y + ") " + this.spriteFile + "!";
+    };
     return GameObject;
 })();

@@ -45,15 +45,19 @@ $(document).ready(function(){
     // left
     if (e == 37) {
       lFlag = true;
+    }
     // right
     if (e == 39) {
       rFlag = true;
+    }
     // up
     if (e == 38) {
      uFlag = true;
+   }
    // down
     if (e == 40) {
       dFlag = true;    
+    }
   });
 
 });
