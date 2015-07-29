@@ -2,8 +2,8 @@
   testapp.js
 */
 
-setup("grass.png"); // initialize app background
-var sora = addResource("sora", 0,0,"SoraKHCOM.png"); // setup resources
+setup("resources/ice-map.bmp"); // initialize app background
+var sora = addResource("sora", 0,0,"resources/SoraKHCOM.png"); // setup resources
 init(); // start emulator
 
 // game logic
