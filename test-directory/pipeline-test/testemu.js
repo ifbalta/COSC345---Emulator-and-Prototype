@@ -27,8 +27,8 @@
   // start gameloop
   function init () {
     paint();
-    if (typeof game_loop != "undefined") clearInterval(game_loop);
-    game_loop = setInterval(paint, 60);
+    if (typeof clock_cycle != "undefined") clearInterval(clock_cycle);
+    clock_cycle = setInterval(paint, 60);
   }
 
   function paint () {

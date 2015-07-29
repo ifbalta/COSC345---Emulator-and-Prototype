@@ -2,18 +2,11 @@
   testapp.js
 */
 
+setup("grass.png"); // initialize app background
+var sora = addResource("sora", 0,0,"SoraKHCOM.png"); // setup resources
+init(); // start emulator
 
-
-// if window.addEventListener
-//     window.addEventListener('load', Cookie.setup)
-
-// setup resources
-
-var sora = addResource("sora", 0,0,"SoraKHCOM.png");
-
-setup("grass.png");
-init();
-
+// game logic
 window.addEventListener("keydown", function (evt) {
   var e = evt.which;
   switch (e) {
