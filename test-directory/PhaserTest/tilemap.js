@@ -1,51 +1,13 @@
-// var fishSprite;
-
-
-// var game = new Phaser.Game(
-// 	800, 600, Phaser.AUTO, '',
-// 	{ preload: preload, create: create, update: update }
-// );
-
-// function preload(){
-// 	game.load.image('fish', 'fish.png');
-
-// }
-
-// function create(){
-// 	fishSprite = game.add.sprite(game.world.centerX, 0, 'fish');
-// 	game.physics.enable(fishSprite, Phaser.Physics.ARCADE);
-// 	fishSprite.body.acceleration.y = 100; //"gravity"
-// 	fishSprite.body.collideWorldBounds = true;
-// 	fishSprite.body.drag.x = 100;
-// 	fishSprite.anchor.setTo(.5,.5);
-
-// }
-
-// function update(){
-// 	if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-// 		fishSprite.body.velocity.x = -80;
-// 		fishSprite.scale.x = 1;
-// 	} else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-// 		fishSprite.body.velocity.x = 80;
-// 		fishSprite.scale.x = -1;
-// 	}
-
-// 	if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-// 		fishSprite.body.velocity.y = -100;
-// 	}
-
-// }
-
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
 function preload() {
 
-    game.load.tilemap('map', 'ice-cave.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.image('ground_1x1', 'ice-piskel1.png');
-    game.load.image('walls_1x2', 'ice-piskel2.png');
-    // game.load.image('tiles2', 'SoraKHCOM.png');
-   game.load.image('ship', 'SoraKHCOM.png');
+    game.load.tilemap('map', 'assets/tilemaps/maps/collision_test.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.image('ground_1x1', 'assets/tilemaps/tiles/ground_1x1.png');
+    game.load.image('walls_1x2', 'assets/tilemaps/tiles/walls_1x2.png');
+    game.load.image('tiles2', 'assets/tilemaps/tiles/tiles2.png');
+    game.load.image('ship', 'assets/sprites/thrust_ship2.png');
 
 }
 
@@ -58,13 +20,13 @@ function create() {
 
     game.physics.startSystem(Phaser.Physics.P2JS);
 
-    game.stage.backgroundColor = '#000000';
+    game.stage.backgroundColor = '#2d2d2d';
 
     map = game.add.tilemap('map');
 
     map.addTilesetImage('ground_1x1');
     map.addTilesetImage('walls_1x2');
-    // map.addTilesetImage('tiles2');
+    map.addTilesetImage('tiles2');
     
     layer = map.createLayer('Tile Layer 1');
 
