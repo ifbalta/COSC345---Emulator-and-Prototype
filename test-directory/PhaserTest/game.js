@@ -37,13 +37,13 @@
 // }
 
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(320, 320, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
 
 function preload() {
 
     game.load.tilemap('map', 'ice-cave.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.image('ground_1x1', 'ice-piskel1.png');
-    game.load.image('walls_1x2', 'ice-piskel2.png');
+    game.load.image('ice1', 'ice-piskel1.png');
+    game.load.image('ice2', 'ice-piskel2.png');
     // game.load.image('tiles2', 'SoraKHCOM.png');
    game.load.image('ship', 'SoraKHCOM.png');
 
@@ -58,28 +58,28 @@ function create() {
 
     game.physics.startSystem(Phaser.Physics.P2JS);
 
-    game.stage.backgroundColor = '#000000';
+    game.stage.backgroundColor = '#2d2d2d';
 
     map = game.add.tilemap('map');
 
-    map.addTilesetImage('ground_1x1');
-    map.addTilesetImage('walls_1x2');
+    map.addTilesetImage('ice1');
+    map.addTilesetImage('ice2');
     // map.addTilesetImage('tiles2');
     
-    layer = map.createLayer('Tile Layer 1');
+    layer = map.createLayer('coll-layer');
 
     layer.resizeWorld();
 
     //  Set the tiles for collision.
     //  Do this BEFORE generating the p2 bodies below.
-    map.setCollisionBetween(1, 12);
+    map.setCollisionBetween(1, 32,true,layer);
 
     //  Convert the tilemap layer into bodies. Only tiles that collide (see above) are created.
     //  This call returns an array of body objects which you can perform addition actions on if
     //  required. There is also a parameter to control optimising the map build.
     game.physics.p2.convertTilemap(map, layer);
 
-    ship = game.add.sprite(200, 200, 'ship');
+    ship = game.add.sprite(32, 32, 'ship');
     game.physics.p2.enable(ship);
 
     game.camera.follow(ship);
