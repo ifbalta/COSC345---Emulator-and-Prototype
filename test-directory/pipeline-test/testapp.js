@@ -3,9 +3,9 @@
 */
 
 
-setup("resources/ice-map.bmp"); // initialize app background
+setup("resources/islands-map.bmp"); // initialize app background
 var sora = addResource("sora", 0,0,"resources/SoraKHCOM.png"); // setup resources
-var enemy = addResource("enemy", 16,16, "resources/spaceship.jpg");
+//var enemy = addResource("enemy", 16,16, "resources/spaceship.jpg");
 init(); // start emulator
 
 // game logic
