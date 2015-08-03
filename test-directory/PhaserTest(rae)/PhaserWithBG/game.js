@@ -55,11 +55,12 @@ function preload() {
 var ball;
 var map;
 var layer;
+var layer2;
 var cursors;
+var hole;
 
 function create() {
 
-    game.physics.startSystem(Phaser.Physics.P2JS);
 
     //game.stage.backgroundColor = '#2d2d2d';
     game.background = game.add.tileSprite(0,0,320,320,'bg');
@@ -71,20 +72,26 @@ function create() {
     // map.addTilesetImage('tiles2');
     
     layer = map.createLayer('blackTile');
+    //layer2 = map.createLayer('hole2');
 
     layer.resizeWorld();
 
+    game.physics.startSystem(Phaser.Physics.P2JS);
     //  Set the tiles for collision.
     //  Do this BEFORE generating the p2 bodies below.
     map.setCollisionBetween(1, 32,true,layer);
+    //map.setCollisionBetween(1, 32,true,layer2);
 
     //  Convert the tilemap layer into bodies. Only tiles that collide (see above) are created.
     //  This call returns an array of body objects which you can perform addition actions on if
     //  required. There is also a parameter to control optimising the map build.
     game.physics.p2.convertTilemap(map, layer);
+    //game.physics.p2.convertTilemap(map, layer2);
 
+    hole = game.add.sprite(160,160,'hole2');
     ball = game.add.sprite(32, 32, 'ball');
     game.physics.p2.enable(ball, false);
+    //game.physics.p2.enable(hole, true);
 
     game.camera.follow(ball);
 
@@ -96,16 +103,21 @@ function create() {
     //  that, so it's set to false. But if you had custom collision groups set-up then you would need this set to true.
     game.physics.p2.setBoundsToWorld(true, true, true, true, false);
 
+
     //  Even after the world boundary is set-up you can still toggle if the ball collides or not with this:
     // ball.body.collideWorldBounds = false;
 
     cursors = game.input.keyboard.createCursorKeys();
 
+
+
 }
+
 
 function update() {
     ball.body.setZeroVelocity();
-    ball.body.setZeroRotation();
+    ball.body.setZeroRotation(); 
+  
     
     if (cursors.left.isDown){ 
         ball.body.velocity.x = -150;
@@ -123,31 +135,25 @@ function update() {
         ball.body.velocity.y = 150;
     }
 
-
-
-    /*
-
-    if (cursors.left.isDown)
-    {
-        ball.body.rotateLeft(100);
-    }
-    else if (cursors.right.isDown)
-    {
-        ball.body.rotateRight(100);
-    }
-    else
-    {
-        ball.body.setZeroRotation();
+    if (checkOverlap(ball,hole)){
+       console.log('dfgsdfgfsdh');
     }
 
-    if (cursors.up.isDown)
-    {
-        ball.body.thrust(400);
-    }
-    else if (cursors.down.isDown)
-    {
-        ball.body.reverse(400);
-    }*/
+/*
+   var bodyA=game.physics.p2.getBody(ball)
+   var bodyB=game.physics.p2.getBody(hole); 
+    if(p2.Broadphase.aabbCheck(bodyA,bodyB)){ console.log("ok"); } */
+    
+
+}
+
+
+function checkOverlap(spriteA, spriteB) {
+
+    var boundsA = spriteA.getBounds();
+    var boundsB = spriteB.getBounds();
+
+    return Phaser.Rectangle.intersects(boundsA, boundsB);
 
 }
 
