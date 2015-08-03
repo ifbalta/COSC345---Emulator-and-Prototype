@@ -16,3 +16,16 @@ var GameObject = (function () {
     };
     return GameObject;
 })();
+
+/**
+   KeyObject
+   * KeyCode
+   * KeyPressed
+ */
+var KeyObject = (function (){
+    function KeyObject(code, pressed) {
+        this.code = code,
+        this.pressed = pressed;        
+    }
+    return KeyObject;
+})();
