@@ -8,9 +8,7 @@ function preload() {
     game.load.image('bg', 'bg.jpg');
     game.load.image('hole2', 'hole2.png');
     // game.load.image('tiles2', 'ball.png');
-   game.load.image('ball', 'ball2.png');
-
-
+    game.load.image('ball', 'ball2.png');
 
 }
 
@@ -42,12 +40,12 @@ function create() {
         map = game.add.tilemap('map'+i);
     }else{
         destroyEverything(game,map,layer); 
-        alert("done. just testing when the game finishes");
+        alert("just testing for when the game finishes");
         i = 1;
     }  
     i += 1;
     map.addTilesetImage('blackTile');
-    map.addTilesetImage('hole2');
+    //map.addTilesetImage('hole2');
     // map.addTilesetImage('tiles2');
     
     layer = map.createLayer('blackTile');
