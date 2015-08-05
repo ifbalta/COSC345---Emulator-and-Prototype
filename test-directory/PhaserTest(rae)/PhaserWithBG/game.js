@@ -1,54 +1,14 @@
-// var fishSprite;
-
-
-// var game = new Phaser.Game(
-// 	800, 600, Phaser.AUTO, '',
-// 	{ preload: preload, create: create, update: update }
-// );
-
-// function preload(){
-// 	game.load.image('fish', 'fish.png');
-
-// }
-
-// function create(){
-// 	fishSprite = game.add.sprite(game.world.centerX, 0, 'fish');
-// 	game.physics.enable(fishSprite, Phaser.Physics.ARCADE);
-// 	fishSprite.body.acceleration.y = 100; //"gravity"
-// 	fishSprite.body.collideWorldBounds = true;
-// 	fishSprite.body.drag.x = 100;
-// 	fishSprite.anchor.setTo(.5,.5);
-
-// }
-
-// function update(){
-// 	if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-// 		fishSprite.body.velocity.x = -80;
-// 		fishSprite.scale.x = 1;
-// 	} else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-// 		fishSprite.body.velocity.x = 80;
-// 		fishSprite.scale.x = -1;
-// 	}
-
-// 	if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-// 		fishSprite.body.velocity.y = -100;
-// 	}
-
-// }
-
-
 var game = new Phaser.Game(320, 320, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
-
+var mapArray = [];
 function preload() {
 
     game.load.tilemap('map', 'map1.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map2', 'map2.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('blackTile', 'blackTile.png');
     game.load.image('bg', 'bg.jpg');
     game.load.image('hole2', 'hole2.png');
     // game.load.image('tiles2', 'ball.png');
-   game.load.image('ball', 'ball2.png');
-
-
+    game.load.image('ball', 'ball2.png');
 
 }
 
@@ -58,17 +18,34 @@ var layer;
 var layer2;
 var cursors;
 var hole;
+var curr = 0;
+var i = 1;
 
-function create() {
 
-
+function create() {  
     //game.stage.backgroundColor = '#2d2d2d';
     game.background = game.add.tileSprite(0,0,320,320,'bg');
 
-    map = game.add.tilemap('map');
 
+    if(i === 1){    
+        map = game.add.tilemap('map');
+
+        //game.physics.p2.clearTilemapLayerBodies(map, layer);
+        //layer.destroy();
+        //map.destroy();
+
+    }else if(i < 3){
+         
+        destroyEverything(game,map,layer); 
+        map = game.add.tilemap('map'+i);
+    }else{
+        destroyEverything(game,map,layer); 
+        alert("just testing for when the game finishes");
+        i = 1;
+    }  
+    i += 1;
     map.addTilesetImage('blackTile');
-    map.addTilesetImage('hole2');
+    //map.addTilesetImage('hole2');
     // map.addTilesetImage('tiles2');
     
     layer = map.createLayer('blackTile');
@@ -91,6 +68,7 @@ function create() {
     hole = game.add.sprite(160,160,'hole2');
     ball = game.add.sprite(32, 32, 'ball');
     game.physics.p2.enable(ball, false);
+    ball.body.setCircle(9);
     //game.physics.p2.enable(hole, true);
 
     game.camera.follow(ball);
@@ -111,6 +89,11 @@ function create() {
 
 
 
+}
+
+function destroyEverything(game,map, layer){
+     game.physics.p2.clearTilemapLayerBodies(map, layer);
+     layer.destroy();
 }
 
 
@@ -136,7 +119,10 @@ function update() {
     }
 
     if (checkOverlap(ball,hole)){
-       console.log('dfgsdfgfsdh');
+        //curr += 1;
+
+        create();
+    
     }
 
 /*
@@ -146,6 +132,7 @@ function update() {
     
 
 }
+
 
 
 function checkOverlap(spriteA, spriteB) {
