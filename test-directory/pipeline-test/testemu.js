@@ -14,12 +14,14 @@ var bg = new Image();
 var images = []; // GameObject array
 
 // key maps
-var keymap = {};
-var LEFT_KEY = false;
-var RIGHT_KEY = false;
-var UP_KEY = false;
-var DOWN_KEY = false;
+var keymap = [];
+var LEFT_KEY;
+var RIGHT_KEY;
+var UP_KEY;
+var DOWN_KEY;
 
+// passed functions
+var appFunction;
 
 /**
    Gives access to images[]
@@ -34,20 +36,25 @@ function addResource (name, x, y, imgFile) {
    Initializes emulator.
    Must take a background image.
 */
-function setup(bgFile){
+function setup(bgFile, keyFunction){
     bg.src = bgFile;
     bg.height=h;
     bg.width=w;
-    // initialize keymap
-    keymap["left"] = 37;
-    keymap["down"] = 38;
-    keymap["right"] = 39;
-    keymap["up"] = 40
+    // map directional keys
+    keymap["left"] = new KeyObject(37, false);
+    keymap["down"] = new KeyObject(38, false);
+    keymap["right"] = new KeyObject(39, false);
+    keymap["up"] = new KeyObject(40, false)
     keymap.push(keymap["left"]);
     keymap.push(keymap["right"]);
     keymap.push(keymap["down"]);
     keymap.push(keymap["up"]);
-    
+    LEFT_KEY = keymap["left"].pressed;
+    RIGHT_KEY = keymap["right"].pressed;
+    UP_KEY = keymap["up"].pressed;
+    DOWN_KEY = keymap["down"].pressed;
+    // keep callback
+    appFunction = keyFunction;    
 }
 
 // start clock
@@ -66,7 +73,7 @@ function paint () {
         ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);  
     });
      keymap.forEach(function (kObj){
-        if (kObj.code == e) {
+        if (kObj.pressed) {
             kObj.pressed = false;
         }
     });    
@@ -86,14 +93,40 @@ function mapKey (keyCode, keyName, isPressed = false) {
     }    
 }
 
-window.addEventListener("keydown", function (evt) {
+function keyHandler (e, callback) {
     var e = e.which;
     keymap.forEach(function (kObj){
         if (kObj.code == e) {
             kObj.pressed = true;
         }
     });
+    LEFT_KEY = keymap["left"].pressed;
+    RIGHT_KEY = keymap["right"].pressed;
+    UP_KEY = keymap["up"].pressed;
+    DOWN_KEY = keymap["down"].pressed;
+    callback();
+}
+
+window.addEventListener("keydown", function (e){
+    keyHandler(e, appFunction)
 });
+
+/**
+    Key presses will switch key maps from false to true.
+*/
+// window.addEventListener("keydown", function (e) {
+//     var e = e.which;
+//     keymap.forEach(function (kObj){
+//         if (kObj.code == e) {
+//             kObj.pressed = true;
+//         }
+//     });
+//     LEFT_KEY = keymap["left"].pressed;
+//     RIGHT_KEY = keymap["right"].pressed;
+//     UP_KEY = keymap["up"].pressed;
+//     DOWN_KEY = keymap["down"].pressed;
+//     pressedKeys();
+// });
 
 
 
