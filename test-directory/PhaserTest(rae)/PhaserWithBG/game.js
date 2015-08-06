@@ -22,7 +22,10 @@ var curr = 0;
 var i = 1;
 
 
-function create() {  
+function create() {
+    /*  Access emulator.js variables */
+    setup();
+
     //game.stage.backgroundColor = '#2d2d2d';
     game.background = game.add.tileSprite(0,0,320,320,'bg');
 
@@ -102,28 +105,28 @@ function update() {
     ball.body.setZeroRotation(); 
   
     
-    if (cursors.left.isDown){ 
+    if (LEFT_KEY){
         ball.body.velocity.x = -150;
         ball.scale.x = 1;
-    } else if (cursors.right.isDown) {
+    } else if (RIGHT_KEY) {
         ball.body.velocity.x = 150;
         ball.scale.x = -1;
     }
 
-    if (cursors.up.isDown) {
+    if (DOWN_KEY) {
         ball.body.velocity.y = -150;
     }
 
-     if (cursors.down.isDown) {
+     if (UP_KEY) {
         ball.body.velocity.y = 150;
     }
 
     if (checkOverlap(ball,hole)){
         //curr += 1;
-
         create();
     
     }
+    resetKeys();
 
 /*
    var bodyA=game.physics.p2.getBody(ball)

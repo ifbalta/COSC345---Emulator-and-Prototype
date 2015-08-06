@@ -1,14 +1,41 @@
 /**
-   I/O pipeline between browser and app.js.
+   emulator.js defines an IO pipeline between the browser and app.js.
 */
 
+/**
+ GameObject
+    Defines an object that can be painted onto the canvas.
+    No longer needed because phaser.io has its own game loop.
+     - Image
+     - Coordinates
+ */
+var GameObject = (function () {
+    function GameObject(x, y, spriteFile) {
+        this.x = x;
+        this.y = y;
+        this.sprite = new Image();
+        this.sprite.src = spriteFile;
+        this.spriteFile = spriteFile;
+    }
+    GameObject.prototype.toString = function () {
+        return "(" + this.x + "," + this.y + ") " + this.spriteFile + "!";
+    };
+    return GameObject;
+})();
 
-//Inititialize canvas
-var canvas = $("#canvas")[0];
-var ctxt = canvas.getContext("2d");
-var w = $("#canvas").width();
-var h = $("#canvas").height();
-var clock_cycle;
+/**
+ KeyObject
+    Defines an object that represents a key.
+     - KeyCode
+     - KeyPressed
+ */
+var KeyObject = (function (){
+    function KeyObject(code, pressed) {
+        this.code = code,
+            this.pressed = pressed;
+    }
+    return KeyObject;
+})();
 
 // image resources
 var bg = new Image();
@@ -38,10 +65,7 @@ function addResource (name, x, y, imgFile) {
    Initializes emulator.
    Must take a background image.
 */
-function setup(bgFile, keyFunction){
-    bg.src = bgFile;
-    bg.height=h;
-    bg.width=w;
+function setup(keyFunction){
     // map directional keys
     keymap["left"] = new KeyObject(37, false);
     keymap["down"] = new KeyObject(38, false);
@@ -59,52 +83,37 @@ function setup(bgFile, keyFunction){
     mappedKeyFunction = keyFunction;
 }
 
-/**
- *  Start listening for events.
- * */
-function start() {
-    paint();
-    if (typeof clock_cycle != "undefined") clearInterval(clock_cycle);
-    clock_cycle = setInterval(paint, 60);
-}
 
 /**
-*  Paints images and resets key values.
-*/
-function paint () {
-    ctxt.drawImage(bg, 0, 0);
-    images.forEach(function (gObj) {
-        ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);  
-    });
-     keymap.forEach(function (kObj){
+ * Reset key states
+ * */
+function resetKeys(){
+    keymap.forEach(function (kObj){
         if (kObj.pressed) {
             kObj.pressed = false;
         }
-    });    
+    });
 }
 
 
 /**
-*  Map keys. Default key is unpressed.
+ *  Allows the application to map directional buttons to other keys.
+ *  Default key is unpressed.
 */
-function mapKey (keyCode, keyName, isPressed) {
+function mapKey (keyCode, keyName) {
     keyName = keyName.toLowerCase();
-    if (typeof isPressed == "undefined") {
-        isPressed = false;
-    }
     if (typeof keymap[keyName] != "undefined") {
         keymap[keyName].code = keyCode;
     } else {
-        keymap[keyName] = new KeyObject(keyCode, isPressed);
+        keymap[keyName] = new KeyObject(keyCode, false);
         keymap.push(keymap[keyName]);
     }    
 }
 
 /**
- *   Key presses will switch key maps from false to true
- *   and notify the application by using their mapped callback.
- */
-function keyHandler (e, callback) {
+ * Updates key objcts.
+ * */
+window.addEventListener("keydown", function (e){
     var e = e.which;
     keymap.forEach(function (kObj){
         if (kObj.code == e) {
@@ -115,14 +124,6 @@ function keyHandler (e, callback) {
     RIGHT_KEY = keymap["right"].pressed;
     UP_KEY = keymap["up"].pressed;
     DOWN_KEY = keymap["down"].pressed;
-    callback();
-}
-
-/**
- * Tells keyHandler which key was pressed.
- * */
-window.addEventListener("keydown", function (e){
-    keyHandler(e, mappedKeyFunction)
 });
 
 

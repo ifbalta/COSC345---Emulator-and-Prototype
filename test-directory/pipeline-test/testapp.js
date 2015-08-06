@@ -6,26 +6,8 @@
 setup("resources/islands-map.png", pressedKeys); // initialize app background
 var sora = addResource("sora", 0,0,"resources/SoraKHCOM.png"); // setup resources
 //var enemy = addResource("enemy", 16,16, "resources/spaceship.jpg");
-init(); // start emulator
+start(); // start emulator
 
-// game logic
-// window.addEventListener("keydown", function (evt) {
-//   var e = evt.which;
-//   switch (e) {
-//     case 37:
-//        sora.x -= 3;   
-//       break;
-//     case 38:
-//        sora.y -= 4;
-//       break;
-//     case 39:
-//        sora.x += 3;
-//       break;
-//     case 40:
-//        sora.y += 4;
-//       break;
-//   }
-//  });
 
 // game logic
 function pressedKeys () {
