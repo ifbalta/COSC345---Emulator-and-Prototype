@@ -4,6 +4,7 @@
 
 
 //Inititialize canvas
+
 var canvas = $("#canvas")[0];
 var ctxt = canvas.getContext("2d");
 var w = $("#canvas").width();
@@ -40,8 +41,6 @@ function addResource (name, x, y, imgFile) {
 */
 function setup(bgFile, keyFunction){
     bg.src = bgFile;
-    bg.height=h;
-    bg.width=w;
     // map directional keys
     keymap["left"] = new KeyObject(37, false);
     keymap["down"] = new KeyObject(38, false);
@@ -104,7 +103,7 @@ function mapKey (keyCode, keyName, isPressed) {
  *   Key presses will switch key maps from false to true
  *   and notify the application by using their mapped callback.
  */
-function keyHandler (e, callback) {
+function keyHandler (e) {
     var e = e.which;
     keymap.forEach(function (kObj){
         if (kObj.code == e) {
@@ -115,14 +114,14 @@ function keyHandler (e, callback) {
     RIGHT_KEY = keymap["right"].pressed;
     UP_KEY = keymap["up"].pressed;
     DOWN_KEY = keymap["down"].pressed;
-    callback();
+    mappedKeyFunction();
 }
 
 /**
  * Tells keyHandler which key was pressed.
  * */
 window.addEventListener("keydown", function (e){
-    keyHandler(e, mappedKeyFunction)
+    keyHandler(e)
 });
 
 

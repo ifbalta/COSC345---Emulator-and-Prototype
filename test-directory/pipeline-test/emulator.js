@@ -1,8 +1,14 @@
 /**
-  GameObject 
-    - Image
-    - Coordinates
-*/
+ emulator.js defines an IO pipeline between the browser and app.js.
+ */
+
+/**
+ GameObject
+ Defines an object that can be painted onto the canvas.
+ No longer needed because phaser.io has its own game loop.
+ - Image
+ - Coordinates
+ */
 var GameObject = (function () {
     function GameObject(x, y, spriteFile) {
         this.x = x;
@@ -18,9 +24,10 @@ var GameObject = (function () {
 })();
 
 /**
-   KeyObject
-   - KeyCode
-   - KeyPressed
+ KeyObject
+ Defines an object that represents a key.
+ - KeyCode
+ - KeyPressed
  */
 var KeyObject = (function (){
     function KeyObject(code, pressed) {
@@ -32,94 +39,72 @@ var KeyObject = (function (){
 
 /**
     Emulator
-    - Image resources
-    - Key listeners
-    - Click listeners
-    - Event mapping
- * */
-var Emulator = (function (){
-    //Inititialize canvas
-    var canvas = $("#canvas")[0];
-    var ctxt = canvas.getContext("2d");
-    var w = $("#canvas").width();
-    var h = $("#canvas").height();
-
-    // image resources
-    var bg = new Image();
-    var images = []; // GameObject array
-
-    // key maps
-    var keymap = [];
-    var LEFT_KEY;
-    var RIGHT_KEY;
-    var UP_KEY;
-    var DOWN_KEY;
-
-    // application callbacks
-    var mappedKeyFunction;
-
-    /**
-     Constructs emulator.
-     Must take a background image.
-     */
-    function Emulator(bgFile, keyFunction){
-        bg.src = bgFile;
-        bg.height=h;
-        bg.width=w;
-        // map directional keys
-        keymap["left"] = new KeyObject(37, false);
-        keymap["down"] = new KeyObject(38, false);
-        keymap["right"] = new KeyObject(39, false);
-        keymap["up"] = new KeyObject(40, false)
-        keymap.push(keymap["left"]);
-        keymap.push(keymap["right"]);
-        keymap.push(keymap["down"]);
-        keymap.push(keymap["up"]);
-        LEFT_KEY = keymap["left"].pressed;
-        RIGHT_KEY = keymap["right"].pressed;
-        UP_KEY = keymap["up"].pressed;
-        DOWN_KEY = keymap["down"].pressed;
-        // map callbacks to listeners
-        mappedKeyFunction = keyFunction;
+        Holds all resources required to paint objects
+        and raise events.
+        - Image resources
+        - Key listeners
+        - Click listeners
+        - Event mapping
+ */
+var Emulator = (function () {
+    function Emulator(canvas, ctxt) {
+        this.keymap = { string: [KeyObject] };
+        this.images = { string: [GameObject] };
+        this.canvas = canvas;
+        this.ctxt = ctxt;
     }
-
+    /**
+     Configures screen background and key handling events.
+     */
+    Emulator.prototype.setup = function (bgFile, keyFunction) {
+        // setup background
+        this.bg = new Image(bgFile);
+        // initialize keys
+        this.keymap["left"] = new KeyObject(37, false);
+        this.keymap["down"] = new KeyObject(38, false);
+        this.keymap["right"] = new KeyObject(39, false);
+        this.keymap["up"] = new KeyObject(40, false);
+        this.LEFT_KEY = this.keymap["left"].pressed;
+        this.RIGHT_KEY = this.keymap["right"].pressed;
+        this.UP_KEY = this.keymap["up"].pressed;
+        this.DOWN_KEY = this.keymap["down"].pressed;
+        // map keyListener
+        this.mappedKeyFunction = keyFunction;
+    };
     /**
      Allows applications to provide images
      so that the emulator can paint them.
      */
     Emulator.prototype.addResource = function (name, x, y, imgFile) {
-        images[name] = new GameObject(x, y, imgFile); // to allow access by name
-        images.push(images[name]); // to allow access through forEach
-        return images[name];
-    }
-
-
-
+        this.images[name] = new GameObject(x, y, imgFile);
+        return this.images[name];
+    };
     /**
      *  Start listening for events.
      * */
-    Emulator.prototype.start = function (){
-        paint();
-        if (typeof clock_cycle != "undefined") clearInterval(clock_cycle);
-        clock_cycle = setInterval(paint, 60);
-    }
-
+    Emulator.prototype.start = function () {
+        this.paint();
+        if (typeof this.clock_cycle != "undefined") {
+            clearInterval(this.clock_cycle);
+        }
+        this.clock_cycle = setInterval(this.paint, 60);
+    };
     /**
      *  Paints images and resets key values.
      */
-    function paint () {
-        ctxt.drawImage(bg, 0, 0);
-        images.forEach(function (gObj) {
-            ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
-        });
-        keymap.forEach(function (kObj){
-            if (kObj.pressed) {
-                kObj.pressed = false;
+    Emulator.prototype.paint = function () {
+        var gObj;
+        this.ctxt.drawImage(this.bg, 0, 0);
+        for (var gKey in this.images) {
+            gObj = this.images[gKey];
+            this.ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
+        }
+        for (var kKey in this.keymap) {
+            if (this.keymap[kKey].pressed) {
+                this.keymap[kKey].pressed = false;
             }
-        });
-    }
-
-
+        }
+    };
     /**
      *  Map keys. Default key is unpressed.
      */
@@ -128,37 +113,46 @@ var Emulator = (function (){
         if (typeof isPressed == "undefined") {
             isPressed = false;
         }
-        if (typeof keymap[keyName] != "undefined") {
-            keymap[keyName].code = keyCode;
-        } else {
-            keymap[keyName] = new KeyObject(keyCode, isPressed);
-            keymap.push(keymap[keyName]);
+        if (typeof this.keymap[keyName] != "undefined") {
+            this.keymap[keyName].code = keyCode;
         }
-    }
-
+        else {
+            this.keymap[keyName] = new KeyObject(keyCode, isPressed);
+        }
+    };
     /**
      *   Key presses will switch key maps from false to true
      *   and notify the application by using their mapped callback.
      */
-    function keyHandler (e, callback) {
+    Emulator.prototype.keyHandler = function (e) {
         var e = e.which;
-        keymap.forEach(function (kObj){
+        for (var kObj in this.keymap) {
             if (kObj.code == e) {
                 kObj.pressed = true;
             }
-        });
-        LEFT_KEY = keymap["left"].pressed;
-        RIGHT_KEY = keymap["right"].pressed;
-        UP_KEY = keymap["up"].pressed;
-        DOWN_KEY = keymap["down"].pressed;
-        callback();
-    }
-
-    /**
-     * Tells keyHandler which key was pressed.
-     * */
-    window.addEventListener("keydown", function (e){
-        keyHandler(e, mappedKeyFunction)
-    });
+        }
+        this.LEFT_KEY = this.keymap["left"].pressed;
+        this.RIGHT_KEY = this.keymap["right"].pressed;
+        this.UP_KEY = this.keymap["up"].pressed;
+        this.DOWN_KEY = this.keymap["down"].pressed;
+        this.mappedKeyFunction();
+    };
     return Emulator;
 })();
+
+/**
+ * Tell the emulator about the canvas
+ * and add keyEventListener.
+ * */
+
+var canvas = $("#canvas")[0];
+var ctxt = canvas.getContext("2d");
+var emulator = new Emulator(canvas, ctxt);
+/**
+ * Tells emulator which key was pressed.
+ * */
+window.addEventListener("keydown", function (e) {
+    emulator.keyHandler(e);
+});
+
+
