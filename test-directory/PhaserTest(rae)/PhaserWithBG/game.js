@@ -1,5 +1,5 @@
 var game = new Phaser.Game(320, 320, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
-var mapArray = [];
+
 function preload() {
 
     game.load.tilemap('map', 'map1.json', null, Phaser.Tilemap.TILED_JSON);
@@ -11,7 +11,6 @@ function preload() {
     game.load.image('blackTile', 'blackTile.png');
     game.load.image('bg', 'bg.jpg');
     game.load.image('hole2', 'hole2.png');
-    // game.load.image('tiles2', 'ball.png');
     game.load.image('ball', 'ball2.png');
 
 }
@@ -19,12 +18,9 @@ function preload() {
 var ball;
 var map;
 var layer;
-var layer2;
 var cursors;
 var hole;
-var curr = 0;
 var i = 1;
-
 
 function create() {  
     //game.stage.backgroundColor = '#2d2d2d';
@@ -33,21 +29,22 @@ function create() {
 
     if(i === 1){    
         map = game.add.tilemap('map');
+        setup();
 
-        //game.physics.p2.clearTilemapLayerBodies(map, layer);
-        //layer.destroy();
-        //map.destroy();
-
-    }else if(i < 6){
-         
+    }else if(i < 6){       
         destroyEverything(game,map,layer); 
         map = game.add.tilemap('map'+i);
+        setup();
     }else{
-        destroyEverything(game,map,layer); 
-        alert("just testing for when the game finishes");
-        i = 1;
+        destroyEverything(game,map,layer);
+        setup(); 
+
     }  
     i += 1;
+    
+}
+
+function setup(){
     map.addTilesetImage('blackTile');
     //map.addTilesetImage('hole2');
     // map.addTilesetImage('tiles2');
@@ -55,25 +52,29 @@ function create() {
     layer = map.createLayer('blackTile');
     //layer2 = map.createLayer('hole2');
 
-    //layer.resizeWorld();
+    layer.resizeWorld();
 
     game.physics.startSystem(Phaser.Physics.P2JS);
+
     //  Set the tiles for collision.
     //  Do this BEFORE generating the p2 bodies below.
     map.setCollisionBetween(1, 32,true,layer);
-    //map.setCollisionBetween(1, 32,true,layer2);
+   
 
     //  Convert the tilemap layer into bodies. Only tiles that collide (see above) are created.
     //  This call returns an array of body objects which you can perform addition actions on if
     //  required. There is also a parameter to control optimising the map build.
     game.physics.p2.convertTilemap(map, layer);
-    //game.physics.p2.convertTilemap(map, layer2);
+  
 
     hole = game.add.sprite(160,160,'hole2');
     ball = game.add.sprite(32, 32, 'ball');
+    if(i > 5){
+        winLabel();
+    }
     game.physics.p2.enable(ball, false);
     ball.body.setCircle(9);
-    //game.physics.p2.enable(hole, true);
+
 
     game.camera.follow(ball);
 
@@ -91,8 +92,31 @@ function create() {
 
     cursors = game.input.keyboard.createCursorKeys();
 
+}
 
+function winLabel(){
+    var winText;
+    var win;
+    
+    win = game.add.sprite(0,0,'bg');
+    win.inputEnabled = true;
 
+    game.winText = game.add.text(
+        game.world.centerX,
+        game.world.height/5,
+        "",
+        {
+            size: "32px",
+            fill: "#ffffff",  
+            stroke: "#000000", 
+            strokeThickness: 4,
+            wordWrap: true,
+            wordWrapWidth: win.width 
+        }
+    );
+    game.winText.setText("Congratulations!");
+    game.winText.anchor.setTo(0.5, 0.5);
+  
 }
 
 function destroyEverything(game,map, layer){
@@ -123,21 +147,9 @@ function update() {
     }
 
     if (checkOverlap(ball,hole)){
-        //curr += 1;
-
-        create();
-    
+        create();    
     }
-
-/*
-   var bodyA=game.physics.p2.getBody(ball)
-   var bodyB=game.physics.p2.getBody(hole); 
-    if(p2.Broadphase.aabbCheck(bodyA,bodyB)){ console.log("ok"); } */
-    
-
 }
-
-
 
 function checkOverlap(spriteA, spriteB) {
 
