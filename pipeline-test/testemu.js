@@ -32,7 +32,7 @@ var mappedKeyFunction;
 function addResource (name, x, y, imgFile) {
     images[name] = new GameObject(x, y, imgFile); // to allow access by name
     images.push(images[name]); // to allow access through forEach
-    return images[name];   
+    return images[name];
 }
 
 /**
@@ -73,7 +73,7 @@ function start() {
 function paint () {
     ctxt.drawImage(bg, 0, 0);
     images.forEach(function (gObj) {
-        ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);  
+        ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
     });
      keymap.forEach(function (kObj){
         if (kObj.pressed) {

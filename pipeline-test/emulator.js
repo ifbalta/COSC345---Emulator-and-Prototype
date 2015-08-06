@@ -1,14 +1,6 @@
 /**
- emulator.js defines an IO pipeline between the browser and app.js.
- */
-
-/**
- GameObject
- Defines an object that can be painted onto the canvas.
- No longer needed because phaser.io has its own game loop.
- - Image
- - Coordinates
- */
+  Emulator.ts holds all classes required to run the emulator.
+*/
 var GameObject = (function () {
     function GameObject(x, y, spriteFile) {
         this.x = x;
@@ -22,30 +14,17 @@ var GameObject = (function () {
     };
     return GameObject;
 })();
-
-/**
- KeyObject
- Defines an object that represents a key.
- - KeyCode
- - KeyPressed
- */
-var KeyObject = (function (){
+var KeyObject = (function () {
     function KeyObject(code, pressed) {
-        this.code = code,
-        this.pressed = pressed;        
+        this.code = code;
+        this.pressed = pressed;
     }
     return KeyObject;
 })();
-
 /**
-    Emulator
-        Holds all resources required to paint objects
-        and raise events.
-        - Image resources
-        - Key listeners
-        - Click listeners
-        - Event mapping
- */
+    Holds all resources required to paint objects
+    and raise events.
+*/
 var Emulator = (function () {
     function Emulator(canvas, ctxt) {
         this.keymap = { string: [KeyObject] };
@@ -54,7 +33,7 @@ var Emulator = (function () {
         this.ctxt = ctxt;
     }
     /**
-     Configures screen background and key handling events.
+         Configures screen background and key handling events.
      */
     Emulator.prototype.setup = function (bgFile, keyFunction) {
         // setup background
@@ -72,8 +51,8 @@ var Emulator = (function () {
         this.mappedKeyFunction = keyFunction;
     };
     /**
-     Allows applications to provide images
-     so that the emulator can paint them.
+         Allows applications to provide images
+         so that the emulator can paint them.
      */
     Emulator.prototype.addResource = function (name, x, y, imgFile) {
         this.images[name] = new GameObject(x, y, imgFile);
@@ -96,11 +75,16 @@ var Emulator = (function () {
         var gObj;
         this.ctxt.drawImage(this.bg, 0, 0);
         for (var gKey in this.images) {
-            gObj = this.images[gKey];
-            this.ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
+            if (gKey != "string") {
+                gObj = this.images[gKey];
+                console.log("object " + gObj);
+                console.log(typeof gObj.sprite);
+                console.log(gObj.sprite.src);
+                this.ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
+            }
         }
         for (var kKey in this.keymap) {
-            if (this.keymap[kKey].pressed) {
+            if (kKey != "string" && this.keymap[kKey].pressed) {
                 this.keymap[kKey].pressed = false;
             }
         }
@@ -139,13 +123,7 @@ var Emulator = (function () {
     };
     return Emulator;
 })();
-
-/**
- * Tell the emulator about the canvas
- * and add keyEventListener.
- * */
-
-var canvas = $("#canvas")[0];
+var canvas = $("canvas")[0];
 var ctxt = canvas.getContext("2d");
 var emulator = new Emulator(canvas, ctxt);
 /**
@@ -154,5 +132,4 @@ var emulator = new Emulator(canvas, ctxt);
 window.addEventListener("keydown", function (e) {
     emulator.keyHandler(e);
 });
-
-
+//# sourceMappingURL=Emulator.js.map

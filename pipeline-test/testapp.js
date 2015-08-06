@@ -3,7 +3,7 @@
 */
 
 
-setup("resources/islands-map.png", pressedKeys); // initialize app background
+setup("resources/beach-map.png", pressedKeys); // initialize app background
 var sora = addResource("sora", 0,0,"resources/SoraKHCOM.png"); // setup resources
 //var enemy = addResource("enemy", 16,16, "resources/spaceship.jpg");
 start(); // start emulator

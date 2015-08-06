@@ -3,7 +3,7 @@ preload: preload, create: create, update: update});
 
 // tell phaser where to find stuff
 function preload(){
-  game.  
+  //game.
 }
 
 

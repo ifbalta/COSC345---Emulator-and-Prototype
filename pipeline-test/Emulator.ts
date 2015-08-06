@@ -5,14 +5,15 @@
 class GameObject {
   public x: number;
   public y : number;
-  private sprite : HTMLImageElement;
+  public sprite : HTMLImageElement;
   private spriteFile : string;
 
   constructor (x, y, spriteFile){
-    this.x = x;
-    this.y = y;
-    this.sprite = new Image(spriteFile);
-    this.spriteFile = spriteFile;
+      this.x = x;
+      this.y = y;
+      this.sprite = new Image();
+      this.sprite.src = spriteFile;
+      this.spriteFile = spriteFile;
   }
 
    toString() : string {
@@ -47,9 +48,9 @@ class Emulator {
 	private canvas : HTMLCanvasElement;
 	private ctxt : CanvasRenderingContext2D;
 
-	constructor (canvas) {
+	constructor (canvas, ctxt) {
 		this.canvas = canvas;
-		this.ctxt = canvas.getContext("2d");
+		this.ctxt = ctxt;
 	}
 
     /**
@@ -94,14 +95,19 @@ class Emulator {
      *  Paints images and resets key values.
      */
     paint () {
-        var gObj;
+        var gObj : GameObject;
         this.ctxt.drawImage(this.bg, 0, 0);
         for (var gKey in this.images) {
-            gObj = this.images[gKey];
-            this.ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
+			if (gKey != "string") {
+				gObj = this.images[gKey];
+                console.log("object " + gObj);
+                console.log(typeof gObj.sprite);
+                console.log(gObj.sprite.src);
+				this.ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
+			}
         }
         for (var kKey in this.keymap) {
-            if (this.keymap[kKey].pressed){
+            if (kKey != "string" && this.keymap[kKey].pressed){
                 this.keymap[kKey].pressed = false;
             }
         }
@@ -142,9 +148,9 @@ class Emulator {
 
 
 }
-var canvas = (document.getElementById("canvas"));
+var canvas = $("canvas")[0];
 var ctxt = canvas.getContext("2d");
-var emulator =  new Emulator(ctxt);
+var emulator =  new Emulator(canvas, ctxt);
 
 /**
  * Tells emulator which key was pressed.
