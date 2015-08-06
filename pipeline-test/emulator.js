@@ -39,6 +39,7 @@ var Emulator = (function () {
         // setup background
         this.bg = new Image(bgFile);
         // initialize keys
+        this.keymap["spacebar"] = new KeyObject(32, false);
         this.keymap["left"] = new KeyObject(37, false);
         this.keymap["down"] = new KeyObject(38, false);
         this.keymap["right"] = new KeyObject(39, false);
@@ -47,6 +48,7 @@ var Emulator = (function () {
         this.RIGHT_KEY = this.keymap["right"].pressed;
         this.UP_KEY = this.keymap["up"].pressed;
         this.DOWN_KEY = this.keymap["down"].pressed;
+        this.SPACEBAR = this.keymap["spacebar"].pressed;
         // map keyListener
         this.mappedKeyFunction = keyFunction;
     };
@@ -98,10 +100,12 @@ var Emulator = (function () {
             isPressed = false;
         }
         if (typeof this.keymap[keyName] != "undefined") {
+            // this is an key constant
             this.keymap[keyName].code = keyCode;
         }
         else {
             this.keymap[keyName] = new KeyObject(keyCode, isPressed);
+            return this.keymap[keyName];
         }
     };
     /**

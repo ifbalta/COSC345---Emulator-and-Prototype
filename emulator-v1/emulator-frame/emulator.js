@@ -18,7 +18,7 @@ var runningScript;
  });
 
 function bootup(filename){
-	$.getScript(links[filename], function(){
+	$.getScript(filename, function(){
 		console.log("starting " + filename);
 	});
 }
