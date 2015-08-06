@@ -4,6 +4,10 @@ function preload() {
 
     game.load.tilemap('map', 'map1.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.tilemap('map2', 'map2.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map3', 'map3.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map4', 'map4.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map5', 'map5.json', null, Phaser.Tilemap.TILED_JSON);
+
     game.load.image('blackTile', 'blackTile.png');
     game.load.image('bg', 'bg.jpg');
     game.load.image('hole2', 'hole2.png');
@@ -34,7 +38,7 @@ function create() {
         //layer.destroy();
         //map.destroy();
 
-    }else if(i < 3){
+    }else if(i < 6){
          
         destroyEverything(game,map,layer); 
         map = game.add.tilemap('map'+i);
@@ -51,7 +55,7 @@ function create() {
     layer = map.createLayer('blackTile');
     //layer2 = map.createLayer('hole2');
 
-    layer.resizeWorld();
+    //layer.resizeWorld();
 
     game.physics.startSystem(Phaser.Physics.P2JS);
     //  Set the tiles for collision.
