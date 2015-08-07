@@ -1,5 +1,5 @@
 /**
-  Emulator.ts holds all classes required to run the emulator.
+  mockemulator.js is a copy of emulator.js
 */
 var GameObject = (function () {
     function GameObject(x, y, spriteFile) {
@@ -84,9 +84,6 @@ var Emulator = (function () {
         for (var gKey in this.images) {
             if (gKey != "string") {
                 gObj = this.images[gKey];
-                console.log("object " + gObj);
-                console.log(typeof gObj.sprite);
-                console.log(gObj.sprite.src);
                 this.ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
             }
         }
@@ -104,9 +101,11 @@ var Emulator = (function () {
             isPressed = false;
         }
         if (typeof this.keymap[keyName] != "undefined") {
+            // remapping a directional button or spacebar
             this.keymap[keyName].code = keyCode;
         }
         else {
+            // custom key, return instance
             this.keymap[keyName] = new KeyObject(keyCode, isPressed);
             return this.keymap[keyName];
         }
@@ -156,16 +155,16 @@ var Emulator = (function () {
     };
     return Emulator;
 })();
-// the emulator needs a canvas
 var canvas = $("canvas")[0];
-if (typeof canvas == "undefined") {
-    // in case browser doesn't have a canvas
+
+if (typeof canvas == "undefined") { // in case browser doesn't have a canvas
     canvas = document.createElement('canvas');
-    canvas.id = "testcanvas";
-    canvas.width = 320;
+    canvas.id     = "testcanvas";
+    canvas.width  = 320;
     canvas.height = 320;
     document.body.appendChild(canvas);
 }
+
 var ctxt = canvas.getContext("2d");
 var emulator = new Emulator(canvas, ctxt);
 /**

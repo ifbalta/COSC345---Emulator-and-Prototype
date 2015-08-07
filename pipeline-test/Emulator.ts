@@ -5,10 +5,10 @@
 class GameObject {
     public initialX : number;
     public initialY : number;
-  public x: number;
-  public y : number;
-  public sprite : HTMLImageElement;
-  private spriteFile : string;
+    public x: number;
+    public y : number;
+    public sprite : HTMLImageElement;
+    private spriteFile : string;
 
   constructor (x, y, spriteFile){
       this.x = x;
@@ -127,8 +127,7 @@ class Emulator {
     /**
      *  Map keys. Default key is unpressed.
      */
-	mapKey (keyCode, keyName, isPressed) {
-        keyName = keyName.toLowerCase();
+	mapKey (keyName, keyCode, isPressed) {
         if (typeof isPressed == "undefined") {
             isPressed = false;
         }
@@ -136,6 +135,7 @@ class Emulator {
             this.keymap[keyName].code = keyCode;
         } else {
             this.keymap[keyName] = new KeyObject(keyCode, isPressed);
+            return this.keymap[keyName];
         }
     }
 
@@ -179,12 +179,24 @@ class Emulator {
      * */
     resetImages () {
         for (var gKey in this.images) {
-            this.images[gKey].resetPos();
+            this.images[gKey].resetPos;
         }
     }
 
 }
+
+// the emulator needs a canvas
 var canvas = $("canvas")[0];
+
+if (typeof canvas == "undefined") {
+    // in case browser doesn't have a canvas
+    canvas = document.createElement('canvas');
+    canvas.id     = "testcanvas";
+    canvas.width  = 320;
+    canvas.height = 320;
+    document.body.appendChild(canvas);
+}
+
 var ctxt = canvas.getContext("2d");
 var emulator =  new Emulator(canvas, ctxt);
 

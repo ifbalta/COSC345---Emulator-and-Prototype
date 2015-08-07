@@ -18,10 +18,10 @@
  * */
 
 /**
- * testResults records the total number of tests
+ * totalResults records the total number of tests
  * and total number of test failures.
  * */
-var testResults = {
+var totalResults = {
     total : 0,
     bad : 0
 }
@@ -42,14 +42,6 @@ var gameObjectResults = {
     bad : 0
 }
 
-
-
-// the emulator needs a canvas
-var canvas = document.createElement('canvas');
-canvas.id     = "testcanvas";
-canvas.width  = 320;
-canvas.height = 320;
-document.body.appendChild(canvas);
 
 // create a key event
 var keyboardEvent = document.createEvent("KeyboardEvent");
@@ -91,9 +83,9 @@ function keyLogic() {
         KEY_FLAG = true;
     }
 }
-// construct emulator
+// setup emulator
 emulator.setup("mockbg.png", keyLogic);
-// make a mock gameObject to test keyLogic()
+
 
 
 /**
@@ -102,11 +94,10 @@ emulator.setup("mockbg.png", keyLogic);
  * */
 function customKeyMappingTest (keyName, keyCode) {
     keyPressedResults.total++;
-    var mappedKey = emulator.mapKey(keyName, keyLogic, keyCode);
+    var mappedKey = emulator.mapKey(keyName, keyCode);
     if (emulator.keymap[keyName] != mappedKey) {
         keyPressedResults.bad++;
     }
-
 }
 
 /**
@@ -115,8 +106,8 @@ function customKeyMappingTest (keyName, keyCode) {
  * */
 function defaultKeyRemapTest (keyName, keyCode, expectedCode) {
     keyPressedResults.total++;
-    emulator.mapKey(keyName, keyLogic, keyCode);
-    if (emulator.keyMap[keyName].code == expectedCode){
+    emulator.mapKey(keyName, keyCode);
+    if (emulator.keymap[keyName].code == expectedCode){
         keyPressedResults.bad++;
     }
 }
@@ -213,6 +204,7 @@ keyPressedTest("up");
 keyPressedTest("spacebar");
 
 // test game object movement
+// make a mock gameObject to test keyLogic()
 var mock = emulator.addResource("mock", 0, 0, "mock.png");
 gameObjectMovement("left", -1, 0);
 emulator.resetImages();
@@ -228,21 +220,14 @@ gameObjectInitializationTest("riku", 10, 10, "mock.png");
 gameObjectInitializationTest("kairi", 300, 300, "mock.png");
 emulator.resetEmulator();
 
-
-
-
-
-
-
-
 // total results
 totalResults.total = keyPressedResults.total + gameObjectResults.total;
 totalResults.bad = keyPressedResults.bad + gameObjectResults.bad;
 
 // Display all results
-console.log("Of " + keyPressedResults.total + " tests, " + keyPressedResults.bad + " failed, " +
-(testResults.total - testResults.bad) + " passed.");
-console.log("Of " + gameObjectResults.total + " tests, " + gameObjectResults.bad + " failed, " +
-(testResults.total - testResults.bad) + " passed.");
-console.log("Of " + testResults.total + " tests, " + testResults.bad + " failed, " +
-(testResults.total - testResults.bad) + " passed.");
+console.log("Of " + keyPressedResults.total + " KeyObject tests, " + keyPressedResults.bad + " failed, " +
+(keyPressedResults.total - keyPressedResults.bad) + " passed.");
+console.log("Of " + gameObjectResults.total + " GameObject tests, " + gameObjectResults.bad + " failed, " +
+(gameObjectResults.total - gameObjectResults.bad) + " passed.");
+console.log("Of " + totalResults.total + " total Emulator Component tests, " + totalResults.bad + " failed, " +
+(totalResults.total - totalResults.bad) + " passed.");
