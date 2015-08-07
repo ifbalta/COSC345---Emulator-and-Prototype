@@ -65,7 +65,7 @@ function addResource (name, x, y, imgFile) {
    Initializes emulator.
    Must take a background image.
 */
-function setup(keyFunction){
+function initialize(keyFunction){
     // map directional keys
     keymap["left"] = new KeyObject(37, false);
     keymap["down"] = new KeyObject(38, false);

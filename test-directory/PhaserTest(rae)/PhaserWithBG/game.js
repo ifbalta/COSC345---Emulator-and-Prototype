@@ -1,5 +1,10 @@
-var game = new Phaser.Game(320, 320, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
-var mapArray = [];
+
+/*Creates the game*/
+var game = new Phaser.Game(320, 320, Phaser.AUTO, '', 
+    { preload: preload, create: create, update: update});
+
+
+/*Loads maps, tiles, hole, ball images*/
 function preload() {
 
     game.load.tilemap('map', 'map1.json', null, Phaser.Tilemap.TILED_JSON);
@@ -11,73 +16,79 @@ function preload() {
     game.load.image('blackTile', 'blackTile.png');
     game.load.image('bg', 'bg.jpg');
     game.load.image('hole2', 'hole2.png');
-    // game.load.image('tiles2', 'ball.png');
     game.load.image('ball', 'ball2.png');
 
 }
 
+
+/*Gloabal variables*/
 var ball;
 var map;
 var layer;
-var layer2;
 var cursors;
 var hole;
-var curr = 0;
-var i = 1;
+var i = 1; //Level counter
 
 
+/**
+ **Starts and creates the game and identifies if it's going to the next level.
+ **Destroys the game, map and tile layer after the level goes to the next one.
+ **/
 function create() {
-    /*  Access emulator.js variables */
-    setup();
-
-    //game.stage.backgroundColor = '#2d2d2d';
     game.background = game.add.tileSprite(0,0,320,320,'bg');
+    initialize(); // initialize emulator
 
 
     if(i === 1){    
         map = game.add.tilemap('map');
+        setup();
 
-        //game.physics.p2.clearTilemapLayerBodies(map, layer);
-        //layer.destroy();
-        //map.destroy();
-
-    }else if(i < 6){
-         
+    }else if(i < 6){       
         destroyEverything(game,map,layer); 
+        map.destroy();
         map = game.add.tilemap('map'+i);
+        setup();
     }else{
-        destroyEverything(game,map,layer); 
-        alert("just testing for when the game finishes");
-        i = 1;
+        destroyEverything(game,map,layer);
+        setup(); 
+
     }  
     i += 1;
-    map.addTilesetImage('blackTile');
-    //map.addTilesetImage('hole2');
-    // map.addTilesetImage('tiles2');
     
-    layer = map.createLayer('blackTile');
-    //layer2 = map.createLayer('hole2');
+}
 
-    //layer.resizeWorld();
+
+/**
+ ** A function that initialises the map, tile layers, sprites, 
+ ** physics p2 game engine and collisions.
+ **
+ **/
+function setup(){
+
+    map.addTilesetImage('blackTile');    
+    layer = map.createLayer('blackTile');
+    layer.resizeWorld();
 
     game.physics.startSystem(Phaser.Physics.P2JS);
+
     //  Set the tiles for collision.
     //  Do this BEFORE generating the p2 bodies below.
     map.setCollisionBetween(1, 32,true,layer);
-    //map.setCollisionBetween(1, 32,true,layer2);
+   
 
     //  Convert the tilemap layer into bodies. Only tiles that collide (see above) are created.
     //  This call returns an array of body objects which you can perform addition actions on if
     //  required. There is also a parameter to control optimising the map build.
     game.physics.p2.convertTilemap(map, layer);
-    //game.physics.p2.convertTilemap(map, layer2);
+  
 
     hole = game.add.sprite(160,160,'hole2');
     ball = game.add.sprite(32, 32, 'ball');
+    if(i > 5){
+        winLabel(); //calls this function when the player wins the game.
+    }
     game.physics.p2.enable(ball, false);
     ball.body.setCircle(9);
-    //game.physics.p2.enable(hole, true);
-
     game.camera.follow(ball);
 
     //  By default the ball will collide with the World bounds,
@@ -87,27 +98,17 @@ function create() {
     //  The final parameter (false) controls if the boundary should use its own collision group or not. In this case we don't require
     //  that, so it's set to false. But if you had custom collision groups set-up then you would need this set to true.
     game.physics.p2.setBoundsToWorld(true, true, true, true, false);
-
-
-    //  Even after the world boundary is set-up you can still toggle if the ball collides or not with this:
-    // ball.body.collideWorldBounds = false;
-
     cursors = game.input.keyboard.createCursorKeys();
 
-
-
-}
-
-function destroyEverything(game,map, layer){
-     game.physics.p2.clearTilemapLayerBodies(map, layer);
-     layer.destroy();
 }
 
 
+/**
+ ** The purpose of this function is for updating the ball's movement
+ ** and checks if the ball is overlapping the hole
+ **/
 function update() {
     ball.body.setZeroVelocity();
-    ball.body.setZeroRotation(); 
-  
     
     if (LEFT_KEY){
         ball.body.velocity.x = -150;
@@ -121,7 +122,7 @@ function update() {
         ball.body.velocity.y = -150;
     }
 
-     if (UP_KEY) {
+    if (UP_KEY) {
         ball.body.velocity.y = 150;
     }
 
@@ -131,26 +132,58 @@ function update() {
     
     }
     resetKeys();
-
-/*
-   var bodyA=game.physics.p2.getBody(ball)
-   var bodyB=game.physics.p2.getBody(hole); 
-    if(p2.Broadphase.aabbCheck(bodyA,bodyB)){ console.log("ok"); } */
-    
-
 }
 
 
 
+/**
+ ** This function is called whenever the game has to reset the map
+ ** and tile layer.
+ **/
+function destroyEverything(game,map, layer){
+    game.physics.p2.clearTilemapLayerBodies(map, layer);
+    layer.destroy();
+}
+
+
+/**
+ ** This function is called when the player wins the game.
+ ** This shows a text which says 'Congratulations!'.
+ **/
+function winLabel(){
+    var winText;
+    var win;
+    
+    win = game.add.sprite(0,0,'bg');
+    win.inputEnabled = true;
+
+    game.winText = game.add.text(
+        game.world.centerX,
+        game.world.height/5,
+        "",
+        {
+            size: "32px",
+            fill: "#ffffff",  
+            stroke: "#000000", 
+            strokeThickness: 4,
+            wordWrap: true,
+            wordWrapWidth: win.width 
+        }
+    );
+    game.winText.setText("Congratulations!");
+    game.winText.anchor.setTo(0.5, 0.5);
+  
+}
+
+
+/**
+ ** This function is called when the ball is overlapping the hole.
+ **/
 function checkOverlap(spriteA, spriteB) {
 
     var boundsA = spriteA.getBounds();
     var boundsB = spriteB.getBounds();
 
     return Phaser.Rectangle.intersects(boundsA, boundsB);
-
-}
-
-function render() {
 
 }

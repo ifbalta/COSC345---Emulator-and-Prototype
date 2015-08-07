@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="blackTile" tilewidth="20" tileheight="20">
   <image source="blackTile.png" width="20" height="20"/>
  </tileset>
- <layer name="Tile Layer 1" width="16" height="16">
+ <layer name="blackTile" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYKAcMOLBuOTR9eMyF5s8Lj6p9Kh+2utHTwfE6McFiNFPCOPTTyzApp+S9D+QAADPmABg
   </data>
