@@ -1,5 +1,10 @@
-var game = new Phaser.Game(320, 320, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
 
+/*Creates the game*/
+var game = new Phaser.Game(320, 320, Phaser.AUTO, '', 
+    { preload: preload, create: create, update: update});
+
+
+/*Loads maps, tiles, hole, ball images*/
 function preload() {
 
     game.load.tilemap('map', 'map1.json', null, Phaser.Tilemap.TILED_JSON);
@@ -15,15 +20,21 @@ function preload() {
 
 }
 
+
+/*Gloabal variables*/
 var ball;
 var map;
 var layer;
 var cursors;
 var hole;
-var i = 1;
+var i = 1; //Level counter
 
+
+/**
+ **Starts and creates the game and identifies if it's going to the next level.
+ **Destroys the game, map and tile layer after the level goes to the next one.
+ **/
 function create() {  
-    //game.stage.backgroundColor = '#2d2d2d';
     game.background = game.add.tileSprite(0,0,320,320,'bg');
 
 
@@ -33,6 +44,7 @@ function create() {
 
     }else if(i < 6){       
         destroyEverything(game,map,layer); 
+        map.destroy();
         map = game.add.tilemap('map'+i);
         setup();
     }else{
@@ -44,14 +56,16 @@ function create() {
     
 }
 
-function setup(){
-    map.addTilesetImage('blackTile');
-    //map.addTilesetImage('hole2');
-    // map.addTilesetImage('tiles2');
-    
-    layer = map.createLayer('blackTile');
-    //layer2 = map.createLayer('hole2');
 
+/**
+ ** A function that initialises the map, tile layers, sprites, 
+ ** physics p2 game engine and collisions.
+ **
+ **/
+function setup(){
+
+    map.addTilesetImage('blackTile');    
+    layer = map.createLayer('blackTile');
     layer.resizeWorld();
 
     game.physics.startSystem(Phaser.Physics.P2JS);
@@ -70,12 +84,10 @@ function setup(){
     hole = game.add.sprite(160,160,'hole2');
     ball = game.add.sprite(32, 32, 'ball');
     if(i > 5){
-        winLabel();
+        winLabel(); //calls this function when the player wins the game.
     }
     game.physics.p2.enable(ball, false);
     ball.body.setCircle(9);
-
-
     game.camera.follow(ball);
 
     //  By default the ball will collide with the World bounds,
@@ -85,15 +97,54 @@ function setup(){
     //  The final parameter (false) controls if the boundary should use its own collision group or not. In this case we don't require
     //  that, so it's set to false. But if you had custom collision groups set-up then you would need this set to true.
     game.physics.p2.setBoundsToWorld(true, true, true, true, false);
-
-
-    //  Even after the world boundary is set-up you can still toggle if the ball collides or not with this:
-    // ball.body.collideWorldBounds = false;
-
     cursors = game.input.keyboard.createCursorKeys();
 
 }
 
+
+/**
+ ** The purpose of this function is for updating the ball's movement
+ ** and checks if the ball is overlapping the hole
+ **/
+function update() {
+    ball.body.setZeroVelocity();
+    
+    if (cursors.left.isDown){ 
+        ball.body.velocity.x = -150;
+        ball.scale.x = 1;
+    } else if (cursors.right.isDown) {
+        ball.body.velocity.x = 150;
+        ball.scale.x = -1;
+    }
+
+    if (cursors.up.isDown) {
+        ball.body.velocity.y = -150;
+    }
+
+     if (cursors.down.isDown) {
+        ball.body.velocity.y = 150;
+    }
+
+    if (checkOverlap(ball,hole)){
+        create();    
+    }
+}
+
+
+/**
+ ** This function is called whenever the game has to reset the map
+ ** and tile layer.
+ **/
+function destroyEverything(game,map, layer){
+    game.physics.p2.clearTilemapLayerBodies(map, layer);
+    layer.destroy();
+}
+
+
+/**
+ ** This function is called when the player wins the game.
+ ** This shows a text which says 'Congratulations!'.
+ **/
 function winLabel(){
     var winText;
     var win;
@@ -119,45 +170,15 @@ function winLabel(){
   
 }
 
-function destroyEverything(game,map, layer){
-     game.physics.p2.clearTilemapLayerBodies(map, layer);
-     layer.destroy();
-}
 
-
-function update() {
-    ball.body.setZeroVelocity();
-    
-    if (cursors.left.isDown){ 
-        ball.body.velocity.x = -150;
-        ball.scale.x = 1;
-    } else if (cursors.right.isDown) {
-        ball.body.velocity.x = 150;
-        ball.scale.x = -1;
-    }
-
-    if (cursors.up.isDown) {
-        ball.body.velocity.y = -150;
-    }
-
-     if (cursors.down.isDown) {
-        ball.body.velocity.y = 150;
-    }
-
-    if (checkOverlap(ball,hole)){
-        create();    
-    }
-}
-
+/**
+ ** This function is called when the ball is overlapping the hole.
+ **/
 function checkOverlap(spriteA, spriteB) {
 
     var boundsA = spriteA.getBounds();
     var boundsB = spriteB.getBounds();
 
     return Phaser.Rectangle.intersects(boundsA, boundsB);
-
-}
-
-function render() {
 
 }
