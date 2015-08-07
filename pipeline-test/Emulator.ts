@@ -66,7 +66,8 @@ class Emulator {
      */
 	initialize (bgFile, keyFunction) {
 		// setup background
-		this.bg = new Image(bgFile);
+		this.bg = new Image();
+        this.bg.src = bgFile;
 	    // initialize keys
         this.keymap = {string : [KeyObject]};
         this.keymap["spacebar"] = new KeyObject(32, false);
@@ -99,7 +100,7 @@ class Emulator {
 		if (typeof this.clock_cycle != "undefined") {
 			clearInterval(this.clock_cycle);
 		}
-		this.clock_cycle = setInterval(this.paint, 60);
+		this.clock_cycle = setInterval(this.paint, 1000);
 	}
 
     /**
@@ -109,10 +110,11 @@ class Emulator {
         var gObj : GameObject;
         this.ctxt.drawImage(this.bg, 0, 0);
         for (var gKey in this.images) {
+            console.log(gKey);
 			if (gKey != "string") {
 				gObj = this.images[gKey];
                 console.log("object " + gObj);
-                console.log(typeof gObj.sprite);
+                console.log(typeof gObj);
                 console.log(gObj.sprite.src);
 				this.ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
 			}
