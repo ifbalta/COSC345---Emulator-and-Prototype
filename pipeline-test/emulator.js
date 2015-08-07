@@ -3,11 +3,17 @@
 */
 var GameObject = (function () {
     function GameObject(x, y, spriteFile) {
+        this.initialX = x;
+        this.initialY = y;
         this.x = x;
         this.y = y;
         this.sprite = new Image();
         this.sprite.src = spriteFile;
         this.spriteFile = spriteFile;
+    }
+    GameObject.prototype.resetPos = function () {
+        this.x = this.initialX;
+        this.y = this.initialY;
     }
     GameObject.prototype.toString = function () {
         return "(" + this.x + "," + this.y + ") " + this.spriteFile + "!";
@@ -129,8 +135,21 @@ var Emulator = (function () {
      * Resets emulator state to defaults.
      * */
     Emulator.prototype.resetEmulator = function (){
-        console.log("reset emulator");
-     //   this.images
+        this.images = {string : [GameObject]}; // empty images
+        // reset keys
+        this.keymap["spacebar"].code = false;
+        this.keymap["left"].code = false;
+        this.keymap["down"].code = false;
+        this.keymap["right"].code = false;
+        this.keymap["up"].code = false;
+    }
+    /**
+     * Resets objects.
+     * */
+    Emulator.prototype.resetImages =  function () {
+        for (var gKey in this.images) {
+            this.images[gKey].resetPos();
+        }
     }
     return Emulator;
 })();

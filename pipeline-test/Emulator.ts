@@ -3,6 +3,8 @@
 */
 
 class GameObject {
+    public initialX : number;
+    public initialY : number;
   public x: number;
   public y : number;
   public sprite : HTMLImageElement;
@@ -19,6 +21,11 @@ class GameObject {
    toString() : string {
     return "(" + this.x + "," + this.y + ") " + this.spriteFile + "!";
   }
+
+    resetPos () {
+        this.x = this.initialX;
+        this.y = this.initialY;
+    }
 
 }
 
@@ -145,7 +152,26 @@ class Emulator {
 	    this.DOWN_KEY = this.keymap["down"].pressed;
 	    this.mappedKeyFunction();
 	}
-
+    /**
+     * Resets emulator state to defaults.
+     * */
+    resetEmulator (){
+        this.images = {string : [GameObject]}; // empty images
+        // reset keys
+        this.keymap["spacebar"].code = false;
+        this.keymap["left"].code = false;
+        this.keymap["down"].code = false;
+        this.keymap["right"].code = false;
+        this.keymap["up"].code = false;
+    }
+    /**
+     * Resets objects.
+     * */
+    resetImages () {
+        for (var gKey in this.images) {
+            this.images[gKey].resetPos();
+        }
+    }
 
 }
 var canvas = $("canvas")[0];
