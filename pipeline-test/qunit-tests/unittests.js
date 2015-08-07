@@ -72,7 +72,7 @@ function keyLogic() {
     }
 }
 // setup emulator
-emulator.setup("mockbg.png", keyLogic);
+emulator.initialize("mockbg.png", keyLogic);
 
 
 

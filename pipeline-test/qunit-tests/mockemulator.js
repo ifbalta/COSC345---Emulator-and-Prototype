@@ -39,7 +39,7 @@ var Emulator = (function () {
     /**
          Configures screen background and key handling events.
      */
-    Emulator.prototype.setup = function (bgFile, keyFunction) {
+    Emulator.prototype.initialize = function (bgFile, keyFunction) {
         // setup background
         this.bg = new Image(bgFile);
         // initialize keys

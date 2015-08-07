@@ -64,7 +64,7 @@ class Emulator {
     /**
          Configures screen background and key handling events.
      */
-	setup (bgFile, keyFunction) {
+	initialize (bgFile, keyFunction) {
 		// setup background
 		this.bg = new Image(bgFile);
 	    // initialize keys
