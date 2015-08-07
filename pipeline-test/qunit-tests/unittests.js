@@ -94,7 +94,7 @@ function keyLogic() {
 // construct emulator
 emulator.setup("mockbg.png", keyLogic);
 // make a mock gameObject to test keyLogic()
-var mock = emulator.addResource("mock", 0, 0, "mock.png");
+
 
 /**
  * Testing key maps that aren't directional buttons or the spacebar.
@@ -124,7 +124,7 @@ function defaultKeyRemapTest (keyName, keyCode, expectedCode) {
 /**
  * Checks the key presses are using user mapped key logic.
  * */
-function keyPressedTest (keyName, expected) {
+function keyPressedTest (keyName) {
     keyPressedResults.total++;
     // simulate a key press
     keyboardEvent[initMethod](
@@ -150,9 +150,9 @@ function keyPressedTest (keyName, expected) {
 /**
  * Checks that the application and emulator hold references to the same game object.
  * */
-function gameObjectInitialization (objName, objX, objY, objFile) {
+function gameObjectInitializationTest (objName, objX, objY, objFile) {
     gameObjectResults.total++;
-    var testObj = emulator.addResource(objName, objX, objFile);
+    var testObj = emulator.addResource(objName, objX, objY, objFile);
     if (testObj!= emulator[objName]) {
         gameObjectResults.bad++;
     }
@@ -196,13 +196,44 @@ defaultKeyRemapTest("left", 1, 1);
 defaultKeyRemapTest("right", 1, 1);
 defaultKeyRemapTest("down", 1, 1);
 defaultKeyRemapTest("up", 1, 1);
+defaultKeyRemapTest("spacebar", 1, 1);
+emulator.resetEmulator();
 
-
-// test game object initialization
+customKeyMappingTest("shoot", 65);
+customKeyMappingTest("specialMove", 67);
+customKeyMappingTest("hide", 68);
+customKeyMappingTest("crouch", 69);
+emulator.resetEmulator();
 
 // test key presses
+keyPressedTest("left");
+keyPressedTest("right");
+keyPressedTest("down");
+keyPressedTest("up");
+keyPressedTest("spacebar");
 
 // test game object movement
+var mock = emulator.addResource("mock", 0, 0, "mock.png");
+gameObjectMovement("left", -1, 0);
+emulator.resetImages();
+gameObjectMovement("right", 1, 0);
+emulator.resetImages();
+gameObjectMovement("up", 0, 1);
+emulator.resetImages();
+gameObjectMovement("down", 0, -1);
+
+// test game object initialization
+gameObjectInitializationTest("sora", 0, 0, "mock.png");
+gameObjectInitializationTest("riku", 10, 10, "mock.png");
+gameObjectInitializationTest("kairi", 300, 300, "mock.png");
+emulator.resetEmulator();
+
+
+
+
+
+
+
 
 // total results
 totalResults.total = keyPressedResults.total + gameObjectResults.total;

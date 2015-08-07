@@ -43,6 +43,7 @@ class KeyObject {
     and raise events.
 */
 class Emulator {
+    public SPACEBAR : boolean;
 	public LEFT_KEY : boolean;
 	public RIGHT_KEY : boolean;
 	public UP_KEY : boolean;
@@ -67,14 +68,17 @@ class Emulator {
 		// setup background
 		this.bg = new Image(bgFile);
 	    // initialize keys
-		this.keymap["left"] = new KeyObject(37, false);
-		this.keymap["down"] = new KeyObject(38, false);
+        this.keymap = {string : [KeyObject]};
+        this.keymap["spacebar"] = new KeyObject(32, false);
+        this.keymap["left"] = new KeyObject(37, false);
+        this.keymap["down"] = new KeyObject(38, false);
         this.keymap["right"] = new KeyObject(39, false);
-        this.keymap["up"] = new KeyObject(40, false)
-		this.LEFT_KEY = this.keymap["left"].pressed;
-		this.RIGHT_KEY = this.keymap["right"].pressed;
+        this.keymap["up"] = new KeyObject(40, false);
+        this.LEFT_KEY = this.keymap["left"].pressed;
+        this.RIGHT_KEY = this.keymap["right"].pressed;
         this.UP_KEY = this.keymap["up"].pressed;
         this.DOWN_KEY = this.keymap["down"].pressed;
+        this.SPACEBAR = this.keymap["spacebar"].pressed;
         // map keyListener
 		this.mappedKeyFunction = keyFunction;
 	}
@@ -158,11 +162,17 @@ class Emulator {
     resetEmulator (){
         this.images = {string : [GameObject]}; // empty images
         // reset keys
-        this.keymap["spacebar"].code = false;
-        this.keymap["left"].code = false;
-        this.keymap["down"].code = false;
-        this.keymap["right"].code = false;
-        this.keymap["up"].code = false;
+        this.keymap = {string : [KeyObject]};
+        this.keymap["spacebar"] = new KeyObject(32, false);
+        this.keymap["left"] = new KeyObject(37, false);
+        this.keymap["down"] = new KeyObject(38, false);
+        this.keymap["right"] = new KeyObject(39, false);
+        this.keymap["up"] = new KeyObject(40, false);
+        this.LEFT_KEY = this.keymap["left"].pressed;
+        this.RIGHT_KEY = this.keymap["right"].pressed;
+        this.UP_KEY = this.keymap["up"].pressed;
+        this.DOWN_KEY = this.keymap["down"].pressed;
+        this.SPACEBAR = this.keymap["spacebar"].pressed;
     }
     /**
      * Resets objects.
