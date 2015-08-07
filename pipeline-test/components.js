@@ -4,6 +4,7 @@
  * so that neither KeyObjects nor GameObjects work correctly.
  *
  * This is a copy of that last file that worked.
+ * Remember to write handlers for Swipe and Click events.
  */
 
 /**

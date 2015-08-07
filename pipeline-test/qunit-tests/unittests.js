@@ -42,17 +42,7 @@ var gameObjectResults = {
     bad : 0
 }
 
-/**
- * Tests selectFile() formatting.
- * */
-function selectionTest(filename, expected){
-    testResults.total++;
-    var result = selectFile(filename);
-    if (result != expected) {
-        testResults.bad++;
-        console.log("Expected " + expected + " but received " + result);
-    }
-}
+
 
 // the emulator needs a canvas
 var canvas = document.createElement('canvas');
@@ -61,55 +51,152 @@ canvas.width  = 320;
 canvas.height = 320;
 document.body.appendChild(canvas);
 
+// create a key event
+var keyboardEvent = document.createEvent("KeyboardEvent");
+var initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
+
+//keyboardEvent[initMethod](
+//    "keydown", // event type : keydown, keyup, keypress
+//    true, // bubbles
+//    true, // cancelable
+//    window, // viewArg: should be window
+//    false, // ctrlKeyArg
+//    false, // altKeyArg
+//    false, // shiftKeyArg
+//    false, // metaKeyArg
+//    40, // keyCodeArg : unsigned long the virtual key code, else 0
+//    0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
+//);
+//document.dispatchEvent(keyboardEvent);
+
+var KEY_FLAG = false; // indicates a key press
 // make a mock key handling function
 // updates mock game object's position
-// returns true if successful
+// sets KEY_FLAG to true if successful
 function keyLogic() {
     if (emulator.RIGHT_KEY) {
         mock.x++;
-        return true;
+        KEY_FLAG = true;
     }
     if (emulator.LEFT_KEY) {
         mock.x--;
-        return true;
+        KEY_FLAG = true;
     }
     if (emulator.UP_KEY) {
         mock.y++;
-        return true;
+        KEY_FLAG = true;
     }
     if (emulator.DOWN_KEY) {
         mock.y--;
-        return true;
+        KEY_FLAG = true;
     }
 }
-
 // construct emulator
 emulator.setup("mockbg.png", keyLogic);
-
 // make a mock gameObject to test keyLogic()
 var mock = emulator.addResource("mock", 0, 0, "mock.png");
 
+/**
+ * Testing key maps that aren't directional buttons or the spacebar.
+ * Checks if custom key has been added to the keymap.
+ * */
+function customKeyMappingTest (keyName, keyCode) {
+    keyPressedResults.total++;
+    var mappedKey = emulator.mapKey(keyName, keyLogic, keyCode);
+    if (emulator.keymap[keyName] != mappedKey) {
+        keyPressedResults.bad++;
+    }
 
+}
 
+/**
+ * Testing custom directional buttons, and spacebar.
+ * Checks if the keymap reflects new keycode.
+ * */
+function defaultKeyRemapTest (keyName, keyCode, expectedCode) {
+    keyPressedResults.total++;
+    emulator.mapKey(keyName, keyLogic, keyCode);
+    if (emulator.keyMap[keyName].code == expectedCode){
+        keyPressedResults.bad++;
+    }
+}
 
-function keyMappingTest (keyName, keyCode, expected) {}
+/**
+ * Checks the key presses are using user mapped key logic.
+ * */
+function keyPressedTest (keyName, expected) {
+    keyPressedResults.total++;
+    // simulate a key press
+    keyboardEvent[initMethod](
+        "keydown", // event type : keydown, keyup, keypress
+        true, // bubbles
+        true, // cancelable
+        window, // viewArg: should be window
+        false, // ctrlKeyArg
+        false, // altKeyArg
+        false, // shiftKeyArg
+        false, // metaKeyArg
+        emulator.keymap[keyName].code, // keyCodeArg : unsigned long the virtual key code, else 0
+        0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
+    );
+    document.dispatchEvent(keyboardEvent);
+    if (!KEY_FLAG) {
+        keyPressedResults.bad++;
+    }
+    KEY_FLAG = false; // turn off the flag
 
-function keyPressedTest (keyName, expected) {}
+}
 
-function gameObjectInitialization (objName, objX, objY, objFile, expected) {}
+/**
+ * Checks that the application and emulator hold references to the same game object.
+ * */
+function gameObjectInitialization (objName, objX, objY, objFile) {
+    gameObjectResults.total++;
+    var testObj = emulator.addResource(objName, objX, objFile);
+    if (testObj!= emulator[objName]) {
+        gameObjectResults.bad++;
+    }
+}
 
-function gameObjectMovement (dir, expected) {}
-
-// test file selection
-
-selectionTest("mazegame.js", "appDir/mazegame/mazegame.js");
-selectionTest("mazegameprototype.js", "appDir/mazegameprototype/mazegameprototype.js");
-selectionTest("placeholder.js", "appDir/placeholder/placeholder.js");
-selectionTest("testgameprototype.js", "appDir/testgameprototype/testgameprototype.js");
-selectionTest("snakelogic.js", "appDir/snakelogic/snakelogic.js");
-selectionTest("snakeprototype.js", "appDir/snakeprototype/snakeprototype.js");
+/**
+ * Check that game objects respond to user-mapped key handling logic
+ * */
+function gameObjectMovement (dir, expectedX, expectedY) {
+    // simulate a keyPress
+    keyPressedResults.total++;
+    // simulate a key press
+    keyboardEvent[initMethod](
+        "keydown", // event type : keydown, keyup, keypress
+        true, // bubbles
+        true, // cancelable
+        window, // viewArg: should be window
+        false, // ctrlKeyArg
+        false, // altKeyArg
+        false, // shiftKeyArg
+        false, // metaKeyArg
+        emulator.keymap[dir].code, // keyCodeArg : unsigned long the virtual key code, else 0
+        0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
+    );
+    document.dispatchEvent(keyboardEvent);
+    gameObjectResults.total++;
+    if (mock.x != expectedX){
+        gameObjectResults.bad++;
+    }
+    gameObjectResults.total++;
+    if (mock.y != expectedY) {
+        gameObjectResults.bad++;
+    }
+    // reset the mock object
+    mock.x = 0;
+    mock.y = 0;
+}
 
 // test keymaps upon emulator construction
+defaultKeyRemapTest("left", 1, 1);
+defaultKeyRemapTest("right", 1, 1);
+defaultKeyRemapTest("down", 1, 1);
+defaultKeyRemapTest("up", 1, 1);
+
 
 // test game object initialization
 
@@ -117,8 +204,11 @@ selectionTest("snakeprototype.js", "appDir/snakeprototype/snakeprototype.js");
 
 // test game object movement
 
+// total results
+totalResults.total = keyPressedResults.total + gameObjectResults.total;
+totalResults.bad = keyPressedResults.bad + gameObjectResults.bad;
 
-// Display results
+// Display all results
 console.log("Of " + keyPressedResults.total + " tests, " + keyPressedResults.bad + " failed, " +
 (testResults.total - testResults.bad) + " passed.");
 console.log("Of " + gameObjectResults.total + " tests, " + gameObjectResults.bad + " failed, " +

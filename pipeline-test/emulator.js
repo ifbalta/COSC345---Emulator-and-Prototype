@@ -125,6 +125,13 @@ var Emulator = (function () {
         this.DOWN_KEY = this.keymap["down"].pressed;
         this.mappedKeyFunction();
     };
+    /**
+     * Resets emulator state to defaults.
+     * */
+    Emulator.prototype.resetEmulator = function (){
+        console.log("reset emulator");
+     //   this.images
+    }
     return Emulator;
 })();
 var canvas = $("canvas")[0];
