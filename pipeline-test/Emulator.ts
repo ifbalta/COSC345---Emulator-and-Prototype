@@ -143,8 +143,8 @@ class Emulator {
      *   Key presses will switch key maps from false to true
      *   and notify the application by using their mapped callback.
      */
-	keyHandler (e) {
-	    var e = e.which;
+	keyHandler (evt) {
+	    var e = evt.which;
 	    for (var kObj in this.keymap) {
 			if (kObj.code == e) {
 	            kObj.pressed = true;
@@ -154,6 +154,7 @@ class Emulator {
 	    this.RIGHT_KEY = this.keymap["right"].pressed;
 	    this.UP_KEY = this.keymap["up"].pressed;
 	    this.DOWN_KEY = this.keymap["down"].pressed;
+        this.SPACEBAR = this.keymap["spacebar"].pressed;
 	    this.mappedKeyFunction();
 	}
     /**
