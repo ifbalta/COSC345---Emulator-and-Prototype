@@ -127,8 +127,6 @@ function destroyEverything(game,map, layer){
 
 function update() {
     ball.body.setZeroVelocity();
-    ball.body.setZeroRotation(); 
-  
     
     if (cursors.left.isDown){ 
         ball.body.velocity.x = -150;
