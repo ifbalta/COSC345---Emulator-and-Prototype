@@ -1,0 +1,16 @@
+    h1 {
+        font-size: 40px;
+    }
+    h2 {
+        font-size: 28px;
+    }
+    body {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        display: block;
+        margin: 10px auto;
+        padding: 0 50px;
+    }
+    div.section {
+        line-height: 200%;
+    }
+

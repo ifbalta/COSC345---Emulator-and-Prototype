@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Emulator Documentation</title>
+		<link rel="stylesheet" type="text/css" href="report.css">
+	</head>
+	<body>
+		<h1>Smart Watch Emulator Manual</h1>
+		<p>
+			<b>Authors:</b><br>
+			Isabel Baltazar<br>
+			Lennox Huang
+		</p>
+		<p>
+			<b>Language:</b> JavaScript<br>
+			<b>Dependencies:</b>
+			jQuery version 1.11.1 provided by  <a href="https://developers.google.com/speed/libraries/">Google's hosted library.</a><br>
+		</p>
+		<p>
+			The emulator acts like a generic smart watch and is not meant to mimic any currently
+			available smart watches such as the Apple Watch or Moto 360.<br>
+			The emulator is written in JavaScript and jQuery and is run on the browser.
+			It is a compatibility layer between the browser and smart watch application.<br>
+			The emulator is compatible with Safari.<br>
+			The emulator is compatible with Chrome, Firefox, Internet Explorer, and Opera if node.js and Express.js or python is pre-installed.
+		</p>
+		<h2>
+			Features
+		</h2>
+		<ul>
+			<li>A 320 x 320 screen</li>
+			<li>An app tray</li>
+		</ul>
+		<h2>Installation</h2>
+		Requires git VCS be pre-installed.<br>
+		git can be downloaded from <a href="http://git-scm.com/downloads"> git-scm.com/downloads.</a>
+		<p>
+		For compatibility with non-Safari browsers, node.js and Express.js or python must be installed.<br><br>
+		If using a python server:
+		<ul>
+			<li>
+				Install <a href="https://www.python.org/downloads/">python</a> from their website
+			</li>
+			<li>
+				Navigate to the webRoot directory and run <code>python -m SimpleHTTPServer 8080</code> on the command line.
+			</li>
+		</ul>
+		If using a node server:
+		<ul>
+			<li>Install <a href="https://nodejs.org/download/">node.js</a> from their website</li>
+			<li>Install Express.js by running <code>npm install express --save</code> on the command line</li>
+			<li>Navigate to the webRoot directory, and start the server using the command <code>node bootup</code></li>
+		</ul>
+		The emulator is open-source and available on GitHub.
+		Get the code <a href="https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git">
+			here</a>.
+		<ol>
+			<li>Clone the repository using
+				<code>git clone https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git</code> or
+				Git clients such as SourceTree or the GitHub GUI
+			</li>
+			<li>Using Safari, open <code>emulator.html</code> in the broswer</li>
+			<li>
+			Using Google Chrome,
+			<ul>
+				<li>
+					Using node, start server through <code>node bootup</code> and navigate to
+					<code>http://localhost:3000</code> in the browser
+				</li>
+				<li>Using python, start server through <code>python -m SimpleHTTPServer 8080</code> and navigate
+					to <code>http://localhost:8080</code>
+				</li>
+			</ul>
+		</ol>
+		<p>
+		<h2>For Users</h2>
+		<p>
+		Starting up the emulator is as simple as opening <code>emulator.html</code> in Safari, and selecting an app
+		from the menu.<br>
+		<h3>Not using Safari?</h3>
+		<p>
+			The emulator is compatible with Google Chrome, Firefox, Internet Explorer and Opera if you have node.js and Express.js pre-installed.
+		</p>
+		<h2>For Developers</h2>
+		<p>
+		The emulator uses jQuery's getScript() function to retrieve AppObjects from other JavaScript files.<br>
+		<h3>Installing your own application</h3>
+		<ol>
+			<li>Applications must be written in JavaScript and follow the AppObject structure</li>
+			<li>Store your application in the <code>appDir/</code> directory.
+				<br> Your folder must have the same name as your main JavaScript file.
+				If your file is named <code>example.js</code> it must be stored in the <code>example</code> directory.
+				<br> The resulting file path should be <code>appDir/example/example.js</code>.
+			</li>
+			<li> Add your application to the app tray on <code>emulator.html</code>.
+				The app tray is a select menu with an <code>label</code> property. The <code>value</code> attribute must have the
+				same name as your main JavaScript file.
+				<br>If your file is named <code>example.js</code>, then its <code>value</code> must also be <code>example.js</code>
+			</li>
+		</ol>
+		The emulator expects an AppObject with three properties:
+		<ul>
+			<li>
+				<h3><code>startUp</code></h3> should initialize the application.
+			</li>
+			<li>
+				<h3><code>stopScript</code></h3> should stop the application.
+			</li>
+			<li>
+				<h3><code>clear</code></h3> should clear the screen.
+			</li>
+		</ul>
+		<br><a href="index.html"></a>
+		The emulator itself has only four functions:
+		<ul>
+			<li>
+				<h3><code>bootup()</code></h3>
+				<p>
+				<code>@param</code> filename<br>
+				the file from which the AppObject can be retrieved
+				<p>
+					<code>bootup()</code> is tasked with clearing and stopping any previously running applications before initializing a new AppObject.
+				</p>
+			</li>
+			<li>
+				<h3><code>clear()</code></h3>
+				<p>
+					<code>clear()</code> clears the emulator screen.
+					It does not stop the application. Stopping the application should be the
+					<code>AppObject's stopScript</code> property's responsibility.
+				</p>
+			</li>
+			<li>
+				<h3>
+					A function linked to <code>emulator.html's start</code> button.
+				</h3>
+				<p>
+					The function uses jQuery to select a file from the app tray.
+				</p>
+			</li>
+			<li>
+				<h3><code>selectFile()</code></h3>
+				<p>
+				<code>@param</code> filename the selected application
+				<p>
+					Responsible for adding the file path to the file name.
+				</p>
+			</li>
+		</ul>
+		<h2>Bugs</h2>
+		<ul id="bug-list">
+			<li>The emulator cannot completely stop an application from running</li>
+			<li>The emulator does not always clear the screen</li>
+		</ul>
+		<h2>
+			Reference
+		</h2>
+		<ul>
+			<li>Smart watch vector was created by zhaolifang in <a href="http://www.vecteezy.com/vector-art/82143-smartwatch-vector">vecteezy.com</a>
+			</li>
+			<li>Background image was generated by <a href="http://www.mudcu.be/bg/">mudcu.be</a></li>
+		</ul>
+	</body>
+</html>
