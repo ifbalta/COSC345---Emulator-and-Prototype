@@ -176,8 +176,6 @@ test('keyPressedTest', function(){
 
 // test game object movement
 
-// make a mock gameObject to test key handling
-var mock = addResource("mock", 0, 0, "mock.png");
 test('gameObjectMovementTest', function(){
     ok(gameObjectMovementTest("left", -1, 0), "mock object moved to the left");
     ok(gameObjectMovementTest("right", 1, 0), "mock object moved to the right");
