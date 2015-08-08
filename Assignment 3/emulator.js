@@ -37,11 +37,13 @@ var GameObject = (function () {
  */
 var KeyObject = (function (){
     function KeyObject(code, pressed) {
-        this.code = code,
-            this.pressed = pressed;
+        this.code = code;
+        this.pressed = pressed;
     }
     return KeyObject;
 })();
+
+var clock_cycle;
 
 // image resources
 var bg = new Image();
@@ -49,11 +51,11 @@ var images = []; // GameObject array
 
 // key maps
 var keymap = [];
+var SPACEBAR;
 var LEFT_KEY;
 var RIGHT_KEY;
 var UP_KEY;
 var DOWN_KEY;
-var SPACEBAR;
 
 // passed functions
 var mappedKeyFunction;
@@ -91,6 +93,37 @@ function initialize(keyFunction){
     SPACEBAR = keymap["spacebar"].pressed;
     // map callbacks to listeners
     mappedKeyFunction = keyFunction;
+}
+
+/**
+ *  Start listening for events.
+ * */
+function start() {
+    if (typeof ctxt != "undefined") {
+        paint();
+        if (typeof clock_cycle != "undefined") clearInterval(clock_cycle);
+        clock_cycle = setInterval(paint, 60);
+    }
+}
+
+/**
+ *  Paints images and resets key values.
+ */
+function paint () {
+    ctxt.drawImage(bg, 0, 0);
+    images.forEach(function (gObj) {
+        ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
+    });
+    resetKeys();
+}
+
+/**
+ * Sets the application's background image.
+ * */
+function setBG (bgFile) {
+    bg.src = bgFile;
+    bg.height = h;
+    bg.width = w;
 }
 
 /**
@@ -143,7 +176,7 @@ function resetImages() {
  *  Allows the application to map directional buttons to other keys.
  *  Default key is unpressed.
 */
-function mapKey (keyCode, keyName) {
+function mapKey (keyName, keyCode) {
     keyName = keyName.toLowerCase();
     if (typeof keymap[keyName] != "undefined") {
         keymap[keyName].code = keyCode;

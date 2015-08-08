@@ -175,7 +175,7 @@ test('keyPressedTest', function(){
 });
 
 // test game object movement
-
+resetImages();
 test('gameObjectMovementTest', function(){
     ok(gameObjectMovementTest("left", -1, 0), "mock object moved to the left");
     ok(gameObjectMovementTest("right", 1, 0), "mock object moved to the right");

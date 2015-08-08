@@ -1,9 +1,6 @@
 /**
   mockemulator.js is a copy of emulator.js
 */
-/**
- emulator.js defines an IO pipeline between the browser and app.js.
- */
 
 /**
  GameObject
@@ -40,11 +37,13 @@ var GameObject = (function () {
  */
 var KeyObject = (function (){
     function KeyObject(code, pressed) {
-        this.code = code,
-            this.pressed = pressed;
+        this.code = code;
+        this.pressed = pressed;
     }
     return KeyObject;
 })();
+
+var clock_cycle;
 
 // image resources
 var bg = new Image();
@@ -100,9 +99,11 @@ function initialize(keyFunction){
  *  Start listening for events.
  * */
 function start() {
-    paint();
-    if (typeof clock_cycle != "undefined") clearInterval(clock_cycle);
-    clock_cycle = setInterval(paint, 60);
+    if (typeof ctxt != "undefined") {
+        paint();
+        if (typeof clock_cycle != "undefined") clearInterval(clock_cycle);
+        clock_cycle = setInterval(paint, 60);
+    }
 }
 
 /**
@@ -113,11 +114,16 @@ function paint () {
     images.forEach(function (gObj) {
         ctxt.drawImage(gObj.sprite, gObj.x, gObj.y);
     });
-    keymap.forEach(function (kObj){
-        if (kObj.pressed) {
-            kObj.pressed = false;
-        }
-    });
+    resetKeys();
+}
+
+/**
+ * Sets the application's background image.
+ * */
+function setBG (bgFile) {
+    bg.src = bgFile;
+    bg.height = h;
+    bg.width = w;
 }
 
 /**
