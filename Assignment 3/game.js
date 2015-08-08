@@ -36,7 +36,7 @@ var i = 1; //Level counter
  **/
 function create() {
     game.background = game.add.tileSprite(0,0,320,320,'bg');
-    initialize("phaser.png"); // initialize emulator
+    initialize(); // initialize emulator
 
 
     if(i === 1){    
@@ -118,11 +118,11 @@ function update() {
         ball.scale.x = -1;
     }
 
-    if (DOWN_KEY) {
+    if (UP_KEY) {
         ball.body.velocity.y = -150;
     }
 
-    if (UP_KEY) {
+    if (DOWN_KEY) {
         ball.body.velocity.y = 150;
     }
 

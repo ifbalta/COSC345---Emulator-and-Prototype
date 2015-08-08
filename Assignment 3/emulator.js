@@ -11,6 +11,8 @@
  */
 var GameObject = (function () {
     function GameObject(x, y, spriteFile) {
+        this.initialX = x;
+        this.initialY = y;
         this.x = x;
         this.y = y;
         this.sprite = new Image();
@@ -20,6 +22,10 @@ var GameObject = (function () {
     GameObject.prototype.toString = function () {
         return "(" + this.x + "," + this.y + ") " + this.spriteFile + "!";
     };
+    GameObject.prototype.resetPos = function () {
+        this.x = this.initialX;
+        this.y = this.initialY;
+    }
     return GameObject;
 })();
 
@@ -47,6 +53,7 @@ var LEFT_KEY;
 var RIGHT_KEY;
 var UP_KEY;
 var DOWN_KEY;
+var SPACEBAR;
 
 // passed functions
 var mappedKeyFunction;
@@ -67,10 +74,12 @@ function addResource (name, x, y, imgFile) {
 */
 function initialize(keyFunction){
     // map directional keys
+    keymap["spacebar"] = new KeyObject(32, false);
     keymap["left"] = new KeyObject(37, false);
-    keymap["down"] = new KeyObject(38, false);
+    keymap["up"] = new KeyObject(38, false);
     keymap["right"] = new KeyObject(39, false);
-    keymap["up"] = new KeyObject(40, false)
+    keymap["down"] = new KeyObject(40, false)
+    keymap.push(keymap["spacebar"]);
     keymap.push(keymap["left"]);
     keymap.push(keymap["right"]);
     keymap.push(keymap["down"]);
@@ -79,8 +88,28 @@ function initialize(keyFunction){
     RIGHT_KEY = keymap["right"].pressed;
     UP_KEY = keymap["up"].pressed;
     DOWN_KEY = keymap["down"].pressed;
+    SPACEBAR = keymap["spacebar"].pressed;
     // map callbacks to listeners
     mappedKeyFunction = keyFunction;
+}
+
+/**
+ * Reset emulator to default state.
+ * */
+function resetEmulator () {
+    keymap = []; // reset keymap
+    keymap["left"] = new KeyObject(37, false);
+    keymap["up"] = new KeyObject(38, false);
+    keymap["right"] = new KeyObject(39, false);
+    keymap["down"] = new KeyObject(40, false)
+    keymap.push(keymap["left"]);
+    keymap.push(keymap["right"]);
+    keymap.push(keymap["down"]);
+    keymap.push(keymap["up"]);
+    LEFT_KEY = keymap["left"].pressed;
+    RIGHT_KEY = keymap["right"].pressed;
+    UP_KEY = keymap["up"].pressed;
+    DOWN_KEY = keymap["down"].pressed;
 }
 
 
@@ -92,6 +121,20 @@ function resetKeys(){
         if (kObj.pressed) {
             kObj.pressed = false;
         }
+    });
+    LEFT_KEY = keymap["left"].pressed;
+    RIGHT_KEY = keymap["right"].pressed;
+    UP_KEY = keymap["up"].pressed;
+    DOWN_KEY = keymap["down"].pressed;
+    SPACEBAR = keymap["spacebar"].pressed;
+}
+
+/**
+ * Reset image coordinates
+ * */
+function resetImages() {
+    images.forEach ( function (gObj){
+        gObj.resetPos();
     });
 }
 
@@ -124,6 +167,7 @@ window.addEventListener("keydown", function (e){
     RIGHT_KEY = keymap["right"].pressed;
     UP_KEY = keymap["up"].pressed;
     DOWN_KEY = keymap["down"].pressed;
+    if (typeof mappedKeyFunction != "undefined")mappedKeyFunction;
 });
 
 
