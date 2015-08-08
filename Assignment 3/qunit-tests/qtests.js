@@ -181,8 +181,8 @@ var mock = addResource("mock", 0, 0, "mock.png");
 test('gameObjectMovementTest', function(){
     ok(gameObjectMovementTest("left", -1, 0), "mock object moved to the left");
     ok(gameObjectMovementTest("right", 1, 0), "mock object moved to the right");
-    ok(gameObjectMovementTest("up", 0, 1), "mock object moved to the up");
-    ok(gameObjectMovementTest("down", 0, -1), "mock object moved to the down");
+    ok(gameObjectMovementTest("up", 0, 1), "mock object moved up");
+    ok(gameObjectMovementTest("down", 0, -1), "mock object moved down");
 });
 
 
