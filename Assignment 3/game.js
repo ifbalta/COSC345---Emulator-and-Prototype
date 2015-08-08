@@ -83,8 +83,8 @@ function setup(){
   
 
     hole = game.add.sprite(160,160,'hole2');
-    ball = game.add.sprite(32, 32, 'ball');
-    if(i > 5){
+    ball = game.add.sprite(20, 20, 'ball');
+    if(i > 1){
         winLabel(); //calls this function when the player wins the game.
     }
     game.physics.p2.enable(ball, false);
@@ -111,19 +111,19 @@ function update() {
     ball.body.setZeroVelocity();
     
     if (LEFT_KEY){
-        ball.body.velocity.x = -150;
+        ball.body.velocity.x = -250;
         ball.scale.x = 1;
     } else if (RIGHT_KEY) {
-        ball.body.velocity.x = 150;
+        ball.body.velocity.x = 250;
         ball.scale.x = -1;
     }
 
     if (UP_KEY) {
-        ball.body.velocity.y = -150;
+        ball.body.velocity.y = -250;
     }
 
     if (DOWN_KEY) {
-        ball.body.velocity.y = 150;
+        ball.body.velocity.y = 250;
     }
 
     if (checkOverlap(ball,hole)){
@@ -159,7 +159,7 @@ function winLabel(){
 
     game.winText = game.add.text(
         game.world.centerX,
-        game.world.height/5,
+        game.world.height-200,
         "",
         {
             size: "32px",
