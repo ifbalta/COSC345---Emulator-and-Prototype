@@ -50,7 +50,8 @@
 		<ul>
 			<li>Install <a href="https://nodejs.org/download/">node.js</a> from their website</li>
 			<li>Install Express.js by running <code>npm install express --save</code> on the command line</li>
-			<li>Navigate to the webRoot directory, and start the server using the command <code>node bootup</code></li>
+			<li>Go to the "Assignment 3" directory, and start the server using the command <code>node bootup</code></li>
+			<li>Navigate to localhost:3000 to start the emulator</li>
 		</ul>
 		The emulator is open-source and available on GitHub.
 		Get the code <a href="https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git">
@@ -83,75 +84,129 @@
 			The emulator is compatible with Google Chrome, Firefox, Internet Explorer and Opera if you have node.js and Express.js pre-installed.
 		</p>
 		<h2>For Developers</h2>
+		
+		The emulator is an interface between the browser and the smartwatch application. It cannot simulate swipe events, and
+		the directional keys are used instead. Click events are not currently supported by the emulator. The emulator uses KeyObject to represent keyboard events, and GameObject to represent objects that can be drawn onscreen.
+
+		<h3>Requirements:</h3>
+		<ul>
+			<li>The emulator requires a canvas element to run.</li>
+			<li>The emulator requires either a node, or python server to run</li>
+		</ul>
+		 
+		<h3>Starting the emulator:</h3>
+		<ul>
+			<li>
+				call <code>initialize()</code> to initialize the emulator state and map key handling logic.
+			</li>
+			<li>
+				call <code>start()</code> to start the emulator.
+			</li>
+		</ul>
+
+		<h3>Emulator Functions</h3>
+
+		<ul>
+			<li>
+				<code>addResource(name, x, y, imgFile):</code>
+					To allow us to add images to the emulator and paint them.
+					Must take a name, x and y coordinates and the image filename.
+					Returns a reference to the GameObject.
+			</li>
+			<li>
+				<code>start():</code>
+				 	Tells the emulator to start listening for KeyBoardEvents. It won’t run if the canvas hasn’t been set.
+				 </li>
+			<li>
+				<code>paint():</code>
+				 Draws all GameObjects on screen and resets KeyObject.pressed to false.
+				</li>
+			<li>
+				<code>setBG(bgFile):</code>
+				 Sets the background image, with bgFile as the path to the image.
+				</li>
+			<li>
+				<code>initialize(keyFunction):</code>
+				 Initializes the default keys and stores keyFunction as a callback 	for the KeyBoardEvent listener. 
+				 <br>keyFunction may be left undefined.
+			</li>
+			<li>
+				<code>mapKey(keyName, keyCode):</code>
+					Used to map one of the five pre-defined keys,
+					or define a new key for the application to use.
+					keyName will be the key’s name inside the keymap, and keyCode is its associated JavaScript key code. If the mapped key is not predefined, then <code>mapKey()</code> returns a reference to the
+					new key.
+			</li>
+			<li>
+				<code>resetEmulator():</code>
+				 Resets the emulator state by resetting the pre-defined keys to its original values and removing all GameObjects.
+			</li>
+			<li>
+				<code>resetKeys():</code>
+				 Sets all KeyObjects’ pressed property to false.</li>
+			<li>
+				<code>resetImages():</code>
+				 Sets all GameObject coordinates to their original position.
+			</li>
+		</ul>
+
+		<h3>KeyObject</h3>
 		<p>
-		The emulator uses jQuery's getScript() function to retrieve AppObjects from other JavaScript files.<br>
-		<h3>Installing your own application</h3>
-		<ol>
-			<li>Applications must be written in JavaScript and follow the AppObject structure</li>
-			<li>Store your application in the <code>appDir/</code> directory.
-				<br> Your folder must have the same name as your main JavaScript file.
-				If your file is named <code>example.js</code> it must be stored in the <code>example</code> directory.
-				<br> The resulting file path should be <code>appDir/example/example.js</code>.
-			</li>
-			<li> Add your application to the app tray on <code>emulator.html</code>.
-				The app tray is a select menu with an <code>label</code> property. The <code>value</code> attribute must have the
-				same name as your main JavaScript file.
-				<br>If your file is named <code>example.js</code>, then its <code>value</code> must also be <code>example.js</code>
-			</li>
-		</ol>
-		The emulator expects an AppObject with three properties:
+			KeyObject represents a key that can be pressed and can be customized for each application.
+		</p>
+		<h4>KeyObject Properties</h4>
 		<ul>
 			<li>
-				<h3><code>startUp</code></h3> should initialize the application.
-			</li>
+				<code>code</code>
+				 represents the KeyObject’s corresponding JavaScript key code.
+				</li>
 			<li>
-				<h3><code>stopScript</code></h3> should stop the application.
-			</li>
-			<li>
-				<h3><code>clear</code></h3> should clear the screen.
-			</li>
+				<code>pressed</code>
+				 indicates whether or not a key has been pressed.
+				</li>
 		</ul>
-		<br><a href="index.html"></a>
-		The emulator itself has only four functions:
+
+		<h3>GameObject</h3>
+
+			<p>
+				GameObject represents an image that can be drawn on the canvas.
+				The application is able to add GameObjects for the emulator to draw on the canvas.
+			</p>
+
+		<h4>Game Object Properties</h4>
 		<ul>
 			<li>
-				<h3><code>bootup()</code></h3>
-				<p>
-				<code>@param</code> filename<br>
-				the file from which the AppObject can be retrieved
-				<p>
-					<code>bootup()</code> is tasked with clearing and stopping any previously running applications before initializing a new AppObject.
-				</p>
-			</li>
-			<li>
-				<h3><code>clear()</code></h3>
-				<p>
-					<code>clear()</code> clears the emulator screen.
-					It does not stop the application. Stopping the application should be the
-					<code>AppObject's stopScript</code> property's responsibility.
-				</p>
-			</li>
-			<li>
-				<h3>
-					A function linked to <code>emulator.html's start</code> button.
-				</h3>
-				<p>
-					The function uses jQuery to select a file from the app tray.
-				</p>
-			</li>
-			<li>
-				<h3><code>selectFile()</code></h3>
-				<p>
-				<code>@param</code> filename the selected application
-				<p>
-					Responsible for adding the file path to the file name.
-				</p>
-			</li>
+				<code>initialX</code> and <code>initialY</code>
+				 are the GameObject’s initial coordinates.
+				</li>
+				<li>
+					<code>x</code> and <code>y</code>
+					 are GameObject’s current coordinates
+					</li>
+				<li>
+					<code>sprite</code>
+					 is an HTMLImageElement, which can be drawn on the canvas
+					</li>
+				<li>
+					<code>spriteFile</code> is the filename of the GameObject’s sprit
+				</li>
 		</ul>
+		<h4>GameObject Functions</h4>
+		<ul>
+			<li>
+				<code>toString()</code>
+				 returns a String representation of the GameObject</li>
+			<li>
+				<code>resetPos():</code>
+				 resets the GameObject's position to initial coordinates.</li>
+		</ul>		
+
 		<h2>Bugs</h2>
 		<ul id="bug-list">
-			<li>The emulator cannot completely stop an application from running</li>
-			<li>The emulator does not always clear the screen</li>
+			<li>
+				Nothing stops developers from directly overwriting or
+				reassigning emulator properties.
+			</li>
 		</ul>
 		<h2>
 			Reference

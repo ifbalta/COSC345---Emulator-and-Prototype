@@ -7,135 +7,64 @@
 	</head>
 	<body>
 		<h1>Assignment 3 Report</h1>
-		<p>
 			<b>Authors:</b><br>
 			Isabel Baltazar 8093074  ifbalta@github.com<br>
 			Lennox Huang 1663448  lennsum@github.com<br>
 			Raeciel Reyes   8360953  raeciel@github.com<br>
-			Huijun Zhou  	   6794896  HuijunZhou@github.com<b>
-
-		</p>
-		<p>
-			For the assignment 3, we redo the maze game simulator structure and rewrite the JavaScript.We use the physics 2D engine for the ball movement in the maze.We used several different images to be the maze game structure such as the ball, wall and the maze background.<br>
-		</p>
-		<p>
-			Isabel Baltazar and Lennox Huang were assigned the code on the emulator and report, Raeciel Reyes and Kimi Zhou were learn the physics 2D engine structure to manipulates the ball can work smoothly in every level of the maze game.<br>
-		</p>
-		<p>
-			For our application, it is a maze game and we use up, down, left and right on keyboard to control the ball movement. There are different levels in this game, the user will go to the next level once the ball arrive the hole. <br>
-		</p>
-		<h2>
-			Evaluation
-		</h2>
-		<center><img src="PrevDiagram.png" alt="PrevDiagram" style="width:450px;height:400px;"></center><br>
-
-		<p>The previous emulator and maze game application failed to keep the maze game application and browser independent of each other. The original maze game application used jQuery to handle user input, even though the maze game isn’t allowed to know about the browser. The emulator was supposed to be an interface between the application and the browser, but the emulator isn’t allowed to know anything specific about the application either.<br>
-		</p>
-
-		<center><img src="NewDesign.png" alt="NewDesign" style="width:450px;height:400px;"></center><br>
-
-		<p>We’ve rebuilt the emulator to have functions that raises flags to indicate user input. The Maze Game Application has been rewritten to use the Phaser.io framework and the emulator’s input flags. The emulator no longer knows about the game, and the game no longer knows about the browser.<br>
-		</p>
-
-		<h2>Emulator</h2>
-		The emulator is an interface between the browser and the application.
-		The emulator uses KeyObject and GameObject to represent user input and the canvas display,
-		and has functions that applications can use to access the browser.
-		We are unable to simulate swiping, so key presses are used instead.
-		<h3>KeyObject</h3>
-		<p>KeyObject represents a key that can be pressed and can be customized for each application.</p>
-		<h4>Properties</h4>
-		<ul>
-			<li><code>code</code> represents the KeyObject’s corresponding JavaScript key code.</li>
-			<li><code>pressed</code> indicates whether or not a key has been pressed.</li>
-		</ul>
-
-		<h3>GameObject</h3>
-
-			<p>
-			GameObject represents an image that can be drawn on the canvas.
-			The application is able to add GameObjects for the emulator to draw on the canvas.
-			</p>
-
-		<h4>Properties</h4>
-		<ul>
-		<li><code>initialX</code> and <code>initialY</code> are the GameObject’s initial coordinates.</li>
-			<li><code>x</code> and <code>y</code> are GameObject’s current coordinates</li>
-			<li><code>sprite</code> is an HTMLImageElement, which can be drawn on the canvas</li>
-			<li><code>spriteFile</code> is the filename of the GameObject’s sprite</li>
-		</ul>
+			Huijun Zhou  	   6794896  HuijunZhou@github.com<br>
+	
+		<h2>Evaluation</h2>
 
 		<p>
-		The emulator is a wrapper around the browser, and handles JavaScript KeyBoardEvents so that it
-		can notify the application. The emulator needs an HTML canvas to paint objects to the screen.
+			For assignment 3, we redid the maze game and emulator so that the maze game did not know about the browser, and the emulator did not know about the application. The maze game used the Phaser.io framework and the physics 2D engine for ball movement and collision detection in the maze. We used TypeScript and jQuery to build the emulator.
+			Isabel Baltazar and Lennox Huang worked on the emulator, and Raeciel Reyes and Kimi Zhou worked on the maze game application.
 		</p>
 		<p>
-		The emulator has five pre-defined keys : LEFT_KEY, RIGHT_KEY, DOWN_KEY, UP_KEY, and SPACEBAR,
-		which indicate whether or not a key has been pressed. Applications are free to customize these keys.
+			Isabel Baltazar and Lennox Huang worked on the emulator and they used TypeScript and jQuery after they found pure JavaScript hard to work with. They found JavaScript prototypes confusing, and were happy that TypeScript immediately generated JavaScript code that was easy to understand. They wrote QUnit tests after finishing the emulator. They found unit tests useful for finding bugs in handling key presses and confusing method signatures. 
 		</p>
 		<p>
-		Applications may provide the emulator with functions that handle KeyBoardEvents.
-		The emulator will store the function and call it whenever a key is pressed.
+			Raeciel Reyes and Kimi Zhou were assigned to code the maze game application. They used JavaScript to build the game, Tile Map Editor to create maps on each level and Phaser.io’s physics p2 game engine. They used Phaser’s game engine for the ball movement and collision detection to improve it from the previous version of our maze game application(assignment 2’s version). The arrow keys are used to control the ball movement. There are a total of 5 levels in this application and the user will go to the next level once the ball gets to the hole. Overall, they found Phaser’s game engine and Tile Map Editor’s learning experience enjoyable and also very useful to improve the maze game’s appearance and usability.
 		</p>
 
-		<h3>Functions</h3>
-
-		<ul>
-			<li><code>addResource(name, x, y, imgFile):</code>
-				To allow us to add images to the emulator and paint them.
-				Must take a name, x and y coordinates and the image filename.
-				Returns a reference to the GameObject.
-			</li>
-			<li><code>start():</code> Tells the emulator to start listening for KeyBoardEvents. It won’t run if the canvas
-				hasn’t been set.</li>
-			<li><code>paint():</code> Draws all GameObjects on screen and resets KeyObject.pressed to false.</li>
-			<li><code>setBG(bgFile):</code> Sets the background image, with bgFile as the path to the image.</li>
-			<li><code>initialize(keyFunction):</code> Initializes the default keys and stores keyFunction as a callback
-				for the KeyBoardEvent listener.
-				keyFunction may be left undefined.</li>
-			<li><code>mapKey(keyName, keyCode):</code>
-				Used to map one of the five pre-defined keys,
-				or define a new key for the application to use.
-				keyName will be the key’s name inside the keymap, and keyCode is its associated JavaScript key code.
-				If the mapped key is not predefined, then <code>mapKey()</code> returns a reference to the
-				new key.
-			</li>
-			<li><code>resetEmulator():</code> Resets the emulator state by resetting the pre-defined keys to its original values and removing all GameObjects.
-			</li>
-			<li><code>resetKeys():</code> Sets all KeyObjects’ pressed property to false.</li>
-			<li><code>resetImages():</code> Sets all GameObject coordinates to their original position.
-			</li>
-		</ul>
-
-		<h3>QUnit Tests</h3>
-		<p>
-			The emulator was tested using the QUnit framework.
-			It simulates key presses to test key mapping, key press detection, and key event handling.
-			It also tests GameObject initialization.
-		</p>
+		<center>
+			<img src="PrevDiagram.png" alt="PrevDiagram" style="width:450px;height:400px;"><br>
+			<small>Version 1 of the emulator and maze game had a circular dependency. Removing just one component would affect all parts of the project.</small>
+		</center>
 
 		<p>
-			The emulator passes all tests on Firefox, but fails gameObjectMovementTest on
+			The previous emulator and maze game application failed to keep the maze game application and browser independent of each other. The original maze game application used jQuery to handle user input, even though the maze game isn’t allowed to know about the browser. The emulator was supposed to be an interface between the application and the browser, but the emulator isn’t allowed to know anything specific about the application either.<br>
+		</p>
+		<center>
+			<img src="NewDesign.png" alt="NewDesign" style="width:450px;height:400px;"><br>
+			<small>The new emulator doesn't know about the application, and the application can't
+			directly access the browser.</small>
+		</center>
+
+		<p>
+			We’ve rebuilt the emulator to have functions that raises flags to indicate user input. The Maze Game Application has been rewritten to use the Phaser.io framework and the emulator’s input flags. The emulator no longer knows about the game, and the game no longer knows about the browser.<br>
 		</p>
 
-		<ul>
-			<li><code>defaultKeyRemapTest</code> : Tests the remapping of LEFT_KEY, RIGHT_KEY, UP_KEY, DOWN_KEY and SPACEBAR</li>
-			<li><code>customKeyMappingTest</code> : Tests adding user defined keys</li>
-			<li><code>keyPressedTest</code> : Tests key press detection</li>
-			<li><code>gameObjectMovementTest</code> : Tests if GameObjects are being updated by applications</li>
-			<li><code>gameObjectInitializationTest</code> : Tests if GameObjects are being added to the emulator</li>
-		</ul>
-
+		<h2>Group Evaluation</h2>
+		<p>
+			Our group had project meetings once a week, and we separated the workload into different parts for every member. The group was split into two teams and each member had a clearly defined role. It was easy to work out solutions and identify problems because we knew which member was assigned to which part of the application.
+		</p>
+		<p>
+			Our group had no problems communicating and we were lucky enough to have enough gaps in our timetables for our weekly meetings. Our team had problems when two members fell sick, and we had to account for recovery time. However, each member clearly recorded their work and managed their time well. The rest of team was able to keep working on the project.
+		</p>
+		<p>
+				Our project for Assignment 2 had problems with separating the browser from the application. The group shared different solutions and opinions during meetings, so that both teams knew how the other was planning to approach the problem. We are happy with the Phaser.io framework, and TypeScript. Game development is fun and we'll be happy to try it again.
+		</p>
 		<h2>Maze Game Application</h2>
-
-		<p>
-			We used Phaser.io’s game engine version 2.3.0 (phaser.min.js) for our maze game application.
-			The game.js file is to create and load images and game details into the emulator.
-			We used several functions in game.js file:<br>
-		</p>
-
 		<ul>
-			<li><code>preload()</code>: Load the image and all maze levels to the emulator.</li>
+				<li><a href="game.html">Maze Game Application</a></li>
+				<li><a href="MazeGameInstruction.html">Maze Game Instruction Book</a></li>
+		</ul>		
+		<p>
+				We used Phaser.io’s game engine version 2.3.0 (phaser.min.js) for our maze game application. The game.js file is to create and load images and game details into the emulator. 
+		</p>
+		We used several functions in game.js file:<br>
+		<ul>
+				<li><code>preload()</code>: Load the image and all maze levels to the emulator.</li>
 			<li><code>create()</code>:  To create and set up the rules for the game, when the ball arrive the hole, the map will change it to the other map. </li>
 			<li><code>setup()</code>: To initialize the map, tile layers and prevent the collision occurs.</li>
 			<li><code>destoryEverything()</code>: To check whenever the game has to rest the map and tile layer.</li>
@@ -144,9 +73,124 @@
 			<li><code>checkOverLap()</code>: This function will called when the ball is overlapping the hole.</li>
 		</ul>
 
-		<h2>Group Evaluation</h2>
+		<h2>Emulator</h2>
+		<a href="EmulatorDocumentation.html">Emulator Documentation</a>
 		<p>
-			Our group have meeting for the assignment every once a week, we separate the workload into different part for every member to work. During the time slot, some of the member got sick because of the bad weather conditions. We decided to take two weeks break to recovery from the sickness. However, each member manage the time well and learning new knowledge for the assignment. In assignment 2, our maze game application can not work independently, so we decide to rebuilt the javascript file and the emulator. We shared different opinions during the meeting and some learning the new engine for our game’s movement to improve the assignment progress.
+			The emulator is an interface between the browser and the application.<br>
+			The emulator uses KeyObject and GameObject to represent user input and the canvas display, and has functions that applications can use to access the browser.<br>
+			We are unable to simulate swiping, so key presses are used instead. 
+			Click events are not supported by the emulator.
 		</p>
+		<h3>KeyObject</h3>
+		<p>
+			KeyObject represents a key that can be pressed and can be customized for each application.
+		</p>
+		<h4>Properties</h4>
+		<ul>
+					<li><code>code</code> represents the KeyObject’s corresponding JavaScript key code.</li>
+					<li><code>pressed</code> indicates whether or not a key has been pressed.</li>
+		</ul>
+		<h3>GameObject</h3>
+
+		<p>
+				GameObject represents an image that can be drawn on the canvas.
+				The application is able to add GameObjects for the emulator to draw on the canvas.
+		</p>
+
+		<h4>Properties</h4>
+		<ul>
+			<li><code>initialX</code> and <code>initialY</code> are the GameObject’s initial coordinates.</li>
+			<li><code>x</code> and <code>y</code> are GameObject’s current coordinates</li>
+			<li><code>sprite</code> is an HTMLImageElement, which can be drawn on the canvas</li>
+			<li><code>spriteFile</code> is the filename of the GameObject’s sprite</li>
+		</ul>
+		<p>
+				The emulator is a wrapper around the browser, and handles JavaScript KeyBoardEvents so that it can notify the application. The emulator needs an HTML canvas to paint objects to the screen.
+		</p>
+		<p> 
+				The emulator has five pre-defined keys : LEFT_KEY, RIGHT_KEY, DOWN_KEY, UP_KEY, and SPACEBAR, which indicate whether or not a key has been pressed. Applications are free to customize these keys.
+		</p>
+		<p>
+				Applications may provide the emulator with functions that handle KeyBoardEvents. The emulator will store the function and call it whenever a key is pressed.
+		</p>
+
+		<h3>Functions</h3>
+
+		<ul>
+			<li>
+				<code>addResource(name, x, y, imgFile):</code> To allow us to add images to the emulator and paint them. 
+				<br>Must take a name, x and y coordinates and the image filename.
+				<br>Returns a reference to the GameObject.
+			</li>
+			<li>
+				<code>start():</code> 
+				Tells the emulator to start listening for KeyBoardEvents. It won’t run if the canvas hasn’t been set.
+			</li>
+			<li>
+				<code>paint():</code> 
+				Draws all GameObjects on screen and resets KeyObject.pressed to false.
+			</li>
+			<li>
+				<code>setBG(bgFile):</code> 
+				Sets the background image, with bgFile as the path to the image.
+			</li>
+			<li>
+				<code>initialize(keyFunction):</code>
+				 Initializes the default keys and stores keyFunction as a callback
+				for the KeyBoardEvent listener.
+				<br>keyFunction may be left undefined.
+			</li>
+			<li>
+				<code>mapKey(keyName, keyCode):</code>
+				Used to map one of the five pre-defined keys,
+				or define a new key for the application.
+				<br>keyName will be the key’s name inside the keymap, and keyCode is its associated JavaScript key code.
+				<br>If the mapped key is not predefined, then <code>mapKey()</code> returns a reference to the
+				new key.
+			</li>
+			<li>
+				<code>resetEmulator():</code> 
+				Resets the emulator state by resetting the pre-defined keys to its original values and removing all GameObjects.
+			</li>
+			<li>
+				<code>resetKeys():</code>
+				 Sets all KeyObjects’ pressed property to false.
+				</li>
+			<li>
+				<code>resetImages():</code>
+				Sets all GameObject coordinates to their original position.
+			</li>
+		</ul>
+
+		<h3>QUnit Tests</h3>
+		<p> 
+				The emulator was tested using QUnit version 1.18.0.<br>
+				Tests simulate key presses to test key mapping, key press detection, and key event handling. It also tests GameObject initialization.
+		</p>
+		<p> 
+				The emulator passes all tests on Firefox, but fails gameObjectMovementTest on other browsers.
+		</p>
+		<ul>
+			<li>
+				<code>defaultKeyRemapTest</code>
+				 : Tests the remapping of LEFT_KEY, RIGHT_KEY, UP_KEY, DOWN_KEY and SPACEBAR
+				</li>
+			<li>
+				<code>customKeyMappingTest</code>
+				 : Tests adding user defined keys
+				</li>
+			<li>
+				<code>keyPressedTest</code>
+				 : Tests key press detection
+				</li>
+			<li>
+				<code>gameObjectMovementTest</code>
+				 : Tests if GameObjects are being updated by applications
+				</li>
+			<li>
+				<code>gameObjectInitializationTest</code>
+				 : Tests if GameObjects are being added to the emulator
+				</li>
+		</ul>
 	</body>
 </html>

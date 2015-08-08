@@ -84,7 +84,7 @@ function setup(){
 
     hole = game.add.sprite(160,160,'hole2');
     ball = game.add.sprite(20, 20, 'ball');
-    if(i > 1){
+    if(i > 5){
         winLabel(); //calls this function when the player wins the game.
     }
     game.physics.p2.enable(ball, false);
@@ -131,6 +131,7 @@ function update() {
         create();
     
     }
+    console.log("CURRENT LEVEL: " + i);
     resetKeys();
 }
 

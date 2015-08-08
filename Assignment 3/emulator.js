@@ -1,5 +1,15 @@
 /**
-   emulator.js defines an IO pipeline between the browser and app.js.
+   emulator.js is an IO pipeline between the browser and game.js.
+   emulator.js defines functions and objects that can be used by applications
+   to access a browser's canvas element.
+
+   emulator.js is the transpiled version of Emulator.ts.
+   emulator.js requires a server to run.
+
+   Version : 2.0.0
+
+   Dependencies:
+    jQuery 1.18.0
 */
 
 /**
@@ -43,14 +53,15 @@ var KeyObject = (function (){
     return KeyObject;
 })();
 
-var clock_cycle;
+
+var clock_cycle; // how often the emulator listens for events
 
 // image resources
 var bg = new Image();
 var images = []; // GameObject array
 
 // key maps
-var keymap = [];
+var keymap = []; // KeyObject array
 var SPACEBAR;
 var LEFT_KEY;
 var RIGHT_KEY;
