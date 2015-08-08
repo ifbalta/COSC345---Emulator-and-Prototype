@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="report.css">
 	</head>
 	<body>
-		<h1>SAssignment 3 Report</h1>
+		<h1>Assignment 3 Report</h1>
 		<p>
 			<b>Authors:</b><br>
 			Isabel Baltazar 8093074  ifbalta@github.com<br>
@@ -38,18 +38,100 @@
 		</p>
 
 		<h2>Emulator</h2>
-		We use warper to warp the function and update the key objects. We set up each directional key as a flag.There are several functions in the emulator file:<br>
+		The emulator is an interface between the browser and the application.
+		The emulator uses KeyObject and GameObject to represent user input and the canvas display,
+		and has functions that applications can use to access the browser.
+		We are unable to simulate swiping, so key presses are used instead.
+		<h3>KeyObject</h3>
+		<p>KeyObject represents a key that can be pressed and can be customized for each application.</p>
+		<h4>Properties</h4>
 		<ul>
-			<li><code>addResource()</code>: To allow us to add images to the emulator and allow it to paint them. </li>
-			<li><code>setup()</code>: To initialize the emulator, we set up the key object for up, down, left and right to control the ball movement. The key press is stand for swiping.</li>
-			<li><code>mapKey()</code>: To default undefined key as unpressed and do nothings.</li>
-			<li><code>resetKeys()</code>: To reset all the keys back to original states.</li>
+			<li><code>code</code> represents the KeyObject’s corresponding JavaScript key code.</li>
+			<li><code>pressed</code> indicates whether or not a key has been pressed.</li>
+		</ul>
+
+		<h3>GameObject</h3>
+
+			<p>
+			GameObject represents an image that can be drawn on the canvas.
+			The application is able to add GameObjects for the emulator to draw on the canvas.
+			</p>
+
+		<h4>Properties</h4>
+		<ul>
+		<li><code>initialX</code> and <code>initialY</code> are the GameObject’s initial coordinates.</li>
+			<li><code>x</code> and <code>y</code> are GameObject’s current coordinates</li>
+			<li><code>sprite</code> is an HTMLImageElement, which can be drawn on the canvas</li>
+			<li><code>spriteFile</code> is the filename of the GameObject’s sprite</li>
+		</ul>
+
+		<p>
+		The emulator is a wrapper around the browser, and handles JavaScript KeyBoardEvents so that it
+		can notify the application. The emulator needs an HTML canvas to paint objects to the screen.
+		</p>
+		<p>
+		The emulator has five pre-defined keys : LEFT_KEY, RIGHT_KEY, DOWN_KEY, UP_KEY, and SPACEBAR,
+		which indicate whether or not a key has been pressed. Applications are free to customize these keys.
+		</p>
+		<p>
+		Applications may provide the emulator with functions that handle KeyBoardEvents.
+		The emulator will store the function and call it whenever a key is pressed.
+		</p>
+
+		<h3>Functions</h3>
+
+		<ul>
+			<li><code>addResource(name, x, y, imgFile):</code>
+				To allow us to add images to the emulator and paint them.
+				Must take a name, x and y coordinates and the image filename.
+				Returns a reference to the GameObject.
+			</li>
+			<li><code>start():</code> Tells the emulator to start listening for KeyBoardEvents. It won’t run if the canvas
+				hasn’t been set.</li>
+			<li><code>paint():</code> Draws all GameObjects on screen and resets KeyObject.pressed to false.</li>
+			<li><code>setBG(bgFile):</code> Sets the background image, with bgFile as the path to the image.</li>
+			<li><code>initialize(keyFunction):</code> Initializes the default keys and stores keyFunction as a callback
+				for the KeyBoardEvent listener.
+				keyFunction may be left undefined.</li>
+			<li><code>mapKey(keyName, keyCode):</code>
+				Used to map one of the five pre-defined keys,
+				or define a new key for the application to use.
+				keyName will be the key’s name inside the keymap, and keyCode is its associated JavaScript key code.
+				If the mapped key is not predefined, then <code>mapKey()</code> returns a reference to the
+				new key.
+			</li>
+			<li><code>resetEmulator():</code> Resets the emulator state by resetting the pre-defined keys to its original values and removing all GameObjects.
+			</li>
+			<li><code>resetKeys():</code> Sets all KeyObjects’ pressed property to false.</li>
+			<li><code>resetImages():</code> Sets all GameObject coordinates to their original position.
+			</li>
+		</ul>
+
+		<h3>QUnit Tests</h3>
+		<p>
+			The emulator was tested using the QUnit framework.
+			It simulates key presses to test key mapping, key press detection, and key event handling.
+			It also tests GameObject initialization.
+		</p>
+
+		<p>
+			The emulator passes all tests on Firefox, but fails gameObjectMovementTest on
+		</p>
+
+		<ul>
+			<li><code>defaultKeyRemapTest</code> : Tests the remapping of LEFT_KEY, RIGHT_KEY, UP_KEY, DOWN_KEY and SPACEBAR</li>
+			<li><code>customKeyMappingTest</code> : Tests adding user defined keys</li>
+			<li><code>keyPressedTest</code> : Tests key press detection</li>
+			<li><code>gameObjectMovementTest</code> : Tests if GameObjects are being updated by applications</li>
+			<li><code>gameObjectInitializationTest</code> : Tests if GameObjects are being added to the emulator</li>
 		</ul>
 
 		<h2>Maze Game Application</h2>
 
 		<p>
-		We used Phaser.io’s game engine(phaser.min.js) for our maze game application. The game.js file is to create and load images and game details into the emulator.  We used several functions in game.js file:<br>
+			We used Phaser.io’s game engine version 2.3.0 (phaser.min.js) for our maze game application.
+			The game.js file is to create and load images and game details into the emulator.
+			We used several functions in game.js file:<br>
 		</p>
 
 		<ul>
