@@ -55,7 +55,7 @@ function create() {
 
     }  
     i += 1;
-    
+    hole.body.clearCollision(true);
 }
 
 
@@ -89,7 +89,10 @@ function setup(){
         winLabel(); //calls this function when the player wins the game.
     }
     game.physics.p2.enable(ball, false);
+    game.physics.p2.enable(hole, false);
+    hole.body.setCircle(5);
     ball.body.setCircle(9);
+    
     game.camera.follow(ball);
 
     //  By default the ball will collide with the World bounds,
@@ -109,25 +112,28 @@ function setup(){
  ** and checks if the ball is overlapping the hole
  **/
 function update() {
-    ball.body.setZeroVelocity();
+    hole.body.setZeroVelocity();
+    hole.body.setZeroRotation();
+
     
     if (LEFT_KEY){
-        ball.body.velocity.x = -250;
+        ball.body.velocity.x = -100;
         ball.scale.x = 1;
     } else if (RIGHT_KEY) {
-        ball.body.velocity.x = 250;
+        ball.body.velocity.x = 100;
         ball.scale.x = -1;
     }
 
     if (UP_KEY) {
-        ball.body.velocity.y = -250;
+        ball.body.velocity.y = -100;
     }
 
     if (DOWN_KEY) {
-        ball.body.velocity.y = 250;
+        ball.body.velocity.y = 100;
     }
 
     if (checkOverlap(ball,hole)){
+
         create();
     
     }
@@ -184,8 +190,8 @@ function winLabel(){
 function checkOverlap(spriteA, spriteB) {
 
     var boundsA = spriteA.getBounds();
-    var boundsB = spriteB.getBounds();
+    //var boundsB = spriteB.getBounds();
 
-    return Phaser.Rectangle.intersects(boundsA, boundsB);
+    return Phaser.Rectangle.intersects(boundsA, spriteB);
 
 }
