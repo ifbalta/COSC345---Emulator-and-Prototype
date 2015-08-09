@@ -18,3 +18,7 @@ div.section {
     text-align: center;
     font-size: 8pt;
 }
+
+.noStyle li{
+    list-style: none;
+}
