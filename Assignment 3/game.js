@@ -8,10 +8,11 @@ var game = new Phaser.Game(320, 320, Phaser.AUTO, '',
 function preload() {
 
     game.load.tilemap('map', 'resources/map1.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.tilemap('map2', 'resources/map2.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.tilemap('map3', 'resources/map3.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map2', 'resources/map5.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map3', 'resources/map2.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.tilemap('map4', 'resources/map4.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.tilemap('map5', 'resources/map5.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('map5', 'resources/map3.json', null, Phaser.Tilemap.TILED_JSON);
+
 
     game.load.image('blackTile', 'resources/blackTile.png');
     game.load.image('bg', 'resources/bg.jpg');
@@ -127,11 +128,9 @@ function update() {
     }
 
     if (checkOverlap(ball,hole)){
-        //curr += 1;
         create();
     
     }
-    console.log("CURRENT LEVEL: " + i);
     resetKeys();
 }
 
@@ -160,18 +159,20 @@ function winLabel(){
 
     game.winText = game.add.text(
         game.world.centerX,
-        game.world.height-200,
+        game.world.centerY,
         "",
         {
             size: "32px",
             fill: "#ffffff",  
             stroke: "#000000", 
             strokeThickness: 4,
+            align: "center",
             wordWrap: true,
             wordWrapWidth: win.width 
+
         }
     );
-    game.winText.setText("Congratulations!");
+    game.winText.setText("Congratulations! \n You Won!");
     game.winText.anchor.setTo(0.5, 0.5);
   
 }
