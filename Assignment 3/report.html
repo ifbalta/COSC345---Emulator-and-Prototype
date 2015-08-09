@@ -200,7 +200,7 @@
 			We had trouble passing canvas and image elements in and out of the Emulator class, even when using TypeScript to help solve type problems. We solved the issue by removing the Emulator object and exposing all of its functions and variables. Although we were able to solve the problem of drawing images on the canvas, applications are now able to redefine constants and variables.
 		</p>
 		<p>
-			 A possible solution is to define each constant as their own objects, that are set once, and have properties that get and update the key press state. We could also have a similar object that hides the keymap array.
+			 A possible solution is to define each constant as their own objects. The objects are set once, and have properties that get and update the key press state. We could also have a similar object that hides the keymap array.
 		</p>
 			For example:<br>
 			<code>
