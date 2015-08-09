@@ -191,8 +191,8 @@ function mapKey (keyName, keyCode) {
 /**
  * Updates key objcts.
  * */
-window.addEventListener("keydown", function (e){
-    var e = e.which;
+window.addEventListener("keydown", function (evt){
+    var e = evt.which;    
     keymap.forEach(function (kObj){
         if (kObj.code == e) {
             kObj.pressed = true;

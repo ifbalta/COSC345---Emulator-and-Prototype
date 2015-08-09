@@ -19,9 +19,33 @@
 
 // set up emulator and test objects
 // create a key event
+// create a key event
 var keyboardEvent = document.createEvent("KeyboardEvent");
-var initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
+Object.defineProperty(keyboardEvent, 'keyCode', {
+    get : function() {
+      return this.keyCodeVal;
+    }
+  });
 
+  Object.defineProperty(keyboardEvent, 'which', {
+    get : function() {
+      return this.keyCodeVal;
+    }
+  });
+
+var initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
+ keyboardEvent[initMethod](
+        "keydown", // event type : keydown, keyup, keypress
+        true, // bubbles
+        true, // cancelable
+        window, // viewArg: should be window
+        false, // ctrlKeyArg
+        false, // altKeyArg
+        false, // shiftKeyArg
+        false, // metaKeyArg
+        0, // keyCodeArg : unsigned long the virtual key code, else 0
+        0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
+    );
 var KEY_FLAG = false; // indicates a key press
 // make a mock key handling function
 // updates mock game object's position
@@ -73,18 +97,7 @@ function defaultKeyRemapTest (keyName, keyCode, expectedCode) {
 function keyPressedTest (keyName) {
     var result;
     // simulate a key press
-    keyboardEvent[initMethod](
-        "keydown", // event type : keydown, keyup, keypress
-        true, // bubbles
-        true, // cancelable
-        window, // viewArg: should be window
-        false, // ctrlKeyArg
-        false, // altKeyArg
-        false, // shiftKeyArg
-        false, // metaKeyArg
-        keymap[keyName].code, // keyCodeArg : unsigned long the virtual key code, else 0
-        0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
-    );
+    keyboardEvent.keyCodeVal = keymap[keyName].code; 
     document.dispatchEvent(keyboardEvent);
     // event listener should switch on one of the keys so check them all
     keymap.forEach(function (kObj) {
@@ -117,18 +130,7 @@ function gameObjectInitializationTest (objName, objX, objY, objFile) {
 function gameObjectMovementTest(dir, expectedX, expectedY) {
     var result;
     // simulate a key press
-    keyboardEvent[initMethod](
-        "keydown", // event type : keydown, keyup, keypress
-        true, // bubbles
-        true, // cancelable
-        window, // viewArg: should be window
-        false, // ctrlKeyArg
-        false, // altKeyArg
-        false, // shiftKeyArg
-        false, // metaKeyArg
-        keymap[dir].code, // keyCodeArg : unsigned long the virtual key code, else 0
-        0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
-    );
+    keyboardEvent.keyCodeVal = keymap[dir].code;
     document.dispatchEvent(keyboardEvent);
     result = mock.x == expectedX && mock.y == expectedY;
     // reset the mock object
@@ -145,6 +147,33 @@ function gameObjectMovementTest(dir, expectedX, expectedY) {
  *
  * */
 
+// test key presses
+test('keyPressedTest', function(){
+    ok(keyPressedTest("left"), "pressed the left key");
+    ok(keyPressedTest("right"), "pressed the right key");
+    ok(keyPressedTest("down"), "pressed the down key");
+    ok(keyPressedTest("up"), "pressed the up key");
+    ok(keyPressedTest("spacebar"), "pressed the  spacebar");
+});
+
+// test game object movement
+resetKeys();
+resetImages();
+test('gameObjectMovementTest', function(){
+    ok(gameObjectMovementTest("left", -1, 0), "mock object moved to the left");
+    ok(gameObjectMovementTest("right", 1, 0), "mock object moved to the right");
+    ok(gameObjectMovementTest("up", 0, 1), "mock object moved up");
+    ok(gameObjectMovementTest("down", 0, -1), "mock object moved down");
+});
+
+// test game object initialization
+test('gameObjectInitializationTest', function(){
+    ok(gameObjectInitializationTest("sora", 0, 0, "mock.png"),"initialized sora");
+    ok(gameObjectInitializationTest("riku", 10, 10, "mock.png"),"initialized riku");
+    ok(gameObjectInitializationTest("kairi", 300, 300, "mock.png"),"initialized kairi");
+
+});
+
 // test keymaps upon emulator construction
 test('defaultKeyRemapTest', function () {
     ok(defaultKeyRemapTest("left", 1, 1), "remapped to LEFT_KEY to key code 1");
@@ -156,7 +185,6 @@ test('defaultKeyRemapTest', function () {
 resetEmulator();
 
 
-
 test('customKeyMappingTest', function () {
     ok(customKeyMappingTest("shoot", 65), "mapped SHOOT key to 65 key code");
     ok(customKeyMappingTest("specialMove", 67), "mapped SPECIALMOVE key to 66 key code");
@@ -165,32 +193,4 @@ test('customKeyMappingTest', function () {
 });
 resetEmulator();
 resetKeys();
-// test key presses
-test('keyPressedTest', function(){
-    ok(keyPressedTest("left"), "pressed the left key");
-    ok(keyPressedTest("right"), "pressed the right key");
-    ok(keyPressedTest("down"), "pressed the down key");
-    ok(keyPressedTest("up"), "pressed the up key");
-    ok(keyPressedTest("spacebar"), "pressed the  spacebar");
-});
-
-// test game object movement
-resetImages();
-test('gameObjectMovementTest', function(){
-    ok(gameObjectMovementTest("left", -1, 0), "mock object moved to the left");
-    ok(gameObjectMovementTest("right", 1, 0), "mock object moved to the right");
-    ok(gameObjectMovementTest("up", 0, 1), "mock object moved up");
-    ok(gameObjectMovementTest("down", 0, -1), "mock object moved down");
-});
-
-
-
-
-// test game object initialization
-test('gameObjectInitializationTest', function(){
-    ok(gameObjectInitializationTest("sora", 0, 0, "mock.png"),"initialized sora");
-    ok(gameObjectInitializationTest("riku", 10, 10, "mock.png"),"initialized riku");
-    ok(gameObjectInitializationTest("kairi", 300, 300, "mock.png"),"initialized kairi");
-
-});
 

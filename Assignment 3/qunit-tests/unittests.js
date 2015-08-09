@@ -45,7 +45,31 @@ var gameObjectResults = {
 
 // create a key event
 var keyboardEvent = document.createEvent("KeyboardEvent");
+ Object.defineProperty(keyboardEvent, 'keyCode', {
+        get : function() {
+          return this.keyCodeVal;
+        }
+      });
+
+      Object.defineProperty(keyboardEvent, 'which', {
+        get : function() {
+          return this.keyCodeVal;
+        }
+      });
+
 var initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
+ keyboardEvent[initMethod](
+        "keydown", // event type : keydown, keyup, keypress
+        true, // bubbles
+        true, // cancelable
+        window, // viewArg: should be window
+        false, // ctrlKeyArg
+        false, // altKeyArg
+        false, // shiftKeyArg
+        false, // metaKeyArg
+        0, // keyCodeArg : unsigned long the virtual key code, else 0
+        0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
+    );
 
 var KEY_FLAG = false; // indicates a key press
 // make a mock key handling function
@@ -55,7 +79,6 @@ function keyLogic() {
     KEY_FLAG = true;
     if (RIGHT_KEY) {
         mock.x++;
-
     }
     if (LEFT_KEY) {
         mock.x--;
@@ -66,6 +89,11 @@ function keyLogic() {
     if (DOWN_KEY) {
         mock.y--;
     }
+    // console.log("STATES: right: " + RIGHT_KEY 
+    //     + " left: " + LEFT_KEY 
+    //     + " up: " + UP_KEY 
+    //     + " down: " + DOWN_KEY);
+    // console.log(mock);
     resetKeys();
 }
 // setup emulator
@@ -112,18 +140,7 @@ function defaultKeyRemapTest (keyName, keyCode, expectedCode) {
 function keyPressedTest (keyName) {
     keyPressedResults.total++;
     // simulate a key press
-    keyboardEvent[initMethod](
-        "keydown", // event type : keydown, keyup, keypress
-        true, // bubbles
-        true, // cancelable
-        window, // viewArg: should be window
-        false, // ctrlKeyArg
-        false, // altKeyArg
-        false, // shiftKeyArg
-        false, // metaKeyArg
-        keymap[keyName].code, // keyCodeArg : unsigned long the virtual key code, else 0
-        0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
-    );
+    keyboardEvent.keyCodeVal = keymap[keyName].code; 
     document.dispatchEvent(keyboardEvent);
     // event listener should switch on one of the keys so check them all
     keymap.forEach(function (kObj) {
@@ -163,23 +180,15 @@ function gameObjectInitializationTest (objName, objX, objY, objFile) {
 function gameObjectMovementTest(dir, expectedX, expectedY) {
     // simulate a keyPress
     keyPressedResults.total++;
-    // simulate a key press
-    keyboardEvent[initMethod](
-        "keydown", // event type : keydown, keyup, keypress
-        true, // bubbles
-        true, // cancelable
-        window, // viewArg: should be window
-        false, // ctrlKeyArg
-        false, // altKeyArg
-        false, // shiftKeyArg
-        false, // metaKeyArg
-        keymap[dir].code, // keyCodeArg : unsigned long the virtual key code, else 0
-        0 // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
-    );
+   // simulate a key press
+    keyboardEvent.keyCodeVal = keymap[dir].code;
+    
     document.dispatchEvent(keyboardEvent);
+
     gameObjectResults.total++;
     if (mock.x != expectedX || mock.y != expectedY){
         gameObjectResults.bad++;
+        console.log(keyboardEvent + " " + keyboardEvent.which);
         console.log("mock: " + mock);
         console.log("Failed to register movement in the " + dir + " direction");
         console.log("Mock object x-coordinate  " + mock.x + " is expected to be " + expectedX);
@@ -236,6 +245,7 @@ console.log("Testing game objects");
 console.log("Testing game object movement");
 console.log("-----------------------------");
 // test game object movement
+resetKeys();
 resetImages();
 gameObjectMovementTest("left", -1, 0);
 gameObjectMovementTest("right", 1, 0);
