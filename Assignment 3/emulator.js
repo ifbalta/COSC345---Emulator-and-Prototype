@@ -211,7 +211,9 @@ window.addEventListener("keydown", function (e){
     RIGHT_KEY = keymap["right"].pressed;
     UP_KEY = keymap["up"].pressed;
     DOWN_KEY = keymap["down"].pressed;
-    if (typeof mappedKeyFunction != "undefined")mappedKeyFunction;
+    if (typeof mappedKeyFunction != "undefined") {
+        mappedKeyFunction();
+    }
 });
 
 
