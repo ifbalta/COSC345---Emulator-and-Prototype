@@ -20,7 +20,7 @@
 			Isabel Baltazar and Lennox Huang worked on the emulator, and Raeciel Reyes and Kimi Zhou worked on the maze game application.
 		</p>
 		<p>
-			Isabel Baltazar and Lennox Huang worked on the emulator and they used TypeScript and jQuery after they found pure JavaScript hard to work with. They found JavaScript prototypes confusing, and were happy that TypeScript immediately generated JavaScript code that was easy to understand. They wrote QUnit tests after finishing the emulator. They found unit tests useful for finding bugs in handling key presses and confusing method signatures. 
+			Isabel Baltazar and Lennox Huang worked on the emulator and they used TypeScript and jQuery after they found pure JavaScript hard to work with. They found JavaScript prototypes confusing, and were happy that TypeScript immediately generated JavaScript code that was easy to understand. They wrote QUnit tests after finishing the emulator. They found unit tests useful for finding bugs in handling key presses and updating image coordinates. 
 		</p>
 		<p>
 			Raeciel Reyes and Kimi Zhou were assigned to code the maze game application. They used JavaScript to build the game, Tile Map Editor to create maps on each level and Phaser.io’s physics p2 game engine. They used Phaser’s game engine for the ball movement and collision detection to improve it from the previous version of our maze game application(assignment 2’s version). The arrow keys are used to control the ball movement. There are a total of 5 levels in this application and the user will go to the next level once the ball gets to the hole. Overall, they found Phaser’s game engine and Tile Map Editor’s learning experience enjoyable and also very useful to improve the maze game’s appearance and usability.
@@ -33,7 +33,7 @@
 		
 
 		<p>
-			The previous emulator and maze game application failed to keep the maze game application and browser independent of each other. The original maze game application used jQuery to handle user input, even though the maze game isn’t allowed to know about the browser. The emulator was supposed to be an interface between the application and the browser, but the emulator isn’t allowed to know anything specific about the application either.<br>
+			The previous emulator and maze game application failed to keep the maze game application and browser independent of each other. The original maze game application used jQuery to handle user input, even though the maze game isn’t allowed to know about the browser. The original emulator was able to start and stop multiple applications by checking a list of application files. The emulator was supposed to be an interface between the application and the browser, but the emulator isn’t allowed to know anything specific about the application either.<br>
 		</p>
 		
 		<div class="center">
@@ -56,7 +56,7 @@
 				Our project for Assignment 2 had problems with separating the browser from the application. The group shared different solutions and opinions during meetings, so that both teams knew how the other was planning to approach the problem. We are happy with the Phaser.io framework, and TypeScript. Game development is fun and we'll be happy to try it again.
 		</p>
 		<h2>Maze Game Application</h2>
-		<a href="game.html">Maze Game Application</a>
+		<a href="game.html">Maze Game Application</a><br>
 		<a href="MazeGameInstruction.html">Maze Game Instruction Book</a>
 		<p>
 				We used Phaser.io’s game engine version 2.3.0 (phaser.min.js) for our maze game application. The game.js file is to create and load images and game details into the emulator. 

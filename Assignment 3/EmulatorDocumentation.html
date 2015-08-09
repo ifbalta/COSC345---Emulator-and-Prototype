@@ -30,7 +30,7 @@
 		</h2>
 		<ul>
 			<li>A 320 x 320 screen</li>
-			<li>An app tray</li>
+			<li>Key presses are a stand in for swipe gestures</li>
 		</ul>
 		<h2>Installation</h2>
 		Requires git VCS be pre-installed.<br>
@@ -69,29 +69,25 @@
 					Using node, start server through <code>node bootup</code> and navigate to
 					<code>http://localhost:3000</code> in the browser
 				</li>
-				<li>Using python, start server through <code>python -m SimpleHTTPServer 8080</code> and navigate
+				<li>Or using python, start server through <code>python -m SimpleHTTPServer 8080</code> and navigate
 					to <code>http://localhost:8080</code>
 				</li>
 			</ul>
 		</ol>
+		<p>	
+		<h2>For Developers</h2>
 		<p>
-		<h2>For Users</h2>
-		<p>
-		Starting up the emulator is as simple as opening <code>emulator.html</code> in Safari, and selecting an app
-		from the menu.<br>
-		<h3>Not using Safari?</h3>
+			The emulator is an interface between the browser and the smartwatch application. It cannot simulate swipe events, and
+			the directional keys are used instead. Click events are not currently supported by the emulator. The emulator uses KeyObject to represent keyboard events, and GameObject to represent objects that can be drawn onscreen.
+		</p>
 		<p>
 			The emulator is compatible with Google Chrome, Firefox, Internet Explorer and Opera if you have node.js and Express.js pre-installed.
 		</p>
-		<h2>For Developers</h2>
-		
-		The emulator is an interface between the browser and the smartwatch application. It cannot simulate swipe events, and
-		the directional keys are used instead. Click events are not currently supported by the emulator. The emulator uses KeyObject to represent keyboard events, and GameObject to represent objects that can be drawn onscreen.
 
 		<h3>Requirements:</h3>
 		<ul>
 			<li>The emulator requires a canvas element to run.</li>
-			<li>The emulator requires either a node, or python server to run</li>
+			<li>The emulator requiresa web server to run JavaScript</li>
 		</ul>
 		 
 		<h3>Starting the emulator:</h3>
