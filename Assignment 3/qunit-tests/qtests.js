@@ -17,8 +17,6 @@
  *
  * */
 
-// set up emulator and test objects
-// create a key event
 // create a key event
 var keyboardEvent = document.createEvent("KeyboardEvent");
 Object.defineProperty(keyboardEvent, 'keyCode', {
