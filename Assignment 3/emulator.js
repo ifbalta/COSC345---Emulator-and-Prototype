@@ -198,10 +198,11 @@ function mapKey (keyName, keyCode) {
 }
 
 var canvas = $("#canvas")[0];
-var ctxt = canvas.getContext("2d");
-var h = canvas.height;
-var w = canvas.width;
-
+if (typeof canvas != "undefined"){
+    var ctxt = canvas.getContext("2d");
+    var h = canvas.height;
+    var w = canvas.width;
+}
 /**
  * Updates key objcts.
  * */
