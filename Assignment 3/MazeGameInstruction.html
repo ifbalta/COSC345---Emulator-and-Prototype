@@ -3,55 +3,75 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Maze Game Prototype Instruction Manual</title>
-		<style type="text/css">
-  		body {
-    	font-family: "Trebuchet MS", Helvetica, sans-serif;
-    	display: block;
-    	margin: 10px auto;
-    	padding: 0 50px;
-  		}
-  		ul#author{
-    	list-style-type: none;
-  		}
-		</style>
+		<link rel="stylesheet" type="text/css" href="report.css">
 	</head>
 	<body>
 		<h1>Maze Game Prototype Instruction Manual</h1>
-		<ul id ="author">
-			<li>Raeciel Reyes</li>
-			<li>Huijun Zhou</li>
-		</ul>
-		<h2>Dependencies</h2>
-		<ul>
-			<li>Phaser.io version 2.3.0</li>
-		</ul>
+		<p>
+			<b>Authors:</b><br>
+			Raeciel Reyes<br>
+			Huijun Zhou
+			
+		</p>
+
+
+		<p>
+			<b>Language:</b> JavaScript<br>
+			<b>Dependencies:</b>
+			Phaser.io version 2.3.0 provided by  <a href="https://phaser.io">Phaser.io</a><br>
+		</p>
+		<p>
+			The aim of the maze game application is to reach the hole at the centre of the maze.<br>
+			The ball movement can be controlled by arrow keys. There are multiple levels of increasing difficulty.
+		</p>
 		
 		<h2>Requirements:</h2>
 		<ul>
 			<li><a href="EmulatorDocumentation.html">Install</a>
 			the emulator.<br></li>
-			<li>The game uses Phaser.io, and which requires a server to run. The emulator comes with a node server, or if you have python pre-installed, you can use python's SimpleHTTPServer. </li>
+			<li>The game uses Phaser.io's game engin, which requires a server to run. The emulator comes with a node server, or if you have python pre-installed, you can use python's SimpleHTTPServer. </li>
 		</ul>
 
 		<h2>
 			How to play:
 		</h2>
 		<ul>
-			<li>Simply use your "Up, Down, Left, Right" key on the keyboard to move the rectangle.</li>
+			<li>Simply use your "Up, Down, Left, Right" key on the keyboard to move the ball.</li>
 			<li>The ball will not be able to pass the maze when they collide.</li>
-			<li>The only way to continue to the next level is reach the black hole in the centre.</li>
+			<li>The only way to continue to the next level is reach the hole at the centre of the maze.</li>
 		</ul>
-		<h2>
+
+		<h2>For Developers</h2>
+		The JavaScript files, game.js and phaser.io's game engine(phaser.min.js) are used to load and create images and game details into the emulator.
+
+		<h3>Tools we used:</h3>
+		<ul>
+			<li>Phaser.io’s game engine version 2.3.0 (phaser.min.js) - For our maze game application's ball movement and collision detection.</li>
+			<li>Tile Map Editor - To create different mazes as maps on each level.</li>
+			<li>Sublime Text 2 - A text editor for code and markup.</li>
+		</ul>
+
+		<h3>Game.js functions:</h3>
+		<ul>
+			<li><code>preload()</code>: Loads images and all of the maze levels to the emulator.</li>
+			<li><code>create()</code>: Starts and creates the game and identifies if it's going to the next level. </li>
+			<li><code>setup()</code>: Initialises the game engine, map, tile layers and collision detection</li>
+			<li><code>destoryEverything()</code>: Clears the game's map and tile layers for the next level of the game.</li>
+			<li><code>winLabel()</code>:To show the winning text.</li>
+			<li><code>update()</code>: Updates the ball movement when arrow keys are being pressed. It also calls the checkOverLap function to check if the ball reaches the hole.</li>
+			<li><code>checkOverLap()</code>: This function will called when the ball is overlapping the hole.</li>
+		</ul>
+		<h3>
 			Bugs
-		</h2>
+		</h3>
 		<ul>
 			<li>Sometimes, there is a random collision between the ball and an empty space(which is a tile that we are unable to see).<br>
 				<b>Solution:</b> All you need to do is refresh the page and it will disappear.
 			</li>
 		</ul>
-		<h2>
+		<h3>
 			Reference
-		</h2>
+		</h3>
 		<ul>
 			<li><a href="http://www.phaser.io">Phaser game engine</a> for the game's collision detection and player's movement.
 			</li>

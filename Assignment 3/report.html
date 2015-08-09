@@ -17,13 +17,13 @@
 
 		<p>
 			For assignment 3, we redid the maze game and emulator so that the maze game did not know about the browser, and the emulator did not know about the application. The maze game used the Phaser.io framework and the physics 2D engine for ball movement and collision detection in the maze. We used TypeScript and jQuery to build the emulator.
-			Isabel Baltazar and Lennox Huang worked on the emulator, and Raeciel Reyes and Kimi Zhou worked on the maze game application.
+			Isabel Baltazar and Lennox Huang worked on the emulator, and Raeciel Reyes and Huijun Zhou worked on the maze game application.
 		</p>
 		<p>
 			Isabel Baltazar and Lennox Huang worked on the emulator and they used TypeScript and jQuery after they found pure JavaScript hard to work with. They found JavaScript prototypes confusing, and were happy that TypeScript immediately generated JavaScript code that was easy to understand. They wrote QUnit tests after finishing the emulator. They found unit tests useful for finding bugs in handling key presses and updating image coordinates. 
 		</p>
 		<p>
-			Raeciel Reyes and Kimi Zhou were assigned to code the maze game application. They used JavaScript to build the game, Tile Map Editor to create maps on each level and Phaser.io’s physics p2 game engine. They used Phaser’s game engine for the ball movement and collision detection to improve it from the previous version of our maze game application(assignment 2’s version). The arrow keys are used to control the ball movement. There are a total of 5 levels in this application and the user will go to the next level once the ball gets to the hole. Overall, they found Phaser’s game engine and Tile Map Editor’s learning experience enjoyable and also very useful to improve the maze game’s appearance and usability.
+			Raeciel Reyes and Huijun Zhou were assigned to code the maze game application. They used JavaScript to build the game, Tile Map Editor to create maps on each level and Phaser.io’s physics p2 game engine. They used Phaser’s game engine for the ball movement and collision detection to improve it from the previous version of our maze game application(assignment 2’s version). The arrow keys are used to control the ball movement. There are a total of 5 levels in this application and the user will go to the next level once the ball gets to the hole. Overall, they found Phaser’s game engine and Tile Map Editor’s learning experience enjoyable and also very useful to improve the maze game’s appearance and usability.
 		</p>
 
 		<div class ="center">
@@ -57,20 +57,32 @@
 		</p>
 		<h2>Maze Game Application</h2>
 		<a href="game.html">Maze Game Application</a><br>
-		<a href="MazeGameInstruction.html">Maze Game Instruction Book</a>
+		<a href="MazeGameInstruction.html">Maze Game Instruction Manual</a>
+
 		<p>
-				We used Phaser.io’s game engine version 2.3.0 (phaser.min.js) for our maze game application. The game.js file is to create and load images and game details into the emulator. 
+		 The JavaScript files, game.js and phaser.io's game engine(phaser.min.js) are used to load and create images and game details into the emulator. 
 		</p>
-		We used several functions in game.js file:<br>
+		
+		<h3>Tools we used:</h3>
 		<ul>
-				<li><code>preload()</code>: Load the image and all maze levels to the emulator.</li>
-			<li><code>create()</code>:  To create and set up the rules for the game, when the ball arrive the hole, the map will change it to the other map. </li>
-			<li><code>setup()</code>: To initialize the map, tile layers and prevent the collision occurs.</li>
-			<li><code>destoryEverything()</code>: To check whenever the game has to rest the map and tile layer.</li>
-			<li><code>winLabel()</code>:To shows the winning text.</li>
-			<li><code>update()</code>: To check overlapping for the ball and hole.</li>
+			<li>Phaser.io’s game engine version 2.3.0 (phaser.min.js) - For our maze game application's ball movement and collision detection.</li>
+			<li>Tile Map Editor - To create different mazes as maps on each level.</li>
+			<li>Sublime Text 2 - A text editor for code and markup.</li>
+		</ul>
+
+		<h3>Game.js functions:</h3>
+		<ul>
+			<li><code>preload()</code>: Loads images and all of the maze levels to the emulator.</li>
+			<li><code>create()</code>: Starts and creates the game and identifies if it's going to the next level. </li>
+			<li><code>setup()</code>: Initialises the game engine, map, tile layers and collision detection.</li>
+			<li><code>destoryEverything()</code>: Clears the game's map and tile layers for the next level of the game.</li>
+			<li><code>winLabel()</code>:To show the winning text.</li>
+			<li><code>update()</code>: Updates the ball movement when arrow keys are being pressed. It also calls the checkOverLap function to check if the ball reaches the hole.</li>
 			<li><code>checkOverLap()</code>: This function will called when the ball is overlapping the hole.</li>
 		</ul>
+
+		<h3>Issues</h3>
+		<p>The original plan was to add a time limit on each level and display what level the player is currently at. Unfortunately, we did not have enough time to learn and implement these ideas due to some of our members' absence as they were recovering from their illness.</p>
 
 		<h2>Emulator</h2>
 		<a href="EmulatorDocumentation.html">Emulator Documentation</a><br>
