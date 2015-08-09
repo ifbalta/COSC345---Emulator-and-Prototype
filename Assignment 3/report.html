@@ -26,19 +26,20 @@
 			Raeciel Reyes and Kimi Zhou were assigned to code the maze game application. They used JavaScript to build the game, Tile Map Editor to create maps on each level and Phaser.io’s physics p2 game engine. They used Phaser’s game engine for the ball movement and collision detection to improve it from the previous version of our maze game application(assignment 2’s version). The arrow keys are used to control the ball movement. There are a total of 5 levels in this application and the user will go to the next level once the ball gets to the hole. Overall, they found Phaser’s game engine and Tile Map Editor’s learning experience enjoyable and also very useful to improve the maze game’s appearance and usability.
 		</p>
 
-		<center>
-			<img src="PrevDiagram.png" alt="PrevDiagram" style="width:450px;height:400px;"><br>
-			<small>Version 1 of the emulator and maze game had a circular dependency. Removing just one component would affect all parts of the project.</small>
-		</center>
+		<div class ="center">
+			<figure><img src="PrevDiagram.png" alt="Previous Diagram" height="400" width="450"></figure>
+			<p>Version 1 of the emulator and maze game had a circular dependency. Removing just one component would affect all parts of the project.</p>
+		</div>
+		
 
 		<p>
 			The previous emulator and maze game application failed to keep the maze game application and browser independent of each other. The original maze game application used jQuery to handle user input, even though the maze game isn’t allowed to know about the browser. The emulator was supposed to be an interface between the application and the browser, but the emulator isn’t allowed to know anything specific about the application either.<br>
 		</p>
-		<center>
-			<img src="NewDesign.png" alt="NewDesign" style="width:450px;height:400px;"><br>
-			<small>The new emulator doesn't know about the application, and the application can't
-			directly access the browser.</small>
-		</center>
+		
+		<div class="center">
+			<figure><img src="NewDesign.png" alt="New Design" height="400" width="450"></figure>
+			<p>The new emulator doesn't know about the application, and the application can'tdirectly access the browser.</p>
+		</div>
 
 		<p>
 			We’ve rebuilt the emulator to have functions that raises flags to indicate user input. The Maze Game Application has been rewritten to use the Phaser.io framework and the emulator’s input flags. The emulator no longer knows about the game, and the game no longer knows about the browser.<br>
