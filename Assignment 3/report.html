@@ -192,5 +192,22 @@
 				 : Tests if GameObjects are being added to the emulator
 				</li>
 		</ul>
+		<h3>Issues</h3>
+		<p>
+			The original plan was that the emulator would hold three classes : GameObject, KeyObject and Emulator. This means that some the variables and functions could be kept hidden from the application. For example, we wanted to hide the keymap array and the pre-defined keys to prevent the application from overwriting constants.
+		</p>
+		<p>
+			We had trouble passing canvas and image elements in and out of the Emulator class, even when using TypeScript to help solve type problems. We solved the issue by removing the Emulator object and exposing all of its functions and variables. Although we were able to solve the problem of drawing images on the canvas, applications are now able to redefine constants and variables.
+		</p>
+		<p>
+			 A possible solution is to define each constant as their own objects, that are set once, and have properties that get and update the key press state. We could also have a similar object that hides the keymap array.
+		</p>
+			For example:<br>
+			<code>
+				var LEFT_KEY = {<br>
+				pressed : keymap["left"].pressed,<br>
+				isPressed : function () {this.pressed = keymap["left"].pressed}<br>
+				}<br>
+			</code>	
 	</body>
 </html>
