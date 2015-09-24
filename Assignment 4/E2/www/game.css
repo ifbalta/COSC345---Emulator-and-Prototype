@@ -1,0 +1,38 @@
+html{
+	background: url("resources/index2.png"); 
+	color: black ;
+	background-color: transparent; 
+}
+
+body, canvas{
+	margin-left: auto;
+	margin-right:auto;
+}
+
+body{
+	text-align: center;
+	color: black;
+	background-color: inherit;
+	background: url("resources/watch.png") no-repeat center center;
+	width:406px;
+	height:640px;	
+	margin-top:0;
+}
+
+h1 {
+	color: #000000;	
+	background-color: inherit;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	padding-top:20px;
+	
+}
+
+canvas{
+	margin-top:0px;
+}
+
+#credits{
+	position:relative;
+	top:420px;
+	font-size: 11px;
+}

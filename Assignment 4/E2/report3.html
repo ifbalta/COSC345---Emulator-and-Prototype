@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Report 3</title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1038.36">
+  <style type="text/css">
+    p.p4 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times}
+    p.p5 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Courier}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px Times}
+    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    span.s1 {text-decoration: underline ; color: #0000ee}
+    td.td1 {width: 353.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 1.0px 1.0px 1.0px 1.0px}
+    td.td2 {width: 215.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 1.0px 1.0px 1.0px 1.0px}
+    td.td3 {width: 187.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 1.0px 1.0px 1.0px 1.0px}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<h1 style="margin: 0.0px 0.0px 16.0px 0.0px; font: 24.0px Times"><b>Assignment 3</b></h1>
+<h2 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 18.0px Times"><b>Structure and Interface of Emulator</b></h2>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times"><b>Intro</b></h3>
+<p class="p4">The emulator is entirely contained within emulator.js. It's structure is simple, it defines a few simple functions as "calls" to be passed to the app, as well as a set of sounds and a EaselJS 'Stage'.</p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times"><b>App.js</b></h3>
+<p class="p4">The app is stored in a file called app.js. The code should be in a module pattern along the lines of the following:</p>
+<p class="p5">var App = (function(){<br>
+   var pub = {};<br>
+   pub.init = function(calls_in, stage_in, sounds_in){<br>
+      //application initialisation code<br>
+   }<br>
+   return pub;<br>
+}</p>
+<p class="p4">Once the emulator has performed all it's intialisation it will call the App.init function, passing it the the three objects (calls, stage, sounds). In App.init you will want to store the three passed objects and the perform any startup you require before calling into your app's main logic loop.</p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times"><b>Calls</b></h3>
+<p class="p4">The first object passed to the app is an object containing functions linking to the emulated non-graphics/screen and non-sound hardware functions of the emulator. Our emulator is currently only setup to handle GPS and Bluetooth connection. Those calls are as follows:</p>
+<p class="p5">calls.testBluetooth() - Returns true or false indicating whether the watch is connected via bluetooth to the phone. This is just a toggle button in the UI<br>
+<br>
+calls.getLocation() - Returns the current GPS location of the watch. This is set in the UI either as a marker in a Google Maps window, manually entered coordinates, or a selection from Radio buttons. The returned value is an object coord with values coord.lat (latitude) and coord.lon (longitude).</p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times"><b>Stage</b></h3>
+<p class="p4">The second object passed to the app is a 'stage' this is an object created on top of the canvas (watch screen). This allows emulation of the watch's graphics functionality. This functionality is provided by the library 'easelJS'. For more information regarding this, and documentation for it's use please see: <a href="http://www.createjs.com/docs/easeljs/modules/EaselJS.html"><span class="s1">EaselJS Docs</span></a></p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times"><b>Sounds</b></h3>
+<p class="p4">The final object passed is just an object containing a selection of sounds objects, these are defined in the emulator init method, and new sounds can easily be added or removed. These are played by simply calling sounds.soundName.play()</p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times"><b>Other Functionality</b></h3>
+<p class="p4">We included a few other libraries to perform some tasks, they are listed below with links to documentation in case you are unfamiliar with some of them:</p>
+<ul class="ul1">
+  <li class="li6"><b>JQuery</b> - Used for Javascript simplification, mainly in the Emulator. See: <a href="http://api.jquery.com/"><span class="s1">JQuery Docs</span></a></li>
+  <li class="li6"><b>Google Maps</b> - Used as an extension of the GPS UI. See: <a href="https://developers.google.com/maps/documentation/javascript/tutorial"><span class="s1">Google Maps Api Docs</span></a></li>
+  <li class="li6"><b>Hammer.js</b> - Unfortunately we found that the Swipe events included in Easel.js were not accurate enough for our liking. Hammer.js provided a much better solution. See: <a href="http://hammerjs.github.io/getting-started/"><span class="s1">Hammer.js Docs</span></a></li>
+  <li class="li6"><b>Tween.js</b> - We included this to allow some nice little animations on our app. See: <a href="http://hammerjs.github.io/getting-started/"><span class="s1">Tween.js Docs</span></a></li>
+</ul>
+<h2 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 18.0px Times"><b>Final Prototype</b></h2>
+<p class="p4">Our final application is simple and easy to use. It is used via bluetooth to detect a missing connection between the watch and a cellphone. When the connection is undetected, an alarm will play on the watch screen to notify you that you have left your phone behind.</p>
+<p class="p4">When you first launch the application the home screen appears presenting easy instructions to:</p>
+<ul class="ul1">
+  <li class="li6">Swipe left for settings</li>
+  <li class="li6">Swipe right for your current location</li>
+</ul>
+<p class="p4">You are able to set "safe zone" locations (home, school, work, etc) where if connection is lost, the alarm will not sound.</p>
+<p class="p4">In order for the alarm to sound, you have to manually press the "disconnect" button, which represents the loss of bluetooth.</p>
+<p class="p4">The application uses Google Maps as a GPS system for setting locations and zones</p>
+<h2 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 18.0px Times"><b>Tools</b></h2>
+<p class="p4">Tools that we used to make the app. What we found useful and what we wanted that was missing?</p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times"><b>Editing, Version Control and Programming Language Tools</b></h3>
+<p class="p4">We found working with WebStorm as our editor alongside Bitbucket for version control worked best for us. Since we divided particular tasks between group members, Bitbucket was easy and simple to commit individual changes and to see who made what changes.</p>
+<p class="p4">JavaScript and jQuery worked well throughout all assignments as we all apart from 1 group member, had experience with this language. It made using graphic and animation libraries easier to understand as well as majority of group members able to follow code written by others.</p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times"><b>Create.js Libraries</b></h3>
+<p class="p4">We used two libraries from Create.js called Easel.js and Tween.js. These two libraries were used as tools for making the graphics and animations. These libraries made using the canvas element simple and allowed our graphic/animation code to be consistent.</p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times"><b>Google Maps API</b></h3>
+<p class="p4">The Google Maps UI is used to extend the functionality of GPS emulation. A marker is placed on the map which represents the current GPS location which is passed to the watch app. This just adds an extra layer to our emulator.</p>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Times"><b>Missing Useful Tools</b></h3>
+<p class="p4">We were unable to use mercurial on the lab computers which made making new commits to our repository a little difficult if you were working from the lab. To overcome this issue, we used a mercurial client called TortoiseHg.</p>
+<h2 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 18.0px Times"><b>Testing</b></h2>
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p7"><b>Input</b></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p7"><b>Expected Output</b></p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p7"><b>Actual Output</b></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Select “GPS Location” button where the phone isn’t.</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">Alarm to beep.</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">Alarm does beep.</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Change color on “Tori’s Color Design”.</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">The color should change to the selected color.</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">All colors change as expected.</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Change location by clicking on the google map.</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">Location gets change to targeted location.</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">Location does get changed.</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Can connected to a theoretical phone by bluetooth.</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">Stops alarm if you’re are out of gps signal.</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">Alarm stops.</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Can use the app to set new home location.</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">New home location will be set.</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">New home location does get set.</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Moving the phone out of signal.</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">Alarm notifies user.</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">Alarm does go off.</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Changing location</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">Alarm should appear when changing location</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">Alarm appears when changing location.</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Changing location and then connecting phone via bluetooth.</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">Alarm should disappear.</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">Alarm does disappear.</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Connecting phone and then changing location.</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">Alarm should not appear.</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">Alarm does not appear.</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Connecting phone, changing location and then disconnecting phone.</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">Alarm should appear.</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">Alarm does appear.</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p6">Connecting phone, changing location, set home and then disconnect phone.</p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p6">Alarm should not appear.</p>
+      </td>
+      <td valign="middle" class="td3">
+        <p class="p6">Alarm did not appear.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p4">All the above were tested on Google Chrome, Firefox, Safari and Opera. Not issues were found at all.</p>
+<h2 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 18.0px Times"><b>Group Dynamics</b></h2>
+<h2 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 18.0px Times"><b>[[REDACTED]]</b></h2>
+</body>
+</html>
