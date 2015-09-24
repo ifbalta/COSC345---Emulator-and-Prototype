@@ -22,7 +22,7 @@ function preload() {
 }
 
 
-/*Global variables*/
+/*Gloabal variables*/
 var ball;
 var map;
 var layer;
