@@ -30,6 +30,48 @@ var cursors;
 var hole;
 var i = 1; //Level counter
 
+/* E2 Compatibility */
+
+// Key Mappings
+var E2_UP = false;
+var E2_DOWN = false;
+var E2_LEFT= false;
+var E2_RIGHT = false;
+
+//App Object
+var App = (function {
+    var pub = {};
+    pub.init = function () {
+        hammertime = new Hammer(document.getElementById("canvas"));
+        hammertime.on("panup pandown panright panleft swipeup swipedown
+                         swipeleft swiperight", handleSwipes);
+    }
+});
+
+function handleSwipes (hamEvt) {
+    switch (hamEvt.type) {
+        case "panup" || "swipeup": //key up
+            E2_UP = true;
+            break;
+        case "pandown" || "swipedown":
+            E2_DOWN = true;
+            break;
+        case "panright" || "swiperight":
+            E2_RIGHT = true;
+            break;
+        case "panleft" || "swipeleft":
+            E2_LEFT = true;
+            break;        
+    }
+}
+
+function resetKeys () {
+    E2_UP = false;
+    E2_DOWN = false;
+    E2_LEFT= false;
+    E2_RIGHT = false;
+}
+
 
 /**
  **Starts and creates the game and identifies if it's going to the next level.
@@ -37,8 +79,6 @@ var i = 1; //Level counter
  **/
 function create() {
     game.background = game.add.tileSprite(0,0,320,320,'bg');
-    initialize(); // initialize emulator
-
 
     if(i === 1){    
         map = game.add.tilemap('map');
@@ -116,19 +156,19 @@ function update() {
     hole.body.setZeroRotation();
 
     
-    if (LEFT_KEY){
+    if (E2_LEFT){
         ball.body.velocity.x = -100;
         ball.scale.x = 1;
-    } else if (RIGHT_KEY) {
+    } elE2_se if (RIGHT) {
         ball.body.velocity.x = 100;
         ball.scale.x = -1;
     }
 
-    if (UP_KEY) {
+    if (E2_UP) {
         ball.body.velocity.y = -100;
     }
 
-    if (DOWN_KEY) {
+    if (E2_DOWN) {
         ball.body.velocity.y = 100;
     }
 
