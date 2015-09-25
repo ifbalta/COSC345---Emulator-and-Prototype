@@ -117,7 +117,6 @@ var Emulator = (function(){
     pub.setup = function(){
         $("#connect").click(BTConnect);
         var stage = new createjs.Stage("canvas");
-
         //Object to hold sounds. An object is used rather than an array
         //to make referencing the sounds easier later on.
         var sounds = {
@@ -137,7 +136,6 @@ var Emulator = (function(){
 
             btDisconnect : new Audio("sounds/powerOff.wav")
         };
-
         //when the radio buttons are changed
         $('input[type=radio][name=gps]').change(changedRadio);
         $('#set').click(setcoords);
@@ -158,10 +156,12 @@ var Emulator = (function(){
             draggable: true
         });
         google.maps.event.addListener(marker, "dragend", dragMarker);
+        console.log("set map");
         $("#home").prop('checked', true);
         console.log("emu initialised");
         //Initiate App
         App.init(calls, stage, sounds);
+
     };
 
     return pub;

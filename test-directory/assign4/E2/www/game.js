@@ -39,12 +39,12 @@ var E2_LEFT= false;
 var E2_RIGHT = false;
 
 //App Object
-var App = (function {
+var App = (function () {
     var pub = {};
     pub.init = function () {
+        console.log("Connecting hammer io");
         hammertime = new Hammer(document.getElementById("canvas"));
-        hammertime.on("panup pandown panright panleft swipeup swipedown
-                         swipeleft swiperight", handleSwipes);
+        hammertime.on("panup pandown panright panleft swipeup swipedown swipeleft swiperight", handleSwipes);
     }
 });
 
@@ -78,6 +78,7 @@ function resetKeys () {
  **Destroys the game, map and tile layer after the level goes to the next one.
  **/
 function create() {
+    console.log("Creating game :D");
     game.background = game.add.tileSprite(0,0,320,320,'bg');
 
     if(i === 1){    
@@ -159,7 +160,7 @@ function update() {
     if (E2_LEFT){
         ball.body.velocity.x = -100;
         ball.scale.x = 1;
-    } elE2_se if (RIGHT) {
+    } else if (E2_RIGHT) {
         ball.body.velocity.x = 100;
         ball.scale.x = -1;
     }
