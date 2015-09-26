@@ -42,12 +42,16 @@ var E2_RIGHT = false;
 var App = (function () {
     var pub = {};
     pub.init = function () {
-        console.log("Connecting hammer io");
+        console.log("Bringing down the HAMMER!!!");
         hammertime = new Hammer(document.getElementById("canvas"));
         hammertime.on("panup pandown panright panleft swipeup swipedown swipeleft swiperight", handleSwipes);
     }
+    return pub;
 });
 
+/**
+* Toggles flags to indicate which direction a user has swiped.
+* */
 function handleSwipes (hamEvt) {
     switch (hamEvt.type) {
         case "panup" || "swipeup": //key up
@@ -65,7 +69,10 @@ function handleSwipes (hamEvt) {
     }
 }
 
-function resetKeys () {
+/**
+ * Puts down flags.
+ * */
+function resetFlags () {
     E2_UP = false;
     E2_DOWN = false;
     E2_LEFT= false;
@@ -178,7 +185,7 @@ function update() {
         create();
     
     }
-    resetKeys();
+    resetFlags();
 }
 
 
