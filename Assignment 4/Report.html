@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Assignment 4 Report</title>
+        <link rel="stylesheet" type="text/css" href="report.css">
+    </head>
+    <body>
+<h1>Assignment 4 Report</h1>
+		<p>
+			<b>Authors:</b><br>
+			Isabel Baltazar 8093074  ifbalta@github.com<br>
+			Lennox Huang 1663448  lennsum@github.com<br>
+			Raeciel Reyes   8360953  raeciel@github.com<br>
+			Huijun Zhou  	   6794896  HuijunZhou@github.com<b>
+		</p>
+		
+<h2>Plans and Estimates For Porting</h2>
+	
+<center><img src="plan.png" alt="plan" style="width:565px;height:77px;"></center><br>
+
+<p>E2 uses HammerJS and EaselJS to handle input/output and animation respectively.</p>
+
+<p>Our group did not use either framework for our emulator or application. Our application relied on the emulator to listen for events and raise event flags. We used Phaser.io as our game and physics engine. We only need to learn HammerJS so that we can handle input.</p>
+
+<p>We estimate that we only need an afternoon to understand HammerJS’s input handling. HammerJS’s documentation comes with many examples and an online editor so that we can easily test code.</p>
+
+<p>Our application relies on the emulator for event listening. This is only a small part of the application, and we estimate it will only take a day to an App object and HammerJS listeners to our application.</p>	
+
+<p>We estimate it will take a day to test and debug our application. We have completed the previous two steps, but the application won’t start because of a problem with Google’s Map API. We’re not sure if we need to get out our own API key, or if porting the application is more complicated than we thought.</p>
+
+<h2>Analysis of Difficulties</h2>
+
+<h2>Critique of Documentation and Examples</h2>
+
+<p>Documentation listed every library dependency and explained what they were for. Our application uses Phaser.io for physics and our game engine, and we relied on the emulator for input handling. It was easy for us to understand which libraries were needed to handle input, but we weren’t sure if we needed to use jQuery or HammerJS for our application.</p>
+
+<p>App.js had very clear documentation and examples. It was clear that the for us to port our application, we needed an App class with an init function. Thanks to the example, we understood that we could define HammerJS functions within the App class’ init function. </p>
+
+<p>Documentation doesn’t say which file handles input. It would have saved us a lot of time scrolling through emulator.js and App.js. We spent a long time switching back and forth between the emulator and application trying to understand which one handled user input. It was confusing because the emulator handled dragging and dropping, but the application handled swipes.</p>
+
+<p>Documentation explains the purpose of the calls, stage and sounds objects. It made it easy to understand which functionality we needed to implement, and which things we could ignore.</p>
+ 
+<h2>Critique of Code Structure and Quality</h2>
+
+<p>The code is well commented and easy to understand. We didn’t like how the application had to provide input handling for itself. It’s strange that the emulator knows about a specific map marker that can be dragged and dropped. We felt that the marker should have been defined in the application instead. </p>
+
+<p>We liked how the emulator and app followed the module pattern.The style is familiar to anyone who did COMP212. It made things easy to read and understand. We also enjoyed playing with the application because of the sounds and different screens. The other group added a lot of Easter eggs, and we enjoyed clicking on everything trying to find them.</p>
+
+<p>App.js is easy to understand because of clear function names and thorough comments but they forgot to delete debugging logs. app.js is an application for locating lost smartphones, which means that emulator.js should at least offer bluetooth and GPS connectivity. emulator.js gives access to both of those features, making it perfect for app.js’s functionality.</p>
+
+<p>emulator.js makes good use of jQuery to handle user input, and app.js uses HammerJS to handle swipe input. We found it confusing that they used both frameworks, when they could have used just one. HammerJS seems to be the more straightforward framework, but jQuery is more well-known.</p>
+
+<p>We felt that all event listeners should be defined in emulator.js, and that app.js should define event handling logic to keep things simple and easy to debug. Defining event listening logic in multiple files makes things more complicated because you won’t always be sure which file handles which input.</p>
+
+<p>emulator.js included functions that handled dragging and dropping map markers, as well setting application specific sounds. We felt that those features should be defined in app.js. We felt that emulator.js should only provide access to bluetooth and GPS connectivity, and not the code behind the user interface.</p>
+
+<p>Our application is a maze game that relies on the emulator to listen for user input. It only defines game logic, and does not include event listeners. To port the application, we needed to study and add HammerJS to our game, and move functions defined in our original emulator to our application. However, we found HammerJS better for handling input than jQuery because of its clear documentation and sandbox editor. We would consider using HammerJS for our own emulator.</p>
+
+
+<h2>Comparison and Conclusion</h2>
+
+<p>Our team tried to port the maze game into other group’s emulator, however we are unable to port into their emulator.</p>
+
+<p>Our application is using the new design of emulator to keep each layer independently that only allow the maze game interact with the emulator (can not allow the game checked on the browser) to removes circular dependency. Our emulator using the keyobejct and gameobject to handle the user input and the display.</p>
+
+<p>The other team emulator style is similar to our first version emulator, using JQuery to get the user input.</p>
+
+<p>We allow the ball have four directional movement and a spacebar (five pre-fined keys) to indicate a key has been pressed or not.
+Their application only need to swipe left and right to change to other interface. (check the setting and current locations)</p>
+
+<p>Our game using Phaser.io engine to hanld the movement. We also use the technique to check the ball collision movements. 
+They set up two functions to handle the user swipe left and right action.</p>
+
+<p>If we want to port our game into their emulator. We need to change plenty of codes and add the functions to handing the user input. </p> 
+
+
+    </body>
+</html>
