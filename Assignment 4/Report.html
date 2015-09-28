@@ -14,7 +14,11 @@
 			Raeciel Reyes   8360953  raeciel@github.com<br>
 			Huijun Zhou  	   6794896  HuijunZhou@github.com<br>
 		</p>
-		
+
+<p>
+    We were assigned to E2's emulator, which was designed for Find-My-Phone type application.
+</p>
+
 <h2>Plans and Estimates For Porting</h2>
 	
 <center><img src="plan.png" alt="plan" style="width:565px;height:77px;"></center><br>
@@ -33,31 +37,30 @@
 
 <p>
     Our application relies on the emulator for event listening.
-    This is only a small part of the application, and we estimate it will only take a day to an App object and HammerJS listeners to our application.
+    This is only a small part of the application, and we estimate it will only take a day to add an App object and HammerJS listeners to our application.
 </p>
 
 <p>
     We estimate it will take a day to test and debug our application.
     We have completed the previous two steps, but the application won’t start because of a problem with Google’s Map API.
-    We’re not sure if we need to get out our own API key, or if porting the application is more complicated than we thought.
+    We’re not sure if we need to get our own API key, or if porting the application is more complicated than we thought.
 </p>
 
 <h2>Analysis of Difficulties</h2>
 <a href="E2-Port/E2/www/game.html">Ported Maze Game Application</a>
 <p>
-One of the main difficulties that we encountered was analysing their code, it took time for us to understand their emulator and application’s dependencies.
-Our maze game application’s controls were very different from E2’s application. Their application uses mouse to control while our we use keyboard to control our application.
-To fix this issue, we planned to redo our controls, then look at their emulator where we can connect our application to.
-We found that E2’s emulator was not completely separate from their application.
-For instance, their dragMaker() function will be more appropriate if it was in their application instead of in their emulator.
+    One of the main difficulties that we encountered was analysing their code.
+    It took time for us to understand their emulator and application’s dependencies.
+    Our maze game application’s controls were very different from E2’s application.
+    Their application uses the mouse to control while our we use keyboard to control our application.
+    To fix this issue, we planned to redo our controls, and then hook it up to the emulator. However, we found this difficult
+    because E2’s emulator was not completely separate from their application.
+    For instance, their dragMaker() function will be more appropriate if it was in their application instead of in their emulator.
 </p>
 
 <p>
-The end result of our attempt into porting our application to their emulator is unsuccessful for the time being.
-This is because we came across a console warning about the Google Maps API in their emulator therefore it was out of our control.
-</p>
-
-<p>
+For the time being, we are unable to run our application on E2's emulator.
+There is a console warning about the Google Maps API in their emulator, and we have not had enough time to study the full API.
 This assignment came at the end of the semester. Most of our team member have other assignments due in this period.
 It was also a challenge to finish those assignments so needed to be well organized with our schedule.
 </p>
@@ -67,7 +70,8 @@ It was also a challenge to finish those assignments so needed to be well organiz
 <p>
     Documentation listed every library dependency and explained what they were for.
     Our application uses Phaser.io for physics and our game engine, and we relied on the emulator for input handling.
-    It was easy for us to understand which libraries were needed to handle input, but we weren’t sure if we needed to use jQuery or HammerJS for our application.
+    It was easy for us to understand which libraries were needed to handle input,
+    but we weren’t sure if we needed to use jQuery or HammerJS for our application.
 </p>
 
 <p>
@@ -77,7 +81,7 @@ It was also a challenge to finish those assignments so needed to be well organiz
 </p>
 
 <p>
-    Documentation doesn’t say which file handles input. It would have saved us a lot of time scrolling through emulator.js and App.js.
+    Documentation doesn’t say which file handles input and that would have saved us a lot of time scrolling between emulator.js and App.js.
     We spent a long time switching back and forth between the emulator and application trying to understand which one handled user input.
     It was confusing because the emulator handled dragging and dropping, but the application handled swipes.
 </p>
@@ -136,31 +140,20 @@ It was also a challenge to finish those assignments so needed to be well organiz
 
 <p>
     Our team tried to port the maze game into other group’s emulator, however we are unable to port into their emulator.
+    Our application uses emulator to handle input, and it keeps each layer independent of the other.
+    This means that the emulator doesn't know about the application, but the application doesn't know about the browser.
 </p>
 
 <p>
-    Our application is using the new design of emulator to keep each layer independently that only allow the maze game interact with the emulator
-    (can not allow the game checked on the browser) to removes circular dependency.
-    Our emulator using the keyobejct and gameobject to handle the user input and the display.
+    The E2's emulator similar to our first emulator, which used JQuery to get the user input.
+    We allow the ball have four directional movement and a spacebar (five pre-defined keys) to indicate a key has been pressed or not.
+    Their application only needs to swipe left and right to change to other screens like the settings menu or current location.
 </p>
 
 <p>
-    The other team emulator style is similar to our first version emulator, using JQuery to get the user input.
-</p>
-
-<p>
-    We allow the ball have four directional movement and a spacebar (five pre-fined keys) to indicate a key has been pressed or not.
-Their application only need to swipe left and right to change to other interface. (check the setting and current locations)
-</p>
-
-<p>
-    Our game using Phaser.io engine to hanld the movement. We also use the technique to check the ball collision movements.
-They set up two functions to handle the user swipe left and right action.
-</p>
-
-<p>
-    If we want to port our game into their emulator.
-    We need to change plenty of codes and add the functions to handing the user input.
+    Our game using Phaser.io engine to handle physics and collisions. Our application relies on the emulator to support key input,
+    but E2 doesn't have it. E2 defined input handling in their application so,
+    to port our game we need to add input handling code to our application.
 </p>
 
 
