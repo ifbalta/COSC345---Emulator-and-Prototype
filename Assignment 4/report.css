@@ -13,4 +13,7 @@
     div.section {
         line-height: 200%;
     }
-
+    img {
+        display: block;
+        margin: auto;
+    }
