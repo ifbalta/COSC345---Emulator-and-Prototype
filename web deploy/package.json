@@ -1,0 +1,13 @@
+{
+    "name":"maze-game",
+    "description":"Javascript smart watch emulator and maze game application",
+    "repository" : {
+        "type":"git",
+        "url",:"https://github.com/ifbalta/COSC345---Emulator-and-Prototype"
+    },
+    "version":"2.0.0",
+    "engines" : {
+     "npm":"2.x",
+     "node":"0.12.x"
+    }
+}

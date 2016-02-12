@@ -3,9 +3,13 @@
 - 15 April 2015: Added git branch instructions
 - 19 April 2015: Added EGit setup instructions.
 - 15 May 2015:   Updated README to reflect emulator installation instructions.
+- 12 February 2016 : Deployed emulator to heroku. Application can be accessed at 
+[polar-lowlands-92535.herokuapp.com](https://polar-lowlands-92535.herokuapp.com) 
+
 
 # COSC345 Emulator and Smart Watch Application
 
+The smart watch emulator can be accessed [here](https://polar-lowlands-92535.herokuapp.com)
 
 ##Collaborators:
 * Isabel Baltazar - ifbalta@github.com
