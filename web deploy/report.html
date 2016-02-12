@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Assignment 3 Report</title>
+		<link rel="stylesheet" type="text/css" href="report.css">
+	</head>
+	<body>
+		<h1>Assignment 3 Report</h1>
+		<p>&laquo; <a href="index.html">Back to Main Page</a></p>
+			<b>Authors:</b><br>
+			Isabel Baltazar 8093074  ifbalta@github.com<br>
+			Lennox Huang 1663448  lennsum@github.com<br>
+			Raeciel Reyes   8360953  raeciel@github.com<br>
+			Huijun Zhou  	   6794896  HuijunZhou@github.com<br>
+	
+		<h2>Evaluation</h2>
+
+		<p>
+			For assignment 3, we redid the maze game and emulator so that the maze game did not know about the browser, and the emulator did not know about the application. The maze game used the Phaser.io framework and the physics 2D engine for ball movement and collision detection in the maze. We used TypeScript and jQuery to build the emulator.
+			Isabel Baltazar and Lennox Huang worked on the emulator, and Raeciel Reyes and Huijun Zhou worked on the maze game application.
+		</p>
+		<p>
+			Isabel Baltazar and Lennox Huang worked on the emulator and they used TypeScript and jQuery after they found pure JavaScript hard to work with. They found JavaScript prototypes confusing, and were happy that TypeScript immediately generated JavaScript code that was easy to understand. They wrote QUnit tests after finishing the emulator. They found unit tests useful for finding bugs in handling key presses and updating image coordinates. 
+		</p>
+		<p>
+			Raeciel Reyes and Huijun Zhou were assigned to code the maze game application. They used JavaScript to build the game, Tile Map Editor to create maps on each level and Phaser.io’s physics p2 game engine. They used Phaser’s game engine for the ball movement and collision detection to improve it from the previous version of our maze game application(assignment 2’s version). The arrow keys are used to control the ball movement. There are a total of 5 levels in this application and the user will go to the next level once the ball gets to the hole. Overall, they found Phaser’s game engine and Tile Map Editor’s learning experience enjoyable and also very useful to improve the maze game’s appearance and usability.
+		</p>
+
+		<div class ="center">
+			<figure><img src="PrevDiagram.png" alt="Previous Diagram" height="400" width="450"></figure>
+			<p>Version 1 of the emulator and maze game had a circular dependency. Removing just one component would affect all parts of the project.</p>
+		</div>
+		
+
+		<p>
+			The previous emulator and maze game application failed to keep the maze game application and browser independent of each other. The original maze game application used jQuery to handle user input, even though the maze game isn’t allowed to know about the browser. The original emulator was able to start and stop multiple applications by checking a list of application files. The emulator was supposed to be an interface between the application and the browser, but the emulator isn’t allowed to know anything specific about the application either.<br>
+		</p>
+		
+		<div class="center">
+			<figure><img src="NewDesign.png" alt="New Design" height="400" width="450"></figure>
+			<p>The new emulator doesn't know about the application, and the application can'tdirectly access the browser.</p>
+		</div>
+
+		<p>
+			We’ve rebuilt the emulator to have functions that raises flags to indicate user input. The Maze Game Application has been rewritten to use the Phaser.io framework and the emulator’s input flags. The emulator no longer knows about the game, and the game no longer knows about the browser.<br>
+		</p>
+
+		<h2>Group Evaluation</h2>
+		<p>
+			Our group had project meetings once a week, and we separated the workload into different parts for every member. The group was split into two teams and each member had a clearly defined role. It was easy to work out solutions and identify problems because we knew which member was assigned to which part of the application.
+		</p>
+		<p>
+			Our group had no problems communicating and we were lucky enough to have enough gaps in our timetables for our weekly meetings. Our team had problems when two members fell sick, and we had to account for recovery time. However, each member clearly recorded their work and managed their time well. The rest of team was able to keep working on the project.
+		</p>
+		<p>
+				Our project for Assignment 2 had problems with separating the browser from the application. The group shared different solutions and opinions during meetings, so that both teams knew how the other was planning to approach the problem. We are happy with the Phaser.io framework, and TypeScript. Game development is fun and we'll be happy to try it again.
+		</p>
+		<h2>Maze Game Application</h2>
+		<a href="game.html">Maze Game Application</a><br>
+		<a href="MazeGameInstruction.html">Maze Game Instruction Manual</a>
+
+		<p>
+		 The JavaScript files, game.js and phaser.io's game engine(phaser.min.js) are used to load and create images and game details into the emulator. 
+		</p>
+		
+		<h3>Tools we used:</h3>
+		<ul>
+			<li>Phaser.io’s game engine version 2.3.0 (phaser.min.js) - For our maze game application's ball movement and collision detection.</li>
+			<li>Tile Map Editor - To create different mazes as maps on each level.</li>
+			<li>Sublime Text 2 - A text editor for code and markup.</li>
+		</ul>
+
+		<h3>Game.js functions:</h3>
+		<ul>
+			<li><code>preload()</code>: Loads images and all of the maze levels to the emulator.</li>
+			<li><code>create()</code>: Starts and creates the game and identifies if it's going to the next level. </li>
+			<li><code>setup()</code>: Initialises the game engine, map, tile layers and collision detection.</li>
+			<li><code>destoryEverything()</code>: Clears the game's map and tile layers for the next level of the game.</li>
+			<li><code>winLabel()</code>:To show the winning text.</li>
+			<li><code>update()</code>: Updates the ball movement when arrow keys are being pressed. It also calls the checkOverLap function to check if the ball reaches the hole.</li>
+			<li><code>checkOverLap()</code>: This function will called when the ball is overlapping the hole.</li>
+		</ul>
+
+		<h3>Issues</h3>
+		<p>The original plan was to add a time limit on each level and display what level the player is currently at. Unfortunately, we did not have enough time to learn and implement these ideas due to some of our members' absence as they were recovering from their illness.</p>
+
+		<h2>Emulator</h2>
+		<a href="EmulatorDocumentation.html">Emulator Documentation</a><br>
+		<a href="qunit-tests/qunittestformat.html">Emulator QUnit Tests</a>
+		<p>
+			The emulator is an interface between the browser and the application.<br>
+			The emulator uses KeyObject and GameObject to represent user input and the canvas display, and has functions that applications can use to access the browser.<br>
+			We are unable to simulate swiping, so key presses are used instead. 
+			Click events are not supported by the emulator.
+		</p>
+		<h3>KeyObject</h3>
+		<p>
+			KeyObject represents a key that can be pressed and can be customized for each application.
+		</p>
+		<h4>Properties</h4>
+		<ul>
+					<li><code>code</code> represents the KeyObject’s corresponding JavaScript key code.</li>
+					<li><code>pressed</code> indicates whether or not a key has been pressed.</li>
+		</ul>
+		<h3>GameObject</h3>
+
+		<p>
+				GameObject represents an image that can be drawn on the canvas.
+				The application is able to add GameObjects for the emulator to draw on the canvas.
+		</p>
+
+		<h4>Properties</h4>
+		<ul>
+			<li><code>initialX</code> and <code>initialY</code> are the GameObject’s initial coordinates.</li>
+			<li><code>x</code> and <code>y</code> are GameObject’s current coordinates</li>
+			<li><code>sprite</code> is an HTMLImageElement, which can be drawn on the canvas</li>
+			<li><code>spriteFile</code> is the filename of the GameObject’s sprite</li>
+		</ul>
+		<p>
+				The emulator is a wrapper around the browser, and handles JavaScript KeyBoardEvents so that it can notify the application. The emulator needs an HTML canvas to paint objects to the screen.
+		</p>
+		<p> 
+				The emulator has five pre-defined keys : LEFT_KEY, RIGHT_KEY, DOWN_KEY, UP_KEY, and SPACEBAR, which indicate whether or not a key has been pressed. Applications are free to customize these keys.
+		</p>
+		<p>
+				Applications may provide the emulator with functions that handle KeyBoardEvents. The emulator will store the function and call it whenever a key is pressed.
+		</p>
+
+		<h3>Functions</h3>
+
+		<ul>
+			<li>
+				<code>addResource(name, x, y, imgFile):</code> To allow us to add images to the emulator and paint them. 
+				<br>Must take a name, x and y coordinates and the image filename.
+				<br>Returns a reference to the GameObject.
+			</li>
+			<li>
+				<code>start():</code> 
+				Tells the emulator to start listening for KeyBoardEvents. It won’t run if the canvas hasn’t been set.
+			</li>
+			<li>
+				<code>paint():</code> 
+				Draws all GameObjects on screen and resets KeyObject.pressed to false.
+			</li>
+			<li>
+				<code>setBG(bgFile):</code> 
+				Sets the background image, with bgFile as the path to the image.
+			</li>
+			<li>
+				<code>initialize(keyFunction):</code>
+				 Initializes the default keys and stores keyFunction as a callback
+				for the KeyBoardEvent listener.
+				<br>keyFunction may be left undefined.
+			</li>
+			<li>
+				<code>mapKey(keyName, keyCode):</code>
+				Used to map one of the five pre-defined keys,
+				or define a new key for the application.
+				<br>keyName will be the key’s name inside the keymap, and keyCode is its associated JavaScript key code.
+				<br>If the mapped key is not predefined, then <code>mapKey()</code> returns a reference to the
+				new key.
+			</li>
+			<li>
+				<code>resetEmulator():</code> 
+				Resets the emulator state by resetting the pre-defined keys to its original values and removing all GameObjects.
+			</li>
+			<li>
+				<code>resetKeys():</code>
+				 Sets all KeyObjects’ pressed property to false.
+				</li>
+			<li>
+				<code>resetImages():</code>
+				Sets all GameObject coordinates to their original position.
+			</li>
+		</ul>
+
+		<h3>QUnit Tests</h3>
+		<p> 
+				The emulator was tested using QUnit version 1.18.0.<br>
+				Tests simulate key presses to test key mapping, key press detection, and key event handling. It also tests GameObject initialization.
+		</p>
+		<p> 
+				The emulator passes all tests on on Google Chrome and Internet Explorer.
+		</p>
+		<ul>
+			<li>
+				<code>defaultKeyRemapTest</code>
+				 : Tests the remapping of LEFT_KEY, RIGHT_KEY, UP_KEY, DOWN_KEY and SPACEBAR
+				</li>
+			<li>
+				<code>customKeyMappingTest</code>
+				 : Tests adding user defined keys
+				</li>
+			<li>
+				<code>keyPressedTest</code>
+				 : Tests key press detection
+				</li>
+			<li>
+				<code>gameObjectMovementTest</code>
+				 : Tests if GameObjects are being updated by applications
+				</li>
+			<li>
+				<code>gameObjectInitializationTest</code>
+				 : Tests if GameObjects are being added to the emulator
+				</li>
+		</ul>
+		<h3>Issues</h3>
+		<p>
+			The original plan was that the emulator would hold three classes : GameObject, KeyObject and Emulator. This means that some the variables and functions could be kept hidden from the application. For example, we wanted to hide the keymap array and the pre-defined keys to prevent the application from overwriting constants.
+		</p>
+		<p>
+			We had trouble passing canvas and image elements in and out of the Emulator class, even when using TypeScript to help solve type problems. We solved the issue by removing the Emulator object and exposing all of its functions and variables. Although we were able to solve the problem of drawing images on the canvas, applications are now able to redefine constants and variables.
+		</p>
+		<p>
+			 A possible solution is to define each constant as their own objects. The objects are set once, and have properties that get and update the key press state. We could also have a similar object that hides the keymap array.
+		</p>
+			For example:<br>
+			<code>
+				var LEFT_KEY = {<br>
+				pressed : keymap["left"].pressed,<br>
+				isPressed : function () {this.pressed = keymap["left"].pressed}<br>
+				}<br>
+			</code>	
+	</body>
+</html>

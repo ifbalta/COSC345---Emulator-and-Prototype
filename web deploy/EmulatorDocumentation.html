@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Emulator Documentation</title>
+		<link rel="stylesheet" type="text/css" href="report.css">
+	</head>
+	<body>
+		<h1>Smart Watch Emulator Manual</h1>
+		<p>&laquo; <a href="index.html">Back to Main Page</a></p>
+		<p>
+			<b>Authors:</b><br>
+			Isabel Baltazar<br>
+			Lennox Huang
+		</p>
+		<p>
+			<b>Language:</b> JavaScript<br>
+			<b>Dependencies:</b>
+			jQuery version 1.11.1 provided by  <a href="https://developers.google.com/speed/libraries/">Google's hosted library.</a><br>
+		</p>
+		<p>
+			The emulator acts like a generic smart watch and is not meant to mimic any currently
+			available smart watches such as the Apple Watch or Moto 360.<br>
+			The emulator is written in JavaScript and jQuery and is run on the browser.
+			It is a compatibility layer between the browser and smart watch application.<br>
+			The emulator is compatible with Safari.<br>
+			The emulator is compatible with Chrome, Firefox, Internet Explorer, and Opera if node.js and Express.js or python is pre-installed.
+		</p>
+		<h2>
+			Features
+		</h2>
+		<ul>
+			<li>A 320 x 320 screen</li>
+			<li>Key presses are a stand in for swipe gestures</li>
+		</ul>
+		<h2>Installation</h2>
+		Requires git VCS be pre-installed.<br>
+		git can be downloaded from <a href="http://git-scm.com/downloads"> git-scm.com/downloads.</a>
+		<p>
+		For compatibility with non-Safari browsers, node.js and Express.js or python must be installed.<br><br>
+		If using a python server:
+		<ul>
+			<li>
+				Install <a href="https://www.python.org/downloads/">python</a> from their website
+			</li>
+			<li>
+				Navigate to the webRoot directory and run <code>python -m SimpleHTTPServer 8080</code> on the command line.
+			</li>
+		</ul>
+		If using a node server:
+		<ul>
+			<li>Install <a href="https://nodejs.org/download/">node.js</a> from their website</li>
+			<li>Install Express.js by running <code>npm install express --save</code> on the command line</li>
+			<li>Go to the "Assignment 3" directory, and start the server using the command <code>node bootup</code></li>
+			<li>Navigate to localhost:3000 to start the emulator</li>
+		</ul>
+		The emulator is open-source and available on GitHub.
+		Get the code <a href="https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git">
+			here</a>.
+		<ol>
+			<li>Clone the repository using
+				<code>git clone https://github.com/ifbalta/COSC345---Emulator-and-Prototype.git</code> or
+				Git clients such as SourceTree or the GitHub GUI
+			</li>
+			<li>Using Safari, open <code>emulator.html</code> in the broswer</li>
+			<li>
+			Using Google Chrome,
+			<ul>
+				<li>
+					Using node, start server through <code>node bootup</code> and navigate to
+					<code>http://localhost:3000</code> in the browser
+				</li>
+				<li>Or using python, start server through <code>python -m SimpleHTTPServer 8080</code> and navigate
+					to <code>http://localhost:8080</code>
+				</li>
+			</ul>
+		</ol>
+		<p>	
+		<h2>For Developers</h2>
+		<p>
+			The emulator is an interface between the browser and the smartwatch application. It cannot simulate swipe events, and
+			the directional keys are used instead. Click events are not currently supported by the emulator. The emulator uses KeyObject to represent keyboard events, and GameObject to represent objects that can be drawn onscreen.
+		</p>
+		<p>
+			The emulator is compatible with Google Chrome, Firefox, Internet Explorer and Opera if you have node.js and Express.js pre-installed.
+		</p>
+
+		<h3>Requirements:</h3>
+		<ul>
+			<li>The emulator requires a canvas element to run.</li>
+			<li>The emulator requiresa web server to run JavaScript</li>
+		</ul>
+		 
+		<h3>Starting the emulator:</h3>
+		<ul>
+			<li>
+				call <code>initialize()</code> to initialize the emulator state and map key handling logic.
+			</li>
+			<li>
+				call <code>start()</code> to start the emulator.
+			</li>
+		</ul>
+
+		<h3>Emulator Functions</h3>
+
+		<ul>
+			<li>
+				<code>addResource(name, x, y, imgFile):</code>
+					To allow us to add images to the emulator and paint them.
+					Must take a name, x and y coordinates and the image filename.
+					Returns a reference to the GameObject.
+			</li>
+			<li>
+				<code>start():</code>
+				 	Tells the emulator to start listening for KeyBoardEvents. It won’t run if the canvas hasn’t been set.
+				 </li>
+			<li>
+				<code>paint():</code>
+				 Draws all GameObjects on screen and resets KeyObject.pressed to false.
+				</li>
+			<li>
+				<code>setBG(bgFile):</code>
+				 Sets the background image, with bgFile as the path to the image.
+				</li>
+			<li>
+				<code>initialize(keyFunction):</code>
+				 Initializes the default keys and stores keyFunction as a callback 	for the KeyBoardEvent listener. 
+				 <br>keyFunction may be left undefined.
+			</li>
+			<li>
+				<code>mapKey(keyName, keyCode):</code>
+					Used to map one of the five pre-defined keys,
+					or define a new key for the application to use.
+					keyName will be the key’s name inside the keymap, and keyCode is its associated JavaScript key code. If the mapped key is not predefined, then <code>mapKey()</code> returns a reference to the
+					new key.
+			</li>
+			<li>
+				<code>resetEmulator():</code>
+				 Resets the emulator state by resetting the pre-defined keys to its original values and removing all GameObjects.
+			</li>
+			<li>
+				<code>resetKeys():</code>
+				 Sets all KeyObjects’ pressed property to false.</li>
+			<li>
+				<code>resetImages():</code>
+				 Sets all GameObject coordinates to their original position.
+			</li>
+		</ul>
+
+		<h3>KeyObject</h3>
+		<p>
+			KeyObject represents a key that can be pressed and can be customized for each application.
+		</p>
+		<h4>KeyObject Properties</h4>
+		<ul>
+			<li>
+				<code>code</code>
+				 represents the KeyObject’s corresponding JavaScript key code.
+				</li>
+			<li>
+				<code>pressed</code>
+				 indicates whether or not a key has been pressed.
+				</li>
+		</ul>
+
+		<h3>GameObject</h3>
+
+			<p>
+				GameObject represents an image that can be drawn on the canvas.
+				The application is able to add GameObjects for the emulator to draw on the canvas.
+			</p>
+
+		<h4>Game Object Properties</h4>
+		<ul>
+			<li>
+				<code>initialX</code> and <code>initialY</code>
+				 are the GameObject’s initial coordinates.
+				</li>
+				<li>
+					<code>x</code> and <code>y</code>
+					 are GameObject’s current coordinates
+					</li>
+				<li>
+					<code>sprite</code>
+					 is an HTMLImageElement, which can be drawn on the canvas
+					</li>
+				<li>
+					<code>spriteFile</code> is the filename of the GameObject’s sprit
+				</li>
+		</ul>
+		<h4>GameObject Functions</h4>
+		<ul>
+			<li>
+				<code>toString()</code>
+				 returns a String representation of the GameObject</li>
+			<li>
+				<code>resetPos():</code>
+				 resets the GameObject's position to initial coordinates.</li>
+		</ul>		
+
+		<h2>Bugs</h2>
+		<ul id="bug-list">
+			<li>
+				Nothing stops developers from directly overwriting or
+				reassigning emulator properties.
+			</li>
+		</ul>
+		<h2>
+			Reference
+		</h2>
+		<ul>
+			<li>Smart watch vector was created by zhaolifang in <a href="http://www.vecteezy.com/vector-art/82143-smartwatch-vector">vecteezy.com</a>
+			</li>
+			<li>Background image was generated by <a href="http://www.mudcu.be/bg/">mudcu.be</a></li>
+		</ul>
+	</body>
+</html>
